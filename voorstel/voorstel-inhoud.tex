@@ -15,41 +15,71 @@
 \section{Inleiding}%
 \label{sec:inleiding}
 
-Waarover zal je bachelorproef gaan? Introduceer het thema en zorg dat volgende zaken zeker duidelijk aanwezig zijn:
+Door de aankondiging van VMware om de licentiekosten te verhogen, zijn er bedrijven die beginnen te denken aan een eventueel alternatief voor VMware.
+De prijzen voor deze software zijn zo hoog dat het voor de meeste bedrijven niet meer interessant is om hiermee te werken.
+Vaak gaat het om bedrijven die virtualisatie hebben als een service, waarbij dit niet de allerbelangrijkste zorg is binnen het bedrijf.
+VMware zit hard vastgeworteld in bedrijven doordat ze werken met verschillende automatisatietools en scripts. Zo'n overgang naar een nieuwe hypervisor zal een impact hebben op elke IT-infrastructuur.
+Om deze overgang ook vloeiend te kunnen laten lopen, moet er in de nieuwe hypervisor ook ondersteuning zijn voor deze verschillende tools.
+De mensen binnen IT moeten hierbij ook een omscholing krijgen of zich gaan verdiepen in de nieuwe hypervisor. De documentatie en support/community achter de nieuwe hypervisor is zeker een aspect dat in rekening moet worden genomen.
+Deze bachelorproef gaat zich richten op het bedrijf Excentis om een mogelijk alternatief te zoeken voor VMware.
+De volgende vragen moeten wij ons stellen bij het zoeken naar alternatieven op de markt.
+\begin{enumerate}
+\item Wat zijn de verschillen tussen de open source en closed source hypervisors met de voor en nadelen?
+\item Hoe bieden alle hypervisors een goede ondersteuning voor Nakivo, Ansible en Foreman?\newline
+\item Hoe zit het met de HighAvailability-ondersteuning van de verschillende hypervisors?
+\item Hoe zit het met de ondersteuning van Direct Attached Storage en Serial Attached SCSI?
+\end{enumerate}
 
-\begin{itemize}
-  \item kaderen thema
-  \item de doelgroep
-  \item de probleemstelling en (centrale) onderzoeksvraag
-  \item de onderzoeksdoelstelling
-\end{itemize}
 
-Denk er aan: een typische bachelorproef is \textit{toegepast onderzoek}, wat betekent dat je start vanuit een concrete probleemsituatie in bedrijfscontext, een \textbf{casus}. Het is belangrijk om je onderwerp goed af te bakenen: je gaat voor die \textit{ene specifieke probleemsituatie} op zoek naar een goede oplossing, op basis van de huidige kennis in het vakgebied.
 
-De doelgroep moet ook concreet en duidelijk zijn, dus geen algemene of vaag gedefinieerde groepen zoals \emph{bedrijven}, \emph{developers}, \emph{Vlamingen}, enz. Je richt je in elk geval op it-professionals, een bachelorproef is geen populariserende tekst. Eén specifiek bedrijf (die te maken hebben met een concrete probleemsituatie) is dus beter dan \emph{bedrijven} in het algemeen.
+% Waarover zal je bachelorproef gaan? Introduceer het thema en zorg dat volgende zaken zeker duidelijk aanwezig zijn:
 
-Formuleer duidelijk de onderzoeksvraag! De begeleiders lezen nog steeds te veel voorstellen waarin we geen onderzoeksvraag terugvinden.
+% \begin{itemize}
+%   \item kaderen thema
+%   \item de doelgroep
+%   \item de probleemstelling en (centrale) onderzoeksvraag
+%   \item de onderzoeksdoelstelling
+% \end{itemize}
 
-Schrijf ook iets over de doelstelling. Wat zie je als het concrete eindresultaat van je onderzoek, naast de uitgeschreven scriptie? Is het een proof-of-concept, een rapport met aanbevelingen, \ldots Met welk eindresultaat kan je je bachelorproef als een succes beschouwen?
+% Denk er aan: een typische bachelorproef is \textit{toegepast onderzoek}, wat betekent dat je start vanuit een concrete probleemsituatie in bedrijfscontext, een \textbf{casus}. Het is belangrijk om je onderwerp goed af te bakenen: je gaat voor die \textit{ene specifieke probleemsituatie} op zoek naar een goede oplossing, op basis van de huidige kennis in het vakgebied.
+
+% De doelgroep moet ook concreet en duidelijk zijn, dus geen algemene of vaag gedefinieerde groepen zoals \emph{bedrijven}, \emph{developers}, \emph{Vlamingen}, enz. Je richt je in elk geval op it-professionals, een bachelorproef is geen populariserende tekst. Eén specifiek bedrijf (die te maken hebben met een concrete probleemsituatie) is dus beter dan \emph{bedrijven} in het algemeen.
+
+% Formuleer duidelijk de onderzoeksvraag! De begeleiders lezen nog steeds te veel voorstellen waarin we geen onderzoeksvraag terugvinden.
+
+% Schrijf ook iets over de doelstelling. Wat zie je als het concrete eindresultaat van je onderzoek, naast de uitgeschreven scriptie? Is het een proof-of-concept, een rapport met aanbevelingen, \ldots Met welk eindresultaat kan je je bachelorproef als een succes beschouwen?
 
 %---------- Stand van zaken ---------------------------------------------------
 
-\section{Literatuurstudie}%
+\section{Literatuurstudie}
 \label{sec:literatuurstudie}
+VMware~\autocite{vmware} is een hypervisor-software systeem. De sterke prijsstijgingen van VMware zorgen ervoor dat veel bedrijven afhaken en op zoek gaan naar alternatieven~\autocite{Hale2024}. Er zijn verschillende alternatieve \newline hypervisor-softwareopties beschikbaar.
+\subsection{Hypervisoropties}
+Een voorbeeld hiervan is 'KVM' (Kernel-based Virtual Machine)\autocite{KVM}. KVM is open source en vrij te gebruiken voor iedereen\autocite{KVM}. Microsoft Hyper-V ~\autocite{Eaton2019} wordt ook genoemd als mogelijke vergelijking met VMware~\autocite{fayyad2013benchmarking}. Hierin wordt een vergelijking gemaakt tussen verschillende hypervisors die geselecteerd zijn. \newline
+Proxmox VE~\autocite{Proxmox} is een andere open-source hypervisor-software die beschikbaar is op de markt en tevens\newline enterprise-ondersteuning aanbiedt voor bedrijven. Uit dit onderzoek~\autocite{Hale2024} blijkt dat Proxmox zeker niet onderdoet tegenover andere hypervisors op het vlak van compatibiliteit met andere Linux-distributies.
+Verder in de virtualisatie wereld hebben wij ook nog het Xen Project~\autocite{xenproject}. Dit is een open-source hypervisor die zich vooral richt op cloud computing en server virtualisatie ~\autocite{binu2011virtualization}.
+XenServer~\autocite{xenserver} is ook een alternatieve software keuze voor VMware. XenServer is een commerciële hypervisor die zich richt op bedrijven en enterprise-ondersteuning biedt.
 
-"VMware~\autocite{vmware} is een hypervisor-software systeem. De sterke prijsstijgingen van VMware zorgen ervoor dat veel bedrijven afhaken en op zoek gaan naar alternatieven~\autocite{Hale2024}. Er zijn verschillende alternatieve hypervisor-softwareopties beschikbaar. Een voorbeeld hiervan is 'KVM' (Kernel-based Virtual Machine)\autocite{KVM}. KVM is open source en vrij te gebruiken voor iedereen\autocite{KVM}. Microsoft Hyper-V ~\autocite{Eaton2019} wordt ook genoemd als mogelijke vergelijking met VMware~\autocite{fayyad2013benchmarking}. Hierin wordt een vergelijking gemaakt tussen verschillende hypervisors die geselecteerd zijn."
-Proxmox VE~\autocite{Proxmox} is een andere open-source hypervisor-software die beschikbaar is op de markt en tevens enterprise-ondersteuning aanbiedt voor bedrijven. Uit dit onderzoek~\autocite{Hale2024} blijkt dat Proxmox zeker niet onderdoet tegenover andere hypervisors op het vlak van compatibiliteit met andere Linux-distributies.
-\subsection{ProxMox VE}
+\subsection{Open source hypervisors}
+Er zijn vele soorten software pakketen op de markt die hypervisors aanbieden. Hieruit kunnen wij ze ondervederlen in 2 groepen. De closed en open source hypervisors. Elke groep heeft zijn voor en nadelen. Alles hangt steeds af van de noden en vereisten van een het bedrijf of instelling.
+Proxmox VE is open source~\autocite{Proxmox}. Dit wil zeggen dat alle de hypervisor kosteloos gebruikt kan worden. Support bij problemen valt hierbij wel af. Er is wel een mogelijkheid om bij hen een enterprise support services subscription te nemen. Hierbij kan u alnog genieten van support bij eventuele problemen.
+Open source software is een evidentie maar zorgt voor meer zelfstandig werk bij installatie en rust meer op de community achter de software.
+\subsection{closed source hypervisors}
+Andere alternatieven hypervisor software systemen zijn closed source. Hierbij hebben we het specifiek over VMware~\autocite{vmware} en Microsoft Hyper-V~\autocite{Eaton2019}. Deze software systemen zijn niet gratis en vragen een licentie om te mogen gebruiken. Dit is een voordeel togenover open source hyperivsors.
+Bij bedrijven waar stabiliteit en betrouwbaarheid hoog ligt zoals in een wetenschapopelijke omgeving en kan een goede keuze zijn om te gaan voor closed source hypervisors~\autocite{voras2012early}. Dit wil niet zeggend dat andere hypervisors uitegesloten zijn.
+\subsection{High Availability-ondersteuning}
+Wanneer we praten over High Availability in de virtualisatie wereld dan praten we ook over 'Serial-Attached SCSI'(SAS) en 'Direct-Attached Storage'\newline(DAS).Deze technologieën zorgen ervoor dat er een hoge beschikbaarheid is van de data en dat deze snel kan worden opgevraagd~\autocite{griswold2002storage}. Dit is een belangrijk aspect in de virtualisatie wereld.
+SAS is een snelle, betrouwbare opslaginterface die servers en high-performance opslagapparaten verbindt~\autocite{aravindan2014performance}. Dit is een belangrijk aspect om High Availability te garanderen. DAS is een opslagarchitectuur waarbij opslag direct fysiek is verbonden aan een enkele server, zonder tussenkomst van een netwerk. Deze technologie is goedkoper en simpeler. Maar garandeert niet de High Availability die SAS wel kan garanderen.~\autocite{griswold2002storage}
+DAS wordt vaak gebruikt in kleinere bedrijven waar de data niet zo belangrijk is en waar de data niet zo vaak wordt opgevraagd. SAS wordt vaak gebruikt in grotere bedrijven waar de data zeer belangrijk is en waar de data vaak wordt opgevraagd.~\autocite{griswold2002storage}
+Hyper-V bied een goed integratie ook met DAS~\autocite{microsoft_hyperv_storage} wat dan kan werken met een windows server.
 
-Hier beschrijf je de \emph{state-of-the-art} rondom je gekozen onderzoeksdomein, d.w.z.\ een inleidende, doorlopende tekst over het onderzoeksdomein van je bachelorproef. Je steunt daarbij heel sterk op de professionele \emph{vakliteratuur}, en niet zozeer op populariserende teksten voor een breed publiek. Wat is de huidige stand van zaken in dit domein, en wat zijn nog eventuele open vragen (die misschien de aanleiding waren tot je onderzoeksvraag!)?
-
-Je mag de titel van deze sectie ook aanpassen (literatuurstudie, stand van zaken, enz.). Zijn er al gelijkaardige onderzoeken gevoerd? Wat concluderen ze? Wat is het verschil met jouw onderzoek?
-
-Verwijs bij elke introductie van een term of bewering over het domein naar de vakliteratuur, bijvoorbeeld~\autocite{Hykes2013}! Denk zeker goed na welke werken je refereert en waarom.
-
-Draag zorg voor correcte literatuurverwijzingen! Een bronvermelding hoort thuis \emph{binnen} de zin waar je je op die bron baseert, dus niet er buiten! Maak meteen een verwijzing als je gebruik maakt van een bron. Doe dit dus \emph{niet} aan het einde van een lange paragraaf. Baseer nooit teveel aansluitende tekst op eenzelfde bron.
-
-Als je informatie over bronnen verzamelt in JabRef, zorg er dan voor dat alle nodige info aanwezig is om de bron terug te vinden (zoals uitvoerig besproken in de lessen Research Methods).
+% \subsection{KVM}
+% \subsection{Microsoft Hyper-V}
+% \subsection{Kernel-based Virtual Machine}
+% \subsection{ProxMox VE}
+% \subsection{xenproject}
+% \subsection{High Availability-ondersteuning}
+% \subsection{Direct Attached Storage en Serial Attached SCSI}
 
 % Voor literatuurverwijzingen zijn er twee belangrijke commando's:
 % \autocite{KEY} => (Auteur, jaartal) Gebruik dit als de naam van de auteur
@@ -58,31 +88,49 @@ Als je informatie over bronnen verzamelt in JabRef, zorg er dan voor dat alle no
 %   functie heeft in de zin (bv. ``Uit onderzoek door Doll & Hill (1954) bleek
 %   ...'')
 
-Je mag deze sectie nog verder onderverdelen in subsecties als dit de structuur van de tekst kan verduidelijken.
 
 %---------- Methodologie ------------------------------------------------------
 \section{Methodologie}%
 \label{sec:methodologie}
+Een objectief resultaat van alle hypervisors is gewenst om deze vervolgens naast elkaar te kunnen vergelijken. Om dit te bereiken, wordt een vergelijkende studie uitgevoerd. De verschillende hypervisors worden met elkaar vergeleken om te bepalen welke het beste aansluit bij de noden van Excentis.
+Aan de hand van literatuurstudie en onderzoeken worden de hypervisors geselecteerd die met elkaar worden vergeleken.
+De hardware en omgeving waarin alles wordt getest en opgebouwd, worden opgesteld in een testomgeving bij Excentis. Dit maakt het mogelijk om de hypervisors te testen in een realistische omgeving, wat essentieel is om een objectief resultaat te bekomen.
+Verschillende servers zullen worden ingezet. Op deze servers worden de geselecteerde hypervisors geïnstalleerd.
+Voor de vergelijking van de hypervisors worden de volgende criteria gehanteerd:
+\begin{itemize}
+\item Ondersteuning voor Nakivo, Ansible en Foreman
+\item Ondersteuning van Direct Attached Storage en Serial Attached SCSI
+\item Prijs/licentiekosten (enkel bij closed source hypervisors zonder enterprise subscription)
+\item Documentatie en support/community
+\end{itemize}
+Deze criteria worden stap voor stap gedaan bij elke hypervisor. Hierbij zullen verschillende testen en metingen worden uitgevoerd om zo het resultaat te krijgen per criteria.
+Als al deze criteria zijn ingevuld, kan er een vergelijking worden gemaakt en hieruit de correcte oplossing(en) worden gekozen voor Excentis.
+% Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor literatuurstudie, interviews met belanghebbenden (bv.~voor requirements-analyse), experimenten, simulaties, vergelijkende studie, risico-analyse, PoC, \ldots?
 
-Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor literatuurstudie, interviews met belanghebbenden (bv.~voor requirements-analyse), experimenten, simulaties, vergelijkende studie, risico-analyse, PoC, \ldots?
+% Valt je onderwerp onder één van de typische soorten bachelorproeven die besproken zijn in de lessen Research Methods (bv.\ vergelijkende studie of risico-analyse)? Zorg er dan ook voor dat we duidelijk de verschillende stappen terug vinden die we verwachten in dit soort onderzoek!
 
-Valt je onderwerp onder één van de typische soorten bachelorproeven die besproken zijn in de lessen Research Methods (bv.\ vergelijkende studie of risico-analyse)? Zorg er dan ook voor dat we duidelijk de verschillende stappen terug vinden die we verwachten in dit soort onderzoek!
+% Vermijd onderzoekstechnieken die geen objectieve, meetbare resultaten kunnen opleveren. Enquêtes, bijvoorbeeld, zijn voor een bachelorproef informatica meestal \textbf{niet geschikt}. De antwoorden zijn eerder meningen dan feiten en in de praktijk blijkt het ook bijzonder moeilijk om voldoende respondenten te vinden. Studenten die een enquête willen voeren, hebben meestal ook geen goede definitie van de populatie, waardoor ook niet kan aangetoond worden dat eventuele resultaten representatief zijn.
 
-Vermijd onderzoekstechnieken die geen objectieve, meetbare resultaten kunnen opleveren. Enquêtes, bijvoorbeeld, zijn voor een bachelorproef informatica meestal \textbf{niet geschikt}. De antwoorden zijn eerder meningen dan feiten en in de praktijk blijkt het ook bijzonder moeilijk om voldoende respondenten te vinden. Studenten die een enquête willen voeren, hebben meestal ook geen goede definitie van de populatie, waardoor ook niet kan aangetoond worden dat eventuele resultaten representatief zijn.
+% Uit dit onderdeel moet duidelijk naar voor komen dat je bachelorproef ook technisch voldoen\-de diepgang zal bevatten. Het zou niet kloppen als een bachelorproef informatica ook door bv.\ een student marketing zou kunnen uitgevoerd worden.
 
-Uit dit onderdeel moet duidelijk naar voor komen dat je bachelorproef ook technisch voldoen\-de diepgang zal bevatten. Het zou niet kloppen als een bachelorproef informatica ook door bv.\ een student marketing zou kunnen uitgevoerd worden.
+% Je beschrijft ook al welke tools (hardware, software, diensten, \ldots) je denkt hiervoor te gebruiken of te ontwikkelen.
 
-Je beschrijft ook al welke tools (hardware, software, diensten, \ldots) je denkt hiervoor te gebruiken of te ontwikkelen.
-
-Probeer ook een tijdschatting te maken. Hoe lang zal je met elke fase van je onderzoek bezig zijn en wat zijn de concrete \emph{deliverables} in elke fase?
+% Probeer ook een tijdschatting te maken. Hoe lang zal je met elke fase van je onderzoek bezig zijn en wat zijn de concrete \emph{deliverables} in elke fase?
 
 %---------- Verwachte resultaten ----------------------------------------------
 \section{Verwacht resultaat, conclusie}%
 \label{sec:verwachte_resultaten}
 
-Hier beschrijf je welke resultaten je verwacht. Als je metingen en simulaties uitvoert, kan je hier al mock-ups maken van de grafieken samen met de verwachte conclusies. Benoem zeker al je assen en de onderdelen van de grafiek die je gaat gebruiken. Dit zorgt ervoor dat je concreet weet welk soort data je moet verzamelen en hoe je die moet meten.
+Het verwachte resultaat is een oplossing in de richting van de open-source wereld. Doordat VMware de prijzen significant verhoogt, is er een beweging ontstaan richting open-source oplossingen voor hypervisors.
+Hierbij ligt de focus specifiek op Proxmox VE. Deze hypervisor is algemeen bekend en beschikt over een community met uitgebreide documentatie en support.
+Het resultaat zal daarmee ook richting Proxmox VE gaan, aangezien het goedkoop in gebruik is en goede ondersteuning biedt voor verschillende Linux-distributies.
+De Windows-hypervisor Hyper-V biedt echter alleen ondersteuning op Windows, wat als een groot minpunt wordt beschouwd in een operationele omgeving bij Excentis.
 
-Wat heeft de doelgroep van je onderzoek aan het resultaat? Op welke manier zorgt jouw bachelorproef voor een meerwaarde?
+Als dit onderzoek een objectief en goed resultaat oplevert, heeft Excentis een geschikte opvolging voor VMware, waarbij de kosten en nadelen in operationele werking zo minimaal mogelijk worden gehouden.
+Hierbij wordt ook rekening gehouden met de tijd die het bedrijf kan besparen door een goede overgang naar een nieuwe hypervisor.
+% Hier beschrijf je welke resultaten je verwacht. Als je metingen en simulaties uitvoert, kan je hier al mock-ups maken van de grafieken samen met de verwachte conclusies. Benoem zeker al je assen en de onderdelen van de grafiek die je gaat gebruiken. Dit zorgt ervoor dat je concreet weet welk soort data je moet verzamelen en hoe je die moet meten.
 
-Hier beschrijf je wat je verwacht uit je onderzoek, met de motivatie waarom. Het is \textbf{niet} erg indien uit je onderzoek andere resultaten en conclusies vloeien dan dat je hier beschrijft: het is dan juist interessant om te onderzoeken waarom jouw hypothesen niet overeenkomen met de resultaten.
+% Wat heeft de doelgroep van je onderzoek aan het resultaat? Op welke manier zorgt jouw bachelorproef voor een meerwaarde?
+
+% Hier beschrijf je wat je verwacht uit je onderzoek, met de motivatie waarom. Het is \textbf{niet} erg indien uit je onderzoek andere resultaten en conclusies vloeien dan dat je hier beschrijft: het is dan juist interessant om te onderzoeken waarom jouw hypothesen niet overeenkomen met de resultaten.
 
