@@ -6,7 +6,7 @@
 .PHONY: help clean mrproper install
 
 ##---------- Variables --------------------------------------------------------
-
+ 
 # Select .tex files that contain "\documentclass"
 sources := $(shell grep --files-with-matches '\\documentclass' *.tex)
 # Derive the names of all resulting PDF files
