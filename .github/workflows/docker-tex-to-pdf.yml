@@ -41,14 +41,6 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
-        # Haal de laatste versie tag op
-        VERSION=$(git describe --tags --abbrev=0)
+        RELEASE_TAG="Bachelorproef-versie~$(date +'%Y%m%d%H%M%S')"  # Maak een unieke release tag gebaseerd op de timestamp
+        gh release create $RELEASE_TAG output/*.pdf --title "Thesis Output" --notes "Deze release bevat de thesis outputbestanden."
 
-        # Verhoog de patch versie door deze te splitsen
-        VERSION_PARTS=(${VERSION//./ })
-        PATCH=${VERSION_PARTS[2]}
-        NEW_PATCH=$((PATCH + 1))
-        NEW_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.$NEW_PATCH"
-
-        # Maak de release met de nieuwe versie tag
-        gh release create "v$NEW_VERSION" output/*.pdf --title "Bachelorproef Release $NEW_VERSION" --notes "Deze release bevat de Bachelorproef outputbestanden."
