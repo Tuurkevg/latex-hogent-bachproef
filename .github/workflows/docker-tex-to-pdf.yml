@@ -11,32 +11,54 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # Checkout de code uit de repository
     - uses: actions/checkout@v4
 
+    # Build de Docker image
     - name: Build the Docker image
       run: docker build -t bpimg -f docker/Dockerfile .
 
+    # Build het voorstel
     - name: Build the proposal
       run: docker run --rm -v "$PWD":/bp bpimg sh /bp/docker/render_thesis.sh voorstel
 
+    # Build de thesis
     - name: Build the thesis
       run: docker run --rm -v "$PWD":/bp bpimg sh /bp/docker/render_thesis.sh bachproef
 
+    # Build de poster
     - name: Build the poster
       run: docker run --rm -v "$PWD":/bp bpimg sh /bp/docker/render_thesis.sh poster
 
+    # Maak een GitHub Release aan
     - name: Create GitHub Release
       id: create_release
       run: |
-        RELEASE_TAG="v$(date +'%Y%m%d%H%M%S')"  # Unique release tag
-        gh release create $RELEASE_TAG output/*.pdf output/*.log --title "Thesis Output" --notes "This release contains the thesis output files."
+        RELEASE_TAG="v$(date +'%Y%m%d%H%M%S')"  # Maak een unieke release tag gebaseerd op de timestamp
+        gh release create $RELEASE_TAG output/*.pdf output/*.log --title "Thesis Output" --notes "Deze release bevat de thesis outputbestanden."
 
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v4
+    # Upload de release assets (PDF en logbestanden) naar de GitHub Release
+    - name: Upload release assets (PDFs and logs)
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: output/*.pdf
+        asset_name: thesis_output.pdf
+        asset_content_type: application/pdf
+
+    # Als je logbestanden ook wilt toevoegen, kun je een extra stap doen:
+    - name: Upload log files
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: output/*.log
+        asset_name: thesis_output.log
+        asset_content_type: text/plain
+    - uses: actions/upload-artifact@v4
       name: Upload artifacts
       with:
         name: output
         path: |
           output/*.pdf
           output/*.log
-        if-no-files-found: error
+        if-no-files-found: error        
