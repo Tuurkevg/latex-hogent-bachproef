@@ -33,6 +33,8 @@ jobs:
     # Maak een GitHub Release aan
     - name: Create GitHub Release
       id: create_release
+      env:
+        GH_TOKEN: ${{ github.token }}  # Voeg de GH_TOKEN toe aan de omgevingsvariabelen      
       run: |
         RELEASE_TAG="v$(date +'%Y%m%d%H%M%S')"  # Maak een unieke release tag gebaseerd op de timestamp
         gh release create $RELEASE_TAG output/*.pdf output/*.log --title "Thesis Output" --notes "Deze release bevat de thesis outputbestanden."
@@ -45,6 +47,8 @@ jobs:
         asset_path: output/*.pdf
         asset_name: thesis_output.pdf
         asset_content_type: application/pdf
+      env:
+        GH_TOKEN: ${{ github.token }}  # Voeg de GH_TOKEN toe aan de omgevingsvariabelen        
 
     # Als je logbestanden ook wilt toevoegen, kun je een extra stap doen:
     - name: Upload log files
@@ -54,6 +58,8 @@ jobs:
         asset_path: output/*.log
         asset_name: thesis_output.log
         asset_content_type: text/plain
+      env:
+        GH_TOKEN: ${{ github.token }}  # Voeg de GH_TOKEN toe aan de omgevingsvariabelen        
     - uses: actions/upload-artifact@v4
       name: Upload artifacts
       with:
