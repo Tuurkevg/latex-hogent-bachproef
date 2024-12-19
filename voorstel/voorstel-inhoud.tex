@@ -21,13 +21,14 @@ Vaak gaat het om bedrijven die virtualisatie hebben als een service, waarbij dit
 VMware-producten zit hard vastgeworteld in bedrijven doordat ze werken met verschillende automatisatietools en scripts. Zo'n overgang naar een nieuwe managementplatform zal een impact hebben op elke IT-infrastructuur.
 Om deze overgang ook vloeiend te kunnen laten lopen, moet er in de managementplatform ook ondersteuning zijn voor deze verschillende tools.
 De mensen binnen IT moeten hierbij ook een omscholing krijgen of zich gaan verdiepen in de managementplatformen  voor virtualisatie. De documentatie en support/community achter de managementplatformen is zeker een aspect dat in rekening moet worden genomen.
-Deze bachelorproef richt zich op het bedrijf Excentis om een mogelijk alternatief te zoeken voor VMWare vCenter.
+Deze bachelorproef richt zich op het bedrijf Excentis: Welke alternatieven zijn er om het huidige VMware vCenter te vervangen en hoe kan die passen binnen de noden van omgeving van Excentis?
 De volgende vragen moeten wij ons stellen bij het zoeken naar alternatieven op de markt.
 \begin{enumerate}
-\item Welke functionele en prestatieverschillen zijn er tussen open-source en closed-source managementplatformen, en welke voor- en nadelen hebben deze verschillen voor een bedrijf zoals Excentis?
-\item In welke mate integreren managementplatformen met tools zoals Nakivo, Ansible en Foreman, en wat zijn de voor- en nadelen van deze integraties?
-\item Hoe presteren managementplatformen op het gebied van High Availability, failover en schaalbaarheid, en welke factoren zijn hierbij bepalend?
+\item Welke functionele en prestatieverschillen zijn er tussen open-source en closed-source managementplatformen, en welke voor- en nadelen hebben deze verschillen voor het bedrijf Excentis?
+\item In welke mate integreren managementplatformen met tools zoals Nakivo, Ansible en Foreman, en hoe kunnen deze toegepast worden binnen Excentis?
+\item Hoe presteren managementplatformen op het gebied van High Availability(failover,schaalbaarheid,backups,...)?
 \item Hoe kan de bestaande ondersteuning van Direct Attached Storage en Serial Attached SCSI in VMWare vCenter worden overgezet naar een alternatief managementplatformen binnen de infrastructuur van Excentis?
+\item Op welke manier is er een mogelijkheid om de bestaande managementplatformen omgeving van Excentis over te zetten naar het nieuwe alternatief?
 \end{enumerate}
 
 
@@ -108,17 +109,18 @@ Workloadmanagers kunnen een goede oplossing zijn om overbelasting tegen te gaan 
 \label{sec:methodologie}
 Een objectief resultaat van alle managementplatformen is gewenst om deze vervolgens naast elkaar te kunnen vergelijken. Om dit te bereiken, wordt een vergelijkende studie uitgevoerd. De verschillende managementplatformen worden met elkaar vergeleken om te bepalen welke het beste aansluit bij de noden van Excentis.
 Aan de hand van literatuurstudie en onderzoeken worden de managementplatformen geselecteerd die met elkaar worden vergeleken.
+Er zal samen met Excentis worden overlopen welke eisen zeker voldaan moeten worden en wat het bedrijf echt nodig heeft in hun managementplatform, gecombineerd met hun bestaande infrastructuur. Er zal ook gekeken worden naar wat er momenteel allemaal wordt gebruikt binnen hun omgeving. Deze zullen dan worden meegenomen als basisvereisten voor de alternatieve managementplatformen.
 De hardware en omgeving waarin alles wordt getest en opgebouwd, worden opgesteld in een testomgeving bij Excentis. Dit maakt het mogelijk om de managementplatformen te testen in een realistische omgeving, wat essentieel is om een objectief resultaat te bekomen.
 Deze omgeving zal bestaan uit 2 verouderde DELL servers die in de serverruimte van Excentis staan. Hierbij zal alles op kleine schaal kunnen worden uitgevoerd.
 Op deze servers worden de geselecteerde managementplatformen geïnstalleerd.
-Voor de vergelijking van de managementplatformen worden de volgende acties uitgevoerd:
+Voor de vergelijking van de managementplatformen worden de volgende acties uitgevoerd op de testomgeving van Excentis:
 \begin{itemize}
-\item werking met de bestaande hardware van Excentis, vergeleken op prestatie en stabiliteit.
-\item Testen en meten van de performance van de bestaande Direct Attached Storage en Serial Attached SCSI-systemen die Excentis gebruikt op de nieuwe managementplatformen.
-\item De integratie van alle bestaande systemen binnen Excentis testen, zoals CI/CD-tools, op de nieuwe managementplatformen.
-\item Prestatie en stabiliteit van de managementplatformen bij piekmomenten en failover.
+\item werking met de bestaande hardware van Excentis, vergeleken op prestatie en stabiliteit. (Hoe snel start een nieuwe virtuele machine op, wat zijn de minimum eisen voor de hardware, ...).
+\item Testen en meten van de performance en stabiliteit van de bestaande Direct Attached Storage en Serial Attached SCSI-systemen die Excentis gebruikt aan de hand van testdata op de nieuwe managementplatformen.
+\item De integratie van bepalende systemen binnen Excentis testen, zoals CI/CD-tools, op de nieuwe managementplatformen.
+\item Prestatie en stabiliteit van de managementplatformen bij piekmomenten en failovers.
 \end{itemize}
-Deze acties worden stap voor stap gedaan bij elke hypervisor. Hierbij zullen deze testen/metingen gedaan worden om zo een zo objectief mogelijk resultaat te krijgen per managementplatform.
+Deze acties worden stap voor stap gedaan bij elke managementplatform. Deze worden gedaan om zo een zo objectief mogelijk resultaat te krijgen per managementplatform.
 Als alle acties zijn uitgevoerd, worden de resultaten met elkaar vergeleken en wordt er een conclusie getrokken over welk managementplatform het beste aansluit bij de noden van Excentis.
 % Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor literatuurstudie, interviews met belanghebbenden (bv.~voor requirements-analyse), experimenten, simulaties, vergelijkende studie, risico-analyse, PoC, \ldots?
 
@@ -137,12 +139,12 @@ Als alle acties zijn uitgevoerd, worden de resultaten met elkaar vergeleken en w
 \label{sec:verwachte_resultaten}
 
 Het verwachte resultaat is een oplossing in de richting van de open-source wereld. Doordat VMware de prijzen significant verhoogt, is er een beweging ontstaan richting open-source oplossingen voor hypervisors en managementplatformen.
-Hierbij ligt de focus specifiek op Proxmox VE als managementplatform met KVM als onderliggende hypervisor. Deze hypervisor is algemeen bekend en beschikt over een community met uitgebreide documentatie en support.
+Hierbij ligt de focus specifiek op Proxmox VE als managementplatform met KVM als onderliggende hypervisor. Deze managementplatform is algemeen bekend en beschikt over een community met uitgebreide documentatie en support.
 Het verwachte resultaat zal daarmee ook richting Proxmox VE gaan, aangezien het goedkoop in gebruik is en alvast goede ondersteuning biedt voor verschillende Linux-distributies.
 De Windows-hypervisor Hyper-V biedt echter alleen ondersteuning op Windows, wat als een groot minpunt wordt beschouwd in een operationele omgeving bij Excentis.
 
 Als dit onderzoek een objectief en goed resultaat oplevert, heeft Excentis een geschikte opvolging voor VMware, waarbij de kosten en nadelen in operationele werking zo minimaal mogelijk worden gehouden.
-Hierbij wordt ook rekening gehouden met de tijd die het bedrijf kan besparen door een goede overgang naar een nieuwe hypervisor.
+Hierbij wordt ook rekening gehouden met de tijd die het bedrijf kan besparen door een goede overgang naar een nieuwe managementplatformen.
 % Hier beschrijf je welke resultaten je verwacht. Als je metingen en simulaties uitvoert, kan je hier al mock-ups maken van de grafieken samen met de verwachte conclusies. Benoem zeker al je assen en de onderdelen van de grafiek die je gaat gebruiken. Dit zorgt ervoor dat je concreet weet welk soort data je moet verzamelen en hoe je die moet meten.
 
 % Wat heeft de doelgroep van je onderzoek aan het resultaat? Op welke manier zorgt jouw bachelorproef voor een meerwaarde?
