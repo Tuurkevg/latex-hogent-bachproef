@@ -41,6 +41,6 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
-        RELEASE_TAG="Bachelorproef-versie~$(date +'%Y%m%d%H%M%S')"  # Maak een unieke release tag gebaseerd op de timestamp
+        RELEASE_TAG="Bachelorproef-versie-$(date +'%Y%m%d%H%M%S')"  # Maak een geldige release tag met een timestamp
         gh release create $RELEASE_TAG output/*.pdf --title "Thesis Output" --notes "Deze release bevat de thesis outputbestanden."
 
