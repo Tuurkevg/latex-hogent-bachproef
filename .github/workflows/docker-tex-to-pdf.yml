@@ -11,53 +11,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Checkout de code uit de repository
+    # Stap 1: Checkout de code uit de repository
     - uses: actions/checkout@v4
 
-    # Build de Docker image
+    # Stap 2: Build de Docker image
     - name: Build the Docker image
       run: docker build -t bpimg -f docker/Dockerfile .
 
-    # Build het voorstel
+    # Stap 3: Build de thesis bestanden
     - name: Build the proposal
       run: docker run --rm -v "$PWD":/bp bpimg sh /bp/docker/render_thesis.sh voorstel
 
-    # Build de thesis
     - name: Build the thesis
       run: docker run --rm -v "$PWD":/bp bpimg sh /bp/docker/render_thesis.sh bachproef
 
-    # Build de poster
     - name: Build the poster
       run: docker run --rm -v "$PWD":/bp bpimg sh /bp/docker/render_thesis.sh poster
 
-    # Maak een GitHub Release aan en verkrijg de release URL
+    # Stap 4: Maak de GitHub release aan
     - name: Create GitHub Release
-      id: create_release
       env:
-        GH_TOKEN: ${{ github.token }}  # Voeg de GH_TOKEN toe aan de omgevingsvariabelen
+        GH_TOKEN: ${{ github.token }}
       run: |
         RELEASE_TAG="v$(date +'%Y%m%d%H%M%S')"  # Maak een unieke release tag gebaseerd op de timestamp
-        release_url=$(gh release create $RELEASE_TAG $(ls output/*.pdf) $(ls output/*.log) --title "Thesis Output" --notes "Deze release bevat de thesis outputbestanden." --json upload_url -q ".upload_url")
-        echo "release_url=$release_url" >> $GITHUB_ENV
+        gh release create $RELEASE_TAG output/*.pdf output/*.log --title "Thesis Output" --notes "Deze release bevat de thesis outputbestanden."
 
-    # Upload PDF-bestanden naar de release
-    - name: Upload PDF assets
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ env.release_url }}
-        asset_path: output/*.pdf
-        asset_name: thesis_output.pdf
-        asset_content_type: application/pdf
-
-    # Upload log-bestanden naar de release
-    - name: Upload log files
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ env.release_url }}
-        asset_path: output/*.log
-        asset_name: thesis_output.log
-        asset_content_type: text/plain
-    
     - uses: actions/upload-artifact@v4
       name: Upload artifacts
       with:
