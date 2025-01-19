@@ -23,20 +23,21 @@ Deze kosten kunnen bij bedrijven zoals Excentis zo hoog oplopen dat de kosten ni
 Welke risico's zijn er verbonden aan het blijven werken met VMware ESXi/VMware vCenter?
 Zijn deze risico’s van een zodanige aard dat ze de dagelijkse werking van Excentis in de toekomst in gevaar zouden kunnen brengen?
 
+Direct Attached Storage en Serial Attached SCSI worden bij Excentis gebruikt in combinatie met VMware vCenter.
+Deze moeten ook worden overgezet naar het nieuwe alternatieve systeem. Dit zal een belangrijk criterium en onderdeel van het onderzoek zijn.
+
 Vaak gaat het om bedrijven die virtualisatie hebben als een service, waarbij dit niet de allerbelangrijkste zorg is binnen het bedrijf.
-VMware-producten zit hard vastgeworteld in bedrijven doordat ze werken met verschillende automatisatietools en scripts. Zo'n overgang naar een nieuwe managementplatform zal een impact hebben op elke IT-infrastructuur.
-Om deze overgang ook vloeiend te kunnen laten lopen, moet er in de managementplatform ook ondersteuning zijn voor deze verschillende tools.
+VMware-producten zitten hard vastgeworteld in bedrijven doordat ze werken met verschillende automatisatietools en scripts. Zo'n overgang naar een nieuwe managementplatform zal een impact hebben op elke IT-infrastructuur.
+Om deze overgang ook vloeiend te kunnen laten lopen, moet er in het managementplatform ook ondersteuning zijn voor onder andere Ansible automatisatietools, Nakivo en Foreman.
 De mensen binnen IT moeten hierbij ook een omscholing krijgen of zich gaan verdiepen in de managementplatformen  voor virtualisatie. De documentatie en support/community achter de managementplatformen is zeker een aspect dat in rekening moet worden genomen.
-Deze bachelorproef richt zich op het bedrijf Excentis: Welke alternatieven zijn er om het huidige VMware vCenter te vervangen en hoe kan die passen binnen de noden van omgeving van Excentis?
-De volgende vragen moeten wij ons stellen bij het zoeken naar alternatieven op de markt.
+Deze bachelorproef richt zich op het bedrijf Excentis: Welke alternatieven zijn er om het huidige VMware vCenter te vervangen en hoe kan die passen binnen de noden van de omgeving van Excentis?
+De volgende vragen moeten worden gesteld bij het zoeken naar alternatieven op de markt.
 \begin{enumerate}
 \item Welke functionele en prestatieverschillen zijn er tussen open-source en closed-source managementplatformen, en welke voor- en nadelen hebben deze verschillen voor het bedrijf Excentis?
 \item In welke mate integreren managementplatformen met tools zoals Nakivo, Ansible en Foreman, en hoe kunnen deze toegepast worden binnen Excentis?
 \item Hoe presteren managementplatformen op het gebied van High Availability(failover,\newline schaalbaarheid,backups,...)?
 \item Hoe kan de bestaande ondersteuning van Direct Attached Storage en Serial Attached SCSI in VMWare vCenter worden overgezet naar een alternatief managementplatformen binnen de infrastructuur van Excentis?
-\item Op welke manier is er een mogelijkheid om de bestaande managementplatformen omgeving van Excentis over te zetten naar het nieuwe alternatief?
 \end{enumerate}
-
 
 
 % Waarover zal je bachelorproef gaan? Introduceer het thema en zorg dat volgende zaken zeker duidelijk aanwezig zijn:
@@ -52,7 +53,7 @@ De volgende vragen moeten wij ons stellen bij het zoeken naar alternatieven op d
 
 % De doelgroep moet ook concreet en duidelijk zijn, dus geen algemene of vaag gedefinieerde groepen zoals \emph{bedrijven}, \emph{developers}, \emph{Vlamingen}, enz. Je richt je in elk geval op it-professionals, een bachelorproef is geen populariserende tekst. Eén specifiek bedrijf (die te maken hebben met een concrete probleemsituatie) is dus beter dan \emph{bedrijven} in het algemeen.
 
-% Formuleer duidelijk de onderzoeksvraag! De begeleiders lezen nog steeds te veel voorstellen waarin we geen onderzoeksvraag terugvinden.
+% Formuleer duidelijk de onderzoeksvraag! De begeleiders lezen nog steeds te veel voorstellen waarin .we geen onderzoeksvraag terugvinden.
 
 % Schrijf ook iets over de doelstelling. Wat zie je als het concrete eindresultaat van je onderzoek, naast de uitgeschreven scriptie? Is het een proof-of-concept, een rapport met aanbevelingen, \ldots Met welk eindresultaat kan je je bachelorproef als een succes beschouwen?
 
@@ -60,37 +61,37 @@ De volgende vragen moeten wij ons stellen bij het zoeken naar alternatieven op d
 
 \section{Literatuurstudie}
 \label{sec:literatuurstudie}
-VMware~\autocite{vmware} is een bedrijf die zich bezighoud met alles rond virtualisatie. De sterke prijsstijgingen van VMware zorgen ervoor dat veel bedrijven afhaken en op zoek gaan naar alternatieven~\autocite{Hale2024}. Er zijn verschillende alternatieve managementplatformen met bijhorende hypervisors.
+VMware~\autocite{vmware} is een bedrijf dat zich specialiseert in virtualisatietechnologieën. De sterke prijsstijgingen van VMware zorgen ervoor dat veel bedrijven afhaken en op zoek gaan naar alternatieven~\autocite{Hale2024}. Er zijn verschillende alternatieve managementplatformen met bijhorende hypervisors.
 
 \subsection{Hypervisors}
-In het huidige systeem dat Excentis gebruikt als onderliggen hypervisor is VMWARE ESXI~\autocite{vmware}. Deze is closed source en werkt binnen het VMware systeem.
-Een voorbeeld hiervan is 'KVM' (Kernel-based Virtual Machine)\autocite{KVM}. KVM is open source en vrij te gebruiken voor iedereen\autocite{KVM}. Microsoft Hyper-V ~\autocite{Eaton2019} wordt ook genoemd als mogelijke vergelijking met VMware ESXI~\autocite{fayyad2013benchmarking}. Hierin wordt een vergelijking gemaakt tussen verschillende hypervisors die geselecteerd zijn.
-Verder in de virtualisatie wereld hebben wij ook nog het Xen Project~\autocite{xenproject}. Dit is een open-source hypervisor die zich vooral richt op cloud computing en server virtualisatie ~\autocite{binu2011virtualization}.
+In het huidige systeem dat Excentis gebruikt, fungeert VMware ESXi~\autocite{vmware} als onderliggende hypervisor. Deze is closed source en werkt binnen het VMware systeem. Als atlernatief voor VMware ESXI zijn er verschillende open-source hypervisors op de markt.
+Een voorbeeld hiervan is 'KVM' (Kernel-based Virtual Machine)\autocite{KVM}. KVM is open source en vrij te gebruiken voor iedereen\autocite{KVM}. Microsoft Hyper-V ~\autocite{Eaton2019} wordt ook genoemd als mogelijke vergelijking met VMware ESXI~\autocite{fayyad2013benchmarking}. In dit onderzoek wordt een vergelijking gemaakt tussen verschillende hypervisors die geselecteerd zijn.
+Verder in de virtualisatiewereld bestaat ook het Xen Project~\autocite{xenproject}. Dit is een open-source hypervisor die zich vooral richt op cloud computing en server virtualisatie ~\autocite{binu2011virtualization}.
 XenServer~\autocite{xenserver} is ook een alternatieve software keuze voor VMware ESXI. XenServer is een commerciële hypervisor die zich richt op bedrijven en enterprise-ondersteuning biedt.
 
 \subsection{managementplatformen}
-Excentis gebruikt bovenliggend als managementplatformen VMWare vCenter~\autocite{vmware}. Deze zou dus moeten vervangen worden.
-Proxmox VE~\autocite{Proxmox} is een open-source managementplatform dat werkt met KVM en enterprise-ondersteuning aanbiedt voor bedrijven. Uit dit onderzoek~\autocite{ally2018comparative} blijkt dat Proxmox, dat gebruik maakt van KVM zeker niet onderdoet tegenover andere closed source systemen.
-OpenStack is een open-source cloud computing platform~\autocite{openstack2024}. Deze bied niet alleen ondersteuning voor KVM maar ook voor Xen~\autocite{oleksiuk2023comparative}.
-Microsoft System Center Virtual Machine Manager (SCVMM)~\autocite{microsoftvmm2025} is van microsoft en bied een managementplatform systeem aan voor Hyper-V.
+Excentis gebruikt bovenliggend als managementplatform VMWare vCenter~\autocite{vmware}. Voor dit platform moet een alternatief worden gevonden.
+Proxmox VE~\autocite{Proxmox} is een open-source managementplatform dat werkt met KVM en enterprise-ondersteuning aanbiedt voor bedrijven. Uit dit onderzoek van~\autocite{ally2018comparative} blijkt dat Proxmox, dat gebruik maakt van KVM, zeker niet onderdoet tegenover andere closed source systemen.
+OpenStack is een open-source cloud computing platform~\autocite{openstack2024}. Deze biedt niet alleen ondersteuning voor KVM maar ook voor Xen~\autocite{oleksiuk2023comparative}.
+Microsoft System Center Virtual Machine Manager (SCVMM)~\autocite{microsoftvmm2025} is een product van Microsoft en biedt een managementplatform systeem aan voor Hyper-V.
 XenCenter~\autocite{xencenter2024} bied een managementplatform aan voor XenServer~\autocite{xenserver}.
 
 \subsection{Open source systemen}
-Er zijn vele soorten softwarepakketten op de markt die hypervisors en managementplatformen aanbieden. Hieruit kunnen wij ze onderverdelen in twee groepen: de closed-source en open-source hypervisors. Elke groep heeft zijn voor- en nadelen. Alles hangt steeds af van de noden en vereisten van het bedrijf of instelling.
-Proxmox VE is open source~\autocite{Proxmox}. Dit wil zeggen dat de systemen kosteloos gebruikt kunnen worden. Support bij problemen valt hierbij wel af. Er is wel een mogelijkheid om bij hen een enterprise support services subscription te nemen. Hierbij kan er alsnog beroep worden gedaan bij eventuele problemen.
+Er zijn vele soorten softwarepakketten op de markt die hypervisors en managementplatformen aanbieden. Bij het bekijken van de verschillende managementplatformen met hun bijbehorende hypervisors kunnen deze worden onderverdeeld in twee groepen: de closed-source en open-source hypervisors. Elke groep heeft zijn voor- en nadelen. Alles hangt steeds af van de noden en vereisten van het bedrijf of instelling.
+Proxmox VE is open source~\autocite{Proxmox}. Dit wil zeggen dat de systemen kosteloos gebruikt kunnen worden. Support bij problemen valt hierbij wel af. Er is wel een mogelijkheid om bij hen een enterprise support services subscription te nemen. Hierbij kan er alsnog beroep worden gedaan op support bij eventuele problemen.
 Open source software is een evidentie maar zorgt voor meer zelfstandig werk bij installatie en rust meer op de community achter de software.
 
 \subsection{closed source systemen}
-Andere alternatieven systemen zijn closed-source. Hierbij hebben we het onder andere over VMware ESXi/VMware vCenter~\autocite{vmware} en Microsoft Hyper-V~\autocite{Eaton2019}. Deze software systemen zijn niet gratis en vragen een licentie om te mogen gebruiken. Dit is een nadeel ten opzichte van open-source systemen.
-Bij bedrijven waar stabiliteit en betrouwbaarheid hoog in het vaandel staan, zoals in een wetenschappelijke omgeving, kan het een goede keuze zijn om te kiezen voor closed-source hypervisors~\autocite{voras2012early}. Dit wil niet zeggen dat andere systemen uitgesloten zijn.
+Andere alternatieven zijn closed-source. Hierbij gaat het onder andere om VMware ESXi/VMware vCenter~\autocite{vmware} en Microsoft Hyper-V~\autocite{Eaton2019}. Deze software systemen zijn niet gratis en vragen een licentie om te mogen gebruiken. Dit is een nadeel ten opzichte van open-source systemen.
+Bij bedrijven waar stabiliteit en betrouwbaarheid hoog in het vaandel staan, zoals in een wetenschappelijke omgeving met supercomputers die veel geld kosten als ze niet draaien, kan het een goede keuze zijn om te kiezen voor closed-source hypervisors~\autocite{voras2012early}. Dit wil niet zeggen dat andere systemen uitgesloten zijn.
 \subsection{Soorten storage systemen}
-Wanneer we praten over storage in de virtualisatiewereld, dan hebben we het ook over 'Serial-Attached SCSI' (SAS) en 'Direct-Attached Storage' (DAS). Deze technologieën zorgen ervoor dat er een hoge beschikbaarheid is van de data en dat deze snel kan worden opgevraagd~\autocite{griswold2002storage}. Dit is een belangrijk aspect in de virtualisatiewereld en is een belangrijke eis voor Excentis.
-SAS is een snelle, betrouwbare opslaginterface die servers en high-performance opslagapparaten verbindt~\autocite{aravindan2014performance}. Dit is een belangrijk om een consistente oplsag te garanderen. DAS is een opslagarchitectuur waarbij opslag direct fysiek is verbonden aan een enkele server, zonder tussenkomst van een netwerk. Deze technologie is goedkoper en eenvoudiger, maar garandeert niet alle voordelen die SAS wel kan garanderen~\autocite{griswold2002storage}.
+Wanneer het over opslag in de virtualisatiewereld gaat, betreft het ook 'Serial-Attached SCSI' (SAS) en 'Direct-Attached Storage' (DAS). Deze technologieën zorgen ervoor dat er een hoge beschikbaarheid is van de data en dat deze snel kan worden opgevraagd~\autocite{griswold2002storage}. Dit is een belangrijk aspect in de virtualisatiewereld en is belangrijk voor Excentis dat deze beide technologieën perfect werken en ondersteunt worden.
+SAS is een snelle, betrouwbare opslaginterface die servers en high-performance opslagapparaten verbindt~\autocite{aravindan2014performance}. Dit is een belangrijk om een consistente opslag te garanderen. DAS is een opslagarchitectuur waarbij opslag direct fysiek is verbonden aan een enkele server, zonder tussenkomst van een netwerk. Deze technologie is goedkoper en eenvoudiger, maar garandeert niet alle voordelen die SAS wel kan garanderen~\autocite{griswold2002storage}.
 DAS wordt vaak gebruikt in kleinere bedrijven waar de data niet zo belangrijk is en waar de data niet zo vaak wordt opgevraagd. SAS wordt vaak gebruikt in grotere bedrijven waar de data zeer belangrijk is en waar de data vaak wordt opgevraagd~\autocite{griswold2002storage}.
 Zo goed als alle managementplatformen ondersteunen DAS en SAS in ons onderzoek. Excentis wilt weten hoe deze ondersteuning kan worden overgezet naar een nieuw managementplatform.
 
 \subsection{High Availability-ondersteuning}
-In dit onderzoek~\autocite{dudnik2017creating} wordt een grote vergelijking gedaan tussen hypervisors en hun managementplatformen. Hierin spit men toe op bepaalde aspecten binnen de term High Availability.
+In dit onderzoek van~\autocite{dudnik2017creating} wordt een grote vergelijking gemaakt tussen hypervisors en hun managementplatformen. Hierin wordt gefocust op bepaalde aspecten binnen de term High Availability, zoals redundantie, risicoanalyse en piekdrukte.
 Er zijn verschillende aspecten die moeten worden bekeken en waaraan voldaan moet worden om aan een goede High Availability te voldoen. Een failover-systeem dat het ene systeem het andere systeem over laat nemen bij een bepaalde fout, is een van die aspecten in het onderzoek van~\autocite{dudnik2017creating}.
 Op netwerkniveau moet er ook nagedacht worden over zowel schaalbaarheid bij piekmomenten als bij problemen die zich voordoen in het netwerk. Migratie tussen verschillende fysieke servers moet ook mogelijk zijn om een goede High Availability te garanderen~\autocite{dudnik2017creating}.
 Workloadmanagers kunnen een goede oplossing zijn om overbelasting tegen te gaan op drukke piekmomenten. Back-ups van de data worden ook gezien als een belangrijk aspect voor High Availability.
@@ -113,12 +114,16 @@ Workloadmanagers kunnen een goede oplossing zijn om overbelasting tegen te gaan 
 %---------- Methodologie ------------------------------------------------------
 \section{Methodologie}%
 \label{sec:methodologie}
-Een objectief resultaat van alle managementplatformen is gewenst om deze vervolgens naast elkaar te kunnen vergelijken. Om dit te bereiken, wordt een vergelijkende studie uitgevoerd. De verschillende managementplatformen worden met elkaar vergeleken om te bepalen welke het beste aansluit bij de noden van Excentis.
+\subsection{Literatuurstudie en voorbereidend onderzoek}
+Een objectief resultaat van alle managementplatformen is gewenst om deze vervolgens naast elkaar te kunnen vergelijken. Om dit te bereiken, wordt een vergelijkende studie uitgevoerd.De verschillende managementplatformen worden met elkaar vergeleken om te bepalen welke het beste aansluit bij de noden van Excentis.
 Aan de hand van literatuurstudie en onderzoeken worden de managementplatformen geselecteerd die met elkaar worden vergeleken.
 Er zal samen met Excentis worden overlopen welke eisen zeker voldaan moeten worden en wat het bedrijf echt nodig heeft in hun managementplatform, gecombineerd met hun bestaande infrastructuur. Er zal ook gekeken worden naar wat er momenteel allemaal wordt gebruikt binnen hun omgeving. Deze zullen dan worden meegenomen als basisvereisten voor de alternatieve managementplatformen.
+
+\subsection{Opzetten testomgeving}
 De hardware en omgeving waarin alles wordt getest en opgebouwd, worden opgesteld in een testomgeving bij Excentis. Dit maakt het mogelijk om de managementplatformen te testen in een realistische omgeving, wat essentieel is om een objectief resultaat te bekomen.
 Deze omgeving zal bestaan uit 2 verouderde DELL servers die in de serverruimte van Excentis staan. Hierbij zal alles op kleine schaal kunnen worden uitgevoerd.
 Op deze servers worden de geselecteerde managementplatformen geïnstalleerd.
+\subsection{Uitvoeren onderzoek op testomgeving}
 Voor de vergelijking van de managementplatformen worden de volgende acties uitgevoerd op de testomgeving van Excentis:
 \begin{itemize}
 \item werking met de bestaande hardware van Excentis, vergeleken op prestatie en stabiliteit. (Hoe snel start een nieuwe virtuele machine op, wat zijn de minimum eisen voor de hardware, ...).
@@ -126,11 +131,12 @@ Voor de vergelijking van de managementplatformen worden de volgende acties uitge
 \item De integratie van bepalende systemen binnen Excentis testen, zoals CI/CD-tools, op de nieuwe managementplatformen.
 \item Prestatie en stabiliteit van de managementplatformen bij piekmomenten en failovers.
 \end{itemize}
-Deze acties worden stap voor stap gedaan bij elke managementplatform. Deze worden gedaan om zo een zo objectief mogelijk resultaat te krijgen per managementplatform.
+\subsection{Evalueren van de resultaten}
+Deze acties worden stap voor stap uitgevoerd bij elk managementplatform, dit om een zo objectief mogelijk resultaat per managementplatform te verkrijgen.
 Als alle acties zijn uitgevoerd, worden de resultaten met elkaar vergeleken en wordt er een conclusie getrokken over welk managementplatform het beste aansluit bij de noden van Excentis.
 % Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor literatuurstudie, interviews met belanghebbenden (bv.~voor requirements-analyse), experimenten, simulaties, vergelijkende studie, risico-analyse, PoC, \ldots?
 
-% Valt je onderwerp onder één van de typische soorten bachelorproeven die besproken zijn in de lessen Research Methods (bv.\ vergelijkende studie of risico-analyse)? Zorg er dan ook voor dat we duidelijk de verschillende stappen terug vinden die we verwachten in dit soort onderzoek!
+% Valt je onderwerp onder één van de typische soorten bachelorproeven die besproken zijn in de lessen Research Methods (bv.\ vergelijkende studie of risico-analyse)? Zorg er dan ook voor dat .we duidelijk de verschillende stappen terug vinden die .we verwachten in dit soort onderzoek!
 
 % Vermijd onderzoekstechnieken die geen objectieve, meetbare resultaten kunnen opleveren. Enquêtes, bijvoorbeeld, zijn voor een bachelorproef informatica meestal \textbf{niet geschikt}. De antwoorden zijn eerder meningen dan feiten en in de praktijk blijkt het ook bijzonder moeilijk om voldoende respondenten te vinden. Studenten die een enquête willen voeren, hebben meestal ook geen goede definitie van de populatie, waardoor ook niet kan aangetoond worden dat eventuele resultaten representatief zijn.
 
@@ -145,7 +151,7 @@ Als alle acties zijn uitgevoerd, worden de resultaten met elkaar vergeleken en w
 \label{sec:verwachte_resultaten}
 
 Het verwachte resultaat is een oplossing in de richting van de open-source wereld. Doordat VMware de prijzen significant verhoogt, is er een beweging ontstaan richting open-source oplossingen voor hypervisors en managementplatformen.
-Hierbij ligt de focus specifiek op Proxmox VE als managementplatform met KVM als onderliggende hypervisor. Deze managementplatform is algemeen bekend en beschikt over een community met uitgebreide documentatie en support.
+Hierbij ligt de focus specifiek op Proxmox VE als managementplatform met KVM als onderliggende hypervisor. Dit managementplatform is algemeen bekend en beschikt over een community met uitgebreide documentatie en support.
 Het verwachte resultaat zal daarmee ook richting Proxmox VE gaan, aangezien het goedkoop in gebruik is en alvast goede ondersteuning biedt voor verschillende Linux-distributies.
 De Windows-hypervisor Hyper-V biedt echter alleen ondersteuning op Windows, wat als een groot minpunt wordt beschouwd in een operationele omgeving bij Excentis.
 
