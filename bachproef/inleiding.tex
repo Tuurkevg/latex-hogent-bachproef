@@ -5,32 +5,51 @@
 \chapter{\IfLanguageName{dutch}{Inleiding}{Introduction}}%
 \label{ch:inleiding}
 
-De inleiding moet de lezer net genoeg informatie verschaffen om het onderwerp te begrijpen en in te zien waarom de onderzoeksvraag de moeite waard is om te onderzoeken. In de inleiding ga je literatuurverwijzingen beperken, zodat de tekst vlot leesbaar blijft. Je kan de inleiding verder onderverdelen in secties als dit de tekst verduidelijkt. Zaken die aan bod kunnen komen in de inleiding~\autocite{Pollefliet2011}:
-
-\begin{itemize}
-  \item context, achtergrond
-  \item afbakenen van het onderwerp
-  \item verantwoording van het onderwerp, methodologie
-  \item probleemstelling
-  \item onderzoeksdoelstelling
-  \item onderzoeksvraag
-  \item \ldots
-\end{itemize}
-
 \section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}%
 \label{sec:probleemstelling}
 
-Uit je probleemstelling moet duidelijk zijn dat je onderzoek een meerwaarde heeft voor een concrete doelgroep. De doelgroep moet goed gedefinieerd en afgelijnd zijn. Doelgroepen als ``bedrijven,'' ``KMO's'', systeembeheerders, enz.~zijn nog te vaag. Als je een lijstje kan maken van de personen/organisaties die een meerwaarde zullen vinden in deze bachelorproef (dit is eigenlijk je steekproefkader), dan is dat een indicatie dat de doelgroep goed gedefinieerd is. Dit kan een enkel bedrijf zijn of zelfs één persoon (je co-promotor/opdrachtgever).
+Door de aankondiging van VMware om de licentiekosten te verhogen~\autocite{device42_2024}, zijn er bedrijven die beginnen te denken aan een eventueel alternatief voor VMware ESXi/VMWare vCenter.
+De prijzen voor deze software zijn zo hoog~\autocite{Hale2024} dat bedrijven zoeken naar alternatieven.
+Hoe groot zijn de kostenstijgingen en wat zijn de gevolgen voor bedrijven die gebruik maken van VMware ESXi/VMware vCenter?
+Deze kosten kunnen bij bedrijven zoals Excentis zo hoog oplopen dat de kosten niet meer in verhouding staan tot de voordelen.
+Welke risico's zijn er verbonden aan het blijven werken met VMware ESXi/VMware vCenter?
+Zijn deze risico’s van een zodanige aard dat ze de dagelijkse werking van Excentis in de toekomst in gevaar zouden kunnen brengen?
+
+Direct Attached Storage en Serial Attached SCSI worden bij Excentis gebruikt in combinatie met VMware vCenter.
+Deze moeten ook worden overgezet naar het nieuwe alternatieve systeem. Dit zal een belangrijk criterium en onderdeel van het onderzoek zijn.
+
+Vaak gaat het om bedrijven die virtualisatie hebben als een service, waarbij dit niet de allerbelangrijkste zorg is binnen het bedrijf.
+VMware-producten zitten hard vastgeworteld in bedrijven doordat ze werken met verschillende automatisatietools en scripts. Zo'n overgang naar een nieuwe managementplatform zal een impact hebben op elke IT-infrastructuur.
+Om deze overgang ook vloeiend te kunnen laten lopen, moet er in het managementplatform ook ondersteuning zijn voor onder andere Ansible automatisatietools, Nakivo en Foreman.
+De mensen binnen IT moeten hierbij ook een omscholing krijgen of zich gaan verdiepen in de managementplatformen  voor virtualisatie. De documentatie en support/community achter de managementplatformen is zeker een aspect dat in rekening moet worden genomen.
+Deze bachelorproef richt zich op het bedrijf Excentis: Welke alternatieven zijn er om het huidige VMware vCenter te vervangen en hoe kan die passen binnen de noden van de omgeving van Excentis?
+De volgende vragen moeten worden gesteld bij het zoeken naar alternatieven op de markt.
+
 
 \section{\IfLanguageName{dutch}{Onderzoeksvraag}{Research question}}%
 \label{sec:onderzoeksvraag}
 
-Wees zo concreet mogelijk bij het formuleren van je onderzoeksvraag. Een onderzoeksvraag is trouwens iets waar nog niemand op dit moment een antwoord heeft (voor zover je kan nagaan). Het opzoeken van bestaande informatie (bv. ``welke tools bestaan er voor deze toepassing?'') is dus geen onderzoeksvraag. Je kan de onderzoeksvraag verder specifiëren in deelvragen. Bv.~als je onderzoek gaat over performantiemetingen, dan 
-
+Evaluatie van alternatieven voor VMware vCenter: Een onderzoek naar verschillende managementplatformen met ondersteuning voor Nakivo, Ansible, en Foreman binnen Excentis
+\newline De volgende deelvragen zullen beantwoord worden om de centrale onderzoeksvraag te beantwoorden:
+\begin{enumerate}
+  \item Welke functionele en prestatieverschillen zijn er tussen open-source en closed-source managementplatformen, en welke voor- en nadelen hebben deze verschillen voor het bedrijf Excentis?
+  \item In welke mate integreren managementplatformen met tools zoals Nakivo, Ansible en Foreman, en hoe kunnen deze toegepast worden binnen Excentis?
+  \item Hoe presteren managementplatformen op het gebied van High Availability(failover,\newline schaalbaarheid,backups,...)?
+  \item Hoe kan de bestaande ondersteuning van Direct Attached Storage en Serial Attached SCSI in VMWare vCenter worden overgezet naar een alternatief managementplatformen binnen de infrastructuur van Excentis?
+  \end{enumerate}
+  
 \section{\IfLanguageName{dutch}{Onderzoeksdoelstelling}{Research objective}}%
 \label{sec:onderzoeksdoelstelling}
-
-Wat is het beoogde resultaat van je bachelorproef? Wat zijn de criteria voor succes? Beschrijf die zo concreet mogelijk. Gaat het bv.\ om een proof-of-concept, een prototype, een verslag met aanbevelingen, een vergelijkende studie, enz.
+Dit onderzoek heeft als doel om een alternatief te vinden voor VMware vCenter binnen de infrastructuur van Excentis. Hierbij wordt er gekeken naar de verschillende managementplatformen die er op de markt zijn en hoe deze kunnen worden geïntegreerd binnen de infrastructuur van Excentis.
+Het resultaat zal verkregen worden aan de hand van een proof of concept. Hierin zullen de specifiek geselecteerde managementplatformen uitgerold worden en de volgende criteria en testen worden uitgevoerd:
+\begin{itemize}
+  \item werking met de bestaande hardware van Excentis, vergeleken op prestatie en stabiliteit. (Hoe snel start een nieuwe virtuele machine op, wat zijn de minimum eisen voor de hardware, ...).
+  \item Testen en meten van de performance en stabiliteit van de bestaande Direct Attached Storage en Serial Attached SCSI-systemen die Excentis gebruikt aan de hand van testdata op de nieuwe managementplatformen.
+  \item De integratie van bepalende systemen binnen Excentis testen, zoals CI/CD-tools, op de nieuwe managementplatformen.
+  \item Prestatie en stabiliteit van de managementplatformen bij piekmomenten en failovers.
+  \end{itemize}
+Een vergelijkende studie zal uitgevoerd worden tussen de verschillende managementplatformen en de resultaten zullen worden geanalyseerd. Hieruit zal een advies worden geformuleerd voor Excentis.
+Als conclusie wordt er dan één managementplatform aanbevolen.
 
 \section{\IfLanguageName{dutch}{Opzet van deze bachelorproef}{Structure of this bachelor thesis}}%
 \label{sec:opzet-bachelorproef}

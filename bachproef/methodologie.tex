@@ -26,4 +26,41 @@
 %% Maak voor elke fase (behalve het literatuuronderzoek) een NIEUW HOOFDSTUK aan
 %% en geef het een gepaste titel.
 
+\subsection{Literatuurstudie en voorbereidend onderzoek}
+Een objectief resultaat van alle managementplatformen is gewenst om deze vervolgens naast elkaar te kunnen vergelijken. Om dit te bereiken, wordt een vergelijkende studie uitgevoerd.De verschillende managementplatformen worden met elkaar vergeleken om te bepalen welke het beste aansluit bij de noden van Excentis.
+Aan de hand van literatuurstudie en onderzoeken worden de managementplatformen geselecteerd die met elkaar worden vergeleken.
+Er zal samen met Excentis worden overlopen welke eisen zeker voldaan moeten worden en wat het bedrijf echt nodig heeft in hun managementplatform, gecombineerd met hun bestaande infrastructuur. Er zal ook gekeken worden naar wat er momenteel allemaal wordt gebruikt binnen hun omgeving. Deze zullen dan worden meegenomen als basisvereisten voor de alternatieve managementplatformen.
+Deze fase zal ook gebruikt worden om de testomgeving op te zetten en de hardware te voorzien die nodig is voor de testen.
 
+\subsection{selecteren van managementplatformen met hun bijhorden hypervisor}
+Er zijn verschillende soorten managementplatformen op de markt die kunnen worden getest en vergeleken. Hieruit moet er een bepaalde selectie komen waar er verder mee vergeleken kan worden voor in de proof of concept.
+Aangezien de tijd en middelen beperkt zijn, is het belangrijk om hierop een goede minimumcriteria te hebben waarop de managementplatformen worden geselecteerd.
+
+\begin{enumerate}
+\item Minimaal 1 open-source managementplatform die geen betalende licentie heeft voor de software (exclusief support).
+\item Er is een volwaardige supportaanbieding voor commercieel gebruik. Hierbij kan de klant mits een betalende licentie beroep doen op support bij problemen.
+\item Het kan draaien op de bestaande DELL-servers die tot de beschikking zijn in de proof of concept.
+\item Het managementplatform moet verschillende nodes kunnen aansturen en beheren.
+\item Betalende managementplatformen die een licentie nodig hebben, bieden een gratis proefversie aan om deze studie te kunnen uitvoeren in de proof of concept-omgeving.
+\end{enumerate}
+
+Als deze criteria zijn voldaan voor een specifiek managementplatform, wordt deze geselecteerd voor te draaien in de proof of concept.
+
+\subsection{Opzetten testomgeving/proof of concept}
+De hardware en omgeving waarin alles wordt getest en opgebouwd, worden opgesteld in een testomgeving bij Excentis. Dit maakt het mogelijk om de managementplatformen te testen in een realistische omgeving, wat essentieel is om een objectief resultaat te bekomen.
+Deze omgeving zal bestaan uit 2 verouderde DELL servers die in de serverruimte van Excentis staan. Hierbij zal alles op kleine schaal kunnen worden uitgevoerd.
+Op deze servers worden de geselecteerde managementplatformen geïnstalleerd.
+\subsection{Uitvoeren onderzoek op testomgeving}
+Voor de vergelijking van de managementplatformen worden de volgende acties uitgevoerd op de testomgeving van Excentis:
+\begin{itemize}
+\item werking met de bestaande hardware van Excentis, vergeleken op prestatie en stabiliteit. (Hoe snel start een nieuwe virtuele machine op, wat zijn de minimum eisen voor de hardware, ...).
+\item Testen en meten van de performance en stabiliteit van de bestaande Direct Attached Storage en Serial Attached SCSI-systemen die Excentis gebruikt aan de hand van testdata op de nieuwe managementplatformen.
+\item De integratie van bepalende systemen binnen Excentis testen, zoals CI/CD-tools, op de nieuwe managementplatformen.
+\item Prestatie en stabiliteit van de managementplatformen bij piekmomenten en failovers.
+\item hot swapping van hard disks. Blijf alles correct werken? 
+\item Neemt de ene node de virtuele machines over van de andere node bij een failover?
+\end{itemize}
+
+\subsection{Evalueren van de resultaten}
+Deze acties worden stap voor stap uitgevoerd bij elk managementplatform, dit om een zo objectief mogelijk resultaat per managementplatform te verkrijgen.
+Als alle acties zijn uitgevoerd, worden de resultaten met elkaar vergeleken en wordt er een conclusie getrokken over welk managementplatform het beste aansluit bij de noden van Excentis.
