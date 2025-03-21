@@ -13,13 +13,13 @@ In het huidige systeem dat Excentis gebruikt, fungeert VMware ESXi~\autocite{vmw
 Een voorbeeld hiervan is 'KVM' (Kernel-based Virtual Machine)\autocite{KVM}. KVM is open source en vrij te gebruiken voor iedereen\autocite{KVM}. Microsoft Hyper-V ~\autocite{Eaton2019} wordt ook genoemd als mogelijke vergelijking met VMware ESXI~\autocite{fayyad2013benchmarking}. In dit onderzoek wordt een vergelijking gemaakt tussen verschillende hypervisors die geselecteerd zijn.
 Verder in de virtualisatiewereld bestaat ook het Xen Project~\autocite{xenproject}. Dit is een open-source hypervisor die zich vooral richt op cloud computing en server virtualisatie ~\autocite{binu2011virtualization}.
 XenServer~\autocite{xenserver} is ook een alternatieve software keuze voor VMware ESXI. XenServer is een commerciële hypervisor die zich richt op bedrijven en enterprise-ondersteuning biedt.
-
+ 
 \subsection{managementplatformen}
-Excentis gebruikt bovenliggend als managementplatform VMWare vCenter~\autocite{vmware}. Voor dit platform moet een alternatief worden gevonden.
-Proxmox VE~\autocite{Proxmox} is een open-source managementplatform dat werkt met KVM en enterprise-ondersteuning aanbiedt voor bedrijven. Uit dit onderzoek van~\autocite{ally2018comparative} blijkt dat Proxmox, dat gebruik maakt van KVM, zeker niet onderdoet tegenover andere closed source systemen.
+Excentis gebruikt als managementplatform VMWare vCenter~\autocite{vmware}. Voor dit platform moet een alternatief worden gevonden.
+Proxmox VE~\autocite{Proxmox} is een open-source managementplatform dat werkt met KVM en enterprise-ondersteuning aanbiedt voor bedrijven. Uit onderzoek van \textcite{ally2018comparative} blijkt dat Proxmox, dat gebruik maakt van KVM, zeker niet onderdoet tegenover andere closed source systemen.
 OpenStack is een open-source cloud computing platform~\autocite{openstack2024}. Deze biedt niet alleen ondersteuning voor KVM maar ook voor Xen~\autocite{oleksiuk2023comparative}.
 Microsoft System Center Virtual Machine Manager (SCVMM)~\autocite{microsoftvmm2025} is een product van Microsoft en biedt een managementplatform systeem aan voor Hyper-V.
-XenCenter~\autocite{xencenter2024} bied een managementplatform aan voor XenServer~\autocite{xenserver}.
+XenCenter~\autocite{xencenter2024} biedt een managementplatform aan voor XenServer~\autocite{xenserver}.
 
 \subsection{Open source systemen}
 Er zijn vele soorten softwarepakketten op de markt die hypervisors en managementplatformen aanbieden. Bij het bekijken van de verschillende managementplatformen met hun bijbehorende hypervisors kunnen deze worden onderverdeeld in twee groepen: de closed-source en open-source hypervisors. Elke groep heeft zijn voor- en nadelen. Alles hangt steeds af van de noden en vereisten van het bedrijf of instelling.
@@ -36,9 +36,35 @@ DAS wordt vaak gebruikt in kleinere bedrijven waar de data niet zo belangrijk is
 Zo goed als alle managementplatformen ondersteunen DAS en SAS in ons onderzoek. Excentis wilt weten hoe deze ondersteuning kan worden overgezet naar een nieuw managementplatform.
 
 \subsection{High Availability-ondersteuning}
-In dit onderzoek van~\autocite{dudnik2017creating} wordt een grote vergelijking gemaakt tussen hypervisors en hun managementplatformen. Hierin wordt gefocust op bepaalde aspecten binnen de term High Availability, zoals redundantie, risicoanalyse en piekdrukte.
-Er zijn verschillende aspecten die moeten worden bekeken en waaraan voldaan moet worden om aan een goede High Availability te voldoen. Een failover-systeem dat het ene systeem het andere systeem over laat nemen bij een bepaalde fout, is een van die aspecten in het onderzoek van~\autocite{dudnik2017creating}.
+In het onderzoek van~\textcite{dudnik2017creating} wordt een grote vergelijking gemaakt tussen hypervisors en hun managementplatformen. Hierin wordt gefocust op bepaalde aspecten binnen de term High Availability, zoals redundantie, risicoanalyse en piekdrukte.
+Er zijn verschillende aspecten die moeten worden bekeken en waaraan voldaan moet worden om aan een goede High Availability te voldoen. Een failover-systeem dat het ene systeem het andere systeem over laat nemen bij een bepaalde fout, is een van die aspecten.
 Op netwerkniveau moet er ook nagedacht worden over zowel schaalbaarheid bij piekmomenten als bij problemen die zich voordoen in het netwerk. Migratie tussen verschillende fysieke servers moet ook mogelijk zijn om een goede High Availability te garanderen~\autocite{dudnik2017creating}.
 Workloadmanagers kunnen een goede oplossing zijn om overbelasting tegen te gaan op drukke piekmomenten. Back-ups van de data worden ook gezien als een belangrijk aspect voor High Availability.
 
+
+\subsection{samenvatting van alle managementplatformen en hun bijhorende hypervisors}
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{geometry} % Voor betere marges
+\usepackage{array}    % Voor fijnere controle over kolombreedte
+
+\begin{document}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|l|l|>{\raggedright\arraybackslash}p{5cm}|} % Kolombreedte voor de 'Beschrijving' is ingesteld op 5 cm
+        \hline
+        \textbf{Naam} & \textbf{Type} & \textbf{Ondersteunde Hypervisors} & \textbf{Beschrijving} \\
+        \hline
+        Microsoft SCVMM & Closed-source & Microsoft Hyper-V & Beheert Hyper-V-omgevingen en biedt integratie met andere Microsoft-producten. \\
+        Proxmox VE & Open-source & KVM & Geavanceerd open-source managementplatform voor KVM, met enterprise-ondersteuning. \\
+        OpenStack & Open-source & KVM, Xen & Cloud computing-platform dat meerdere hypervisors ondersteunt. \\
+        XenCenter & Closed-source & XenServer & Managementplatform specifiek ontworpen voor XenServer-gebruikers. \\
+        \hline
+    \end{tabular}
+    \caption{Overzicht van Virtual Managementplatformen}
+    \label{tab:managementplatformen}
+\end{table}
+
+\end{document}
 
