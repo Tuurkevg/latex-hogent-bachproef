@@ -43,28 +43,18 @@ Workloadmanagers kunnen een goede oplossing zijn om overbelasting tegen te gaan 
 
 
 \subsection{samenvatting van alle managementplatformen en hun bijhorende hypervisors}
-\documentclass{article}
-\usepackage{booktabs}
-\usepackage{geometry} % Voor betere marges
-\usepackage{array}    % Voor fijnere controle over kolombreedte
-
-\begin{document}
-
-\begin{table}[h]
-    \centering
-    \begin{tabular}{|l|l|l|>{\raggedright\arraybackslash}p{5cm}|} % Kolombreedte voor de 'Beschrijving' is ingesteld op 5 cm
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|l|l|l|l|}
         \hline
-        \textbf{Naam} & \textbf{Type} & \textbf{Ondersteunde Hypervisors} & \textbf{Beschrijving} \\
-        \hline
-        Microsoft SCVMM & Closed-source & Microsoft Hyper-V & Beheert Hyper-V-omgevingen en biedt integratie met andere Microsoft-producten. \\
-        Proxmox VE & Open-source & KVM & Geavanceerd open-source managementplatform voor KVM, met enterprise-ondersteuning. \\
-        OpenStack & Open-source & KVM, Xen & Cloud computing-platform dat meerdere hypervisors ondersteunt. \\
-        XenCenter & Closed-source & XenServer & Managementplatform specifiek ontworpen voor XenServer-gebruikers. \\
-        \hline
-    \end{tabular}
-    \caption{Overzicht van Virtual Managementplatformen}
-    \label{tab:managementplatformen}
-\end{table}
-
-\end{document}
+        \textbf{Platform}      & \textbf{Type}      & \textbf{Hypervisor} & \textbf{Description} \\ \hline
+        VMware vCenter         & Closed-source      & VMware ESXi         & Enterprise management platform voor VMware-gebaseerde virtualisatie. \\ \hline
+        Microsoft SCVMM        & Closed-source      & Microsoft Hyper-V   & Beheert Hyper-V-omgevingen en biedt integratie met andere Microsoft-producten. \\ \hline
+        Proxmox VE             & Open-source        & KVM                 & Geavanceerd open-source managementplatform voor KVM, met enterprise-ondersteuning. \\ \hline
+        OpenStack              & Open-source        & KVM, Xen            & Cloud computing-platform dat meerdere hypervisors ondersteunt. \\ \hline
+        XenCenter              & Closed-source      & XenServer           & Managementplatform specifiek ontworpen voor XenServer-gebruikers. \\ \hline
+        \end{tabular}
+        \caption{Vergelijking van Virtualisatieplatforms}
+        \end{table}
+        
 
