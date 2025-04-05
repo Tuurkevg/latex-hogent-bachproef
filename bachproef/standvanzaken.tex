@@ -12,14 +12,14 @@ VMware~\autocite{vmware} is een bedrijf dat zich specialiseert in virtualisatiet
 In het huidige systeem dat Excentis gebruikt, fungeert VMware ESXi~\autocite{vmware} als onderliggende hypervisor. Deze is closed source en werkt binnen het VMware systeem. Als alternatief voor VMware ESXI zijn er verschillende open-source hypervisors op de markt.
 Een voorbeeld hiervan is 'KVM' (Kernel-based Virtual Machine)\autocite{KVM}. KVM is open source en vrij te gebruiken voor iedereen\autocite{KVM}. Microsoft Hyper-V ~\autocite{Eaton2019} wordt ook genoemd als mogelijke vergelijking met VMware ESXI~\autocite{fayyad2013benchmarking}. In dit onderzoek wordt een vergelijking gemaakt tussen verschillende hypervisors die geselecteerd zijn.
 Verder in de virtualisatiewereld bestaat ook het Xen Project~\autocite{xenproject}. Dit is een open-source hypervisor die zich vooral richt op cloud computing en server virtualisatie ~\autocite{binu2011virtualization}.
-XenServer~\autocite{xenserver} is ook een alternatieve software keuze voor VMware ESXI. XenServer is een commerciële hypervisor die zich richt op bedrijven en enterprise-ondersteuning biedt.
+XenServer~\autocite{xenserverwebsite} is ook een alternatieve software keuze voor VMware ESXI. XenServer is een commerciële hypervisor die zich richt op bedrijven en enterprise-ondersteuning biedt.
  
 \subsection{managementplatformen}
 Excentis gebruikt als managementplatform VMWare vCenter~\autocite{vmware}. Voor dit platform moet een alternatief worden gevonden.
 Proxmox VE~\autocite{Proxmox} is een open-source managementplatform dat werkt met KVM en enterprise-ondersteuning aanbiedt voor bedrijven. Uit onderzoek van \textcite{ally2018comparative} blijkt dat Proxmox, dat gebruik maakt van KVM, zeker niet onderdoet tegenover andere closed source systemen.
 OpenStack is een open-source cloud computing platform~\autocite{openstack2024}. Deze biedt niet alleen ondersteuning voor KVM maar ook voor Xen~\autocite{oleksiuk2023comparative}.
 Microsoft System Center Virtual Machine Manager (SCVMM)~\autocite{microsoftvmm2025} is een product van Microsoft en biedt een managementplatform systeem aan voor Hyper-V.
-XenCenter~\autocite{xencenter2024} biedt een managementplatform aan voor XenServer~\autocite{xenserver}.
+XenCenter~\autocite{xencenter2024} biedt een managementplatform aan voor XenServer~\autocite{xenserverwebsite}.
 
 \subsection{Open source systemen}
 Er zijn vele soorten softwarepakketten op de markt die hypervisors en managementplatformen aanbieden. Bij het bekijken van de verschillende managementplatformen met hun bijbehorende hypervisors kunnen deze worden onderverdeeld in twee groepen: de closed-source en open-source hypervisors. Elke groep heeft zijn voor- en nadelen. Alles hangt steeds af van de noden en vereisten van het bedrijf of instelling.
@@ -53,8 +53,49 @@ Workloadmanagers kunnen een goede oplossing zijn om overbelasting tegen te gaan 
         Proxmox VE             & Open-source        & KVM                 & Geavanceerd open-source managementplatform voor KVM, met enterprise-ondersteuning. \\ \hline
         OpenStack              & Open-source        & KVM, Xen            & Cloud computing-platform dat meerdere hypervisors ondersteunt. \\ \hline
         XenCenter              & Closed-source      & XenServer           & Managementplatform specifiek ontworpen voor XenServer-gebruikers. \\ \hline
+        Xen Project            & Open-source        & Xen                 & Managementplatform dat Open-source is. \\ \hline
         \end{tabular}
         \caption{Vergelijking van Virtualisatieplatforms}
         \end{table}
         
+\subsection{Prestatie verschillen tussen XenServer en Proxmox VE}
+In het onderzoek van \textcite{algarni2018performance} wordt een vergelijkende studie gemaakt tussen Xen en KVM. In ons onderzoek focussen wij ons vooral op het managementplatform.
+Aangezien een managementplatform ook een hypervisor nodig heeft kunnen wij hier spreken over het management platform die gekoppeld is in deze studie aan een hypervisor.
+Voor KVM spreken we over PROXMOX VE en voor Xen spreken we over XenServer. In deze studie wordt er een vergelijking gemaakt tussen de twee systemen en hun prestaties. De resultaten zijn als volgt:
+\begin{itemize}
+    \item Proxmox VE heeft een betere prestatie in termen van CPU-gebruik en geheugengebruik dan XenServer.
+    \item XenServer heeft een betere prestatie in termen van I/O-prestaties dan Proxmox VE zoals bestandssysteem beheer en applicatie prestaties.
+\end{itemize}                               
+Over het volledige onderzoek van \textcite{algarni2018performance} heen krijg KVM (gekoppeld aan Proxmox VE voor ons onderzoek) de beste punten over het globael punt heen. Dit onderozek heeft plaats gevonden in 2018 waarbij de conclusies nog alst actueel kunnen beschouwd worden.
+Dit is een belangrijk onderzoek om conclusies uit te trekken eenmaal een proof of concept gemaakt is.
 
+\subsection{Storage ondersteuning voor hypervisors en managementplatformen}
+Zoals eerder uitgelegd wordt er in dit onderzoek gekeken naar Serial-Attached SCSI (SAS) en Direct-Attached Storage (DAS). Deze technologieën zijn belangrijk voor de virtualisatiewereld en zijn ook belangrijk voor Excentis. Het is belangrijk dat deze technologieën goed werken met de hypervisors en managementplatformen die in dit onderzoek worden bekeken.
+Om in de proof of concept deze technologieën te kunnen gebruiken moet er gekken worden of elk managamentplatform deze technologieën ondersteunt.
+SAS storage staat los van elke hypervisor met hun bijhoren virtual managementplatformen. 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../onderzoek/storagesas-das.jpg} 
+    \caption{volledig beeld die SAS weergeeft, afkomstig van \href{https://www.eetimes.com/serial-attached-scsi-storage-moves-ahead-in-network-server-designs/}{TechTarget}.}
+    \label{fig:sas}
+\end{figure}
+De onderstaande figuur toont de kracht van SAS systemen. In het artikel van \textcite{loshin2022sas} wordt er uitgelegd dat SAS tot 2 keer zoveel meer data kan versturen en verwerken t.o.v. het bekende SATA systeem.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../onderzoek/sas_vs_sata-f.png} 
+    \caption{Afbeelding die SAS prestatie weergeeft, afkomstig van \href{https://www.techtarget.com/searchstorage/definition/serial-attached-SCSI}{TechTarget} over Serial Attached SCSI.}
+    \label{fig:sas}
+\end{figure}
+
+
+Bij DAS-systemen wordt, zoals eerder vermeld, de data rechtstreeks aan de hardware verbonden. Het onderzoek van \textcite{joshi2014empirical} richt zich specifiek tot schijfformaten op DAS-systemen.
+Dit gaat buiten de scope van dit onderzoek, maar toont zeer mooi aan dat KVM (voor ons Proxmox VE) zeer goede ondersteuning biedt en hierbij ook aantoont dat er zeer veel ondersteunende schijfformaten bestaan.
+Het is zeer moeilijk om correcte wetenschappelijke artikels te vinden over implementatie van DAS- en SAS-systemen op alle soorten managementplatformen. Er wordt vaak specifiek gericht op een gebruikt systeem die zich onder de categorie bevindt DAS of SAS. Het onderzoek van \textcite{joshi2014empirical} is daar een goed voorbeeld van.
+Met de referenties en kennis die hieruit zijn gekomen, weten we dat DAS en SAS globaal over alle managementplatformen ondersteund worden. De uitvoering en de praktische ervaring zal in de proof of concept worden bekeken. Daaruit moet uitkomen of de SAS- en DAS-integratie voldoende stabiliteit biedt.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../onderzoek/DAS.jpg} 
+    \caption{Afbeelding die DAS simpel weergeeft, afkomstig van \href{https://networkwalks.com/storage-types-das-nas-san/I}{TechTarget}.}
+    \label{fig:sas}
+\end{figure}
