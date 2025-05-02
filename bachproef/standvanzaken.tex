@@ -72,7 +72,8 @@ Dit is een belangrijk onderzoek om conclusies uit te trekken eenmaal een proof o
 \subsection{Storage ondersteuning voor hypervisors en managementplatformen}
 Zoals eerder uitgelegd wordt er in dit onderzoek gekeken naar Serial-Attached SCSI (SAS) en Direct-Attached Storage (DAS). Deze technologieën zijn belangrijk voor de virtualisatiewereld en zijn ook belangrijk voor Excentis. Het is belangrijk dat deze technologieën goed werken met de hypervisors en managementplatformen die in dit onderzoek worden bekeken.
 Om in de proof of concept deze technologieën te kunnen gebruiken moet er gekken worden of elk managamentplatform deze technologieën ondersteunt.
-SAS storage staat los van elke hypervisor met hun bijhoren virtual managementplatformen. 
+SAS-storage staat los van elke hypervisor met hun bijhorende virtual managementplatformen.
+Storage Area Network (SAN) \textcite{ibm2025san} is een technologie die gebruikt wordt om storage te delen over het netwerk. Dit is puur een manier om storage op te zetten. Je hebt hiernaast ook nog een protocol of manier nodig om te kunnen communiceren met de storage op die server.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\textwidth]{../onderzoek/storagesas-das.jpg} 
@@ -88,6 +89,17 @@ De onderstaande figuur toont de kracht van SAS systemen. In het artikel van \tex
 \end{figure}
 
 
+Verder wordt er ook nog Storage Area Network (SAN) gebruikt in combinatie met iSCSI voor grote storage-opslagsystemen. In het onderzoek van \textcite{park2024performance} wordt besproken hoe iSCSI een positieve invloed heeft op de prestatie van storagesystemen die gedeeld worden met verschillende toepassingen.
+In het bedrijf Excentis is het daarom ook belangrijk dat de storage van het virtual managementplatform gedeeld kan worden met verschillende toepassingen. Bij het onderzoek van \textcite{park2024performance} wordt bevestigd dat dit een goede standaardmethode is voor storage over het netwerk.
+ISCI is hiermee ook een belangrijk punt om rekening mee te houden in de proof of concept. Het is belangrijk dat de iSCSI goed werkt met de hypervisors en managementplatformen die in dit onderzoek worden bekeken.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.7\textwidth]{../onderzoek/nas-isci.png} 
+  \caption{Afbeelding die NAS simpel weergeeft, afkomstig van \href{https://www.kernsafe.com/images/VMware-iSCSI-iStorage-Server.png}{TechTarget}.}
+  \label{fig:sas}
+\end{figure}
+
+
 Bij DAS-systemen wordt, zoals eerder vermeld, de data rechtstreeks aan de hardware verbonden. Het onderzoek van \textcite{joshi2014empirical} richt zich specifiek tot schijfformaten op DAS-systemen.
 Dit gaat buiten de scope van dit onderzoek, maar toont zeer mooi aan dat KVM (voor ons Proxmox VE) zeer goede ondersteuning biedt en hierbij ook aantoont dat er zeer veel ondersteunende schijfformaten bestaan.
 Het is zeer moeilijk om correcte wetenschappelijke artikels te vinden over implementatie van DAS- en SAS-systemen op alle soorten managementplatformen. Er wordt vaak specifiek gericht op een gebruikt systeem die zich onder de categorie bevindt DAS of SAS. Het onderzoek van \textcite{joshi2014empirical} is daar een goed voorbeeld van.
@@ -99,3 +111,4 @@ Met de referenties en kennis die hieruit zijn gekomen, weten we dat DAS en SAS g
     \caption{Afbeelding die DAS simpel weergeeft, afkomstig van \href{https://networkwalks.com/storage-types-das-nas-san/I}{TechTarget}.}
     \label{fig:sas}
 \end{figure}
+
