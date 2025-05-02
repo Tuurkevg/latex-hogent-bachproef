@@ -99,7 +99,7 @@ De onderstaande figuur toont de kracht van SAS systemen. In het artikel van \tex
     \centering
     \includegraphics[width=0.7\textwidth]{../onderzoek/sas_vs_sata-f.png} 
     \caption{Afbeelding die SAS prestatie weergeeft, afkomstig van \href{https://www.techtarget.com/searchstorage/definition/serial-attached-SCSI}{TechTarget} over Serial Attached SCSI.}
-    \label{fig:sas}
+    \label{fig:saspres}
 \end{figure}
 
 
@@ -112,7 +112,7 @@ ISCI is hiermee ook een belangrijk punt om rekening mee te houden in de proof of
   \centering
   \includegraphics[width=0.7\textwidth]{../onderzoek/nas-isci.png} 
   \caption{Afbeelding die SAN simpel weergeeft, afkomstig van \href{https://www.kernsafe.com/images/VMware-iSCSI-iStorage-Server.png}{kernsafe}.}
-  \label{fig:sas}
+  \label{fig:san}
 \end{figure}
 
 
@@ -126,19 +126,18 @@ Met de referenties en kennis die hieruit zijn gekomen, weten we dat DAS en SAS g
     \centering
     \includegraphics[width=0.7\textwidth]{../onderzoek/DAS.jpg} 
     \caption{Afbeelding die DAS simpel weergeeft, afkomstig van \href{https://networkwalks.com/storage-types-das-nas-san/I}{Networkwalks}.}
-    \label{fig:sas}
+    \label{fig:das}
 \end{figure}
-
-
-
+\FloatBarrier
 gedistribueerde opslag of distributed storage is nog een belangrijke optie die toepasselijk is voor een virtual managementplatform. Dit is een opslagmethode waarbij de data over verschillende servers (nodes) wordt verdeeld. Dit zorgt ervoor dat de data sneller kan worden opgevraagd en netwerk verkeer eficient benut wordt. ~\autocite{patil2010unified}.
 In het onderzoek zijn wij specifiek gefocust op toepassingen voor management platformen. VMware heeft izjn eigen private toepassing genaamd VSAN~\autocite{hogan2016essential}. Dit is een software-defined storage oplossing die speciaal is ontworpen voor VMware-omgevingen. Het biedt een effectieve opslagoplossing die eenvoudig kan worden geïntegreerd met VMware's virtualisatieplatforms.
 Hierbij moet er dus ook een alternatief ter beschikking zijn. Een daarvan die open source is, is Ceph~\autocite{weil2006ceph}. Dit is een open-source software-defined storage oplossing die kan worden gebruikt met verschillende managementplatformen zoals Proxmox VE ~\autocite{Proxmox}.
 
 
+
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.7\textwidth]{../onderzoek/ds-ceph.webp} 
-  \caption{Afbeelding met ceph als toepassing van een distributed storage, afkomstig van \href{https://medium.com/@pk0752/ceph-the-next-generation-store-67f7c51780d3}{medium}.}
-  \label{fig:sas}
+  \includegraphics[width=0.9\textwidth]{../onderzoek/dssep.png} 
+  \caption{Afbeelding die DAS simpel weergeeft, afkomstig van \href{https://networkwalks.com/storage-types-das-nas-san/I}{Networkwalks}.}
+  \label{fig:das}
 \end{figure}
