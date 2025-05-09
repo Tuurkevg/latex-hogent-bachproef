@@ -43,17 +43,33 @@ Aangezien de tijd en middelen beperkt zijn, is het belangrijk om hierop een goed
 \item Het managementplatform moet verschillende nodes kunnen aansturen en beheren.
 \item Betalende managementplatformen die een licentie nodig hebben, bieden een gratis proefversie aan om deze studie te kunnen uitvoeren in de proof of concept-omgeving.
 \end{enumerate}
-
 Als deze criteria zijn voldaan voor een specifiek managementplatform, wordt deze geselecteerd voor te draaien in de proof of concept.
+
+\subsection{Geselecteerde managementplatformen (short list)} 
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|l|l|l|l|}
+    \hline
+    \textbf{Platform} & \textbf{Type} & \textbf{Hypervisor} \\ \hline
+    \hline
+    Proxmox VE        & Open-source   & KVM,LXC             \\ \hline
+    OpenStack         & Open-source   & KVM, Xen            \\ \hline
+    Xen Orchestra  & Open-source & XCP-ng,Citrix Hypervisor(XenServer) \\ \hline
+    Xen Center  & Closed-source & Citrix Hypervisor(XenServer) \\ \hline
+    \hline
+    \end{tabular}
+    \caption{Vergelijking van virtualisatieplatforms}
+\end{table}
 
 \subsection{Opzetten testomgeving/proof of concept}
 De hardware en omgeving waarin alles wordt getest en opgebouwd, worden opgesteld in een testomgeving bij Excentis. Dit maakt het mogelijk om de managementplatformen te testen in een realistische omgeving, wat essentieel is om een objectief resultaat te bekomen.
 Deze omgeving zal bestaan uit 2 verouderde DELL servers die in de serverruimte van Excentis staan. Hierbij zal alles op kleine schaal kunnen worden uitgevoerd.
 Op deze servers worden de geselecteerde managementplatformen geïnstalleerd.
+Voor bepaalde situaties zal er een extra server gebruikt worden als er beperkingen zijn in bepaalde functionaliteiten van de managementplatformen. Dit kan bijvoorbeeld zijn dat er een minimum aantal nodes moet zijn om bepaalde functionaliteiten rond High Availability te kunnen testen.
 \subsection{Uitvoeren onderzoek op testomgeving}
 Voor de vergelijking van de managementplatformen worden de volgende acties uitgevoerd op de testomgeving van Excentis:
 \begin{itemize}
-\item werking met de bestaande hardware van Excentis, vergeleken op prestatie en stabiliteit. (Hoe snel start een nieuwe virtuele machine op, wat zijn de minimum eisen voor de hardware, ...).
+\item werking met de bestaande infrastructuur van Excentis, vergeleken op prestatie en stabiliteit. (Hoe snel start een nieuwe virtuele machine op, wat zijn de minimum eisen voor de hardware, ...).
 \item Testen en meten van de performance en stabiliteit van de bestaande Direct Attached Storage en Serial Attached SCSI-systemen die Excentis gebruikt aan de hand van testdata op de nieuwe managementplatformen.
 \item Individueele vergelijking van een distributed storage systeem in een virtual management cluster (1<nodes)
 \item De integratie van bepalende systemen binnen Excentis testen, zoals CI/CD-tools, op de nieuwe managementplatformen.
