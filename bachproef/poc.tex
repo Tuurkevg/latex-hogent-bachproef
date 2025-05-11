@@ -100,3 +100,77 @@ Nu maken we een 2de virtuele machine aan met dezelfde configuratie als de eerste
 \end{figure}
 
 \subsubsection{High Availability in Proxmox VE}
+
+Eenmaal de storage in orde is voor de virtuele machines kan er een HA configuratie worden aangemaakt. 
+Onder Datancenter HA kan je een group aanmaken. Hierin beschrijf je alle 3 de fysieke nodes die in de cluster zitten. Vervolgens geven we de groep een logische naam. In dit geval is het de naam ha-pool.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{../poc/ha-group.png}
+  \caption{high Availability group in Proxmox VE}
+  \label{fig:ha-group}
+\end{figure}
+Nu voegen we de 2 virtuele machines toe aan de HA groep. Dit wordt gedaan via de HA section in datancer.
+Bij Max restart en max relocate zet je aan hoeveel keer de virtuele machine opnieuw mogen worden opgestart of verplaatst naar een andere node. In dit geval moet dit groter zijn dan 0.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{../poc/vm-ha.png}
+  \caption{High Availability vm toevoegen in Proxmox VE}
+  \label{fig:ha-vm}
+\end{figure}
+Als beide virtuele machines zijn toegevoegd aan de HA groep kan je de HA configuratie testen.
+
+Om HA te testen in combinatie met beide storage systemen zal er een netwerk probleem worden gesimuleerd.
+Alle virtuele machines draaien nu op node 001
+Op de fysieke node poc001 zal de internet kabel worden uitgetrokken. Hierna kijken we hoelang het duurt vooraleer de virtuele machines opnieuw worden opgestart op een andere node, meer bepaald ook op welke node specifiek.
+
+In de figuur hieronder kan er duidelijk gezien worden dat de virtuele machines volledig van cold mode moeten opstarten. Dit is een andere situatie dan wanneer er een migratie gedaan wordt. Dan wordt live de virtuele machine van de ene node naar de andere gemigreert zonder echte downtime.
+Het systeem in Proxmox VE is nu zo ingesteld dat bij een echte failover de schade van downtime relatief beperkt blijft. Dit staat uiteraard los van data verlies die kan optreden bij een failover.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{../poc/failover-prox.png}
+  \caption{failover node virtuale machines herstellen in HA in Proxmox VE}
+  \label{fig:failover-vm}
+\end{figure}
+
+Vanaf de connectie van poc001 verboken is met de nadere nodes duurt het ongeveer 30-60 seconden vooraleer de virtuele machines opnieuw worden opgestart op een andere node. Dit is ook de tijd die nodig is om de heartbeat van de cluster te verliezen.
+Hierbij kunenn we vanuit gaan dat de defautl healthy check van de cluster en zijn nodes ook rond deze tijdsduur ligt. Beide virtuele machines worden opnieuw opgestart op de node foissarak en poc 002. 
+Aangezien beide virtuele machines dezelfde HA group hebben, krijgen ze ook dezelfde prioriteit.
+
+Merk op dat zowel de virtuele machine met een SAN als de virtuele machine met een distributed storage opnieuw worden opgestart op de node foissarak. Dit toont aan dat Proxmox VE goed werkt met beide storage systemen, zeker met failover situaties.
+
+
+\subsubsection{Virtuele machines migraties in Proxmox VE}
+In het het werkveld komt het geregeld voor dat een node een gepland onderhoud heeft. Dit kan zijn dat er een update moet worden uitgevoerd of dat er hardware moet worden vervangen.
+Bij deze is het gewenst om te weten of er een mogelijkheid is om de virtuele machines te migreren naar een andere node zonder dat er downtime/minimale downtime is.
+Via de GUI in Proxmox VE kan je heel eenvoudig een virtuele machine migreren via de migration optie rechts boven als er een virtuele machine geselecteerd is.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{../poc/vm-migratie-prox.png}
+  \caption{migratie virtuele machine in Proxmox VE}
+  \label{fig:migratie-vm}
+\end{figure}
+Tijdens het migreren van de virtuele machine blijft de console open staan van de virtuele machine. Hierbij is er een zeer korte freeze in het beeld waarna de activiteiten in de vm weer verder werken. Het totale proces voor beide virtuele machines individueel was onegveer 30 seconden.
+Hieruit kan er bekeken worden dat de downtime bij migratie zo goed als minimaal is, wat ideaal is voor het offline brengen van een node voor bijvoorbeeld een gepland onderhoud.
+
+
+\subsubsection{Hot swapping fysieke disks in Proxmox VE}
+Proxmox VE bied ook hot swapping aan van de fysieke disks. 
+Voor deze test is er een fysieke disk voor node poc002 toegevoegd.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{../poc/hot-disk-prox.png}
+  \caption{hot disk swap in Proxmox VE}
+  \label{fig:hotdisk-swap}
+\end{figure}
+Deze noemt sdb. Eenmaal dat deze disk is toegevoegd zou de disk moeten kunnen verwijderd worden en vervangen worden door een andere zonder dat de node poc002 offline moet worden gehaald.
+Dit wordt live getest tijden het draaien. Op deze disk draait momenteel niks. Dit is belangrijk aangezien we het vervangen van een disk simuleren. De data zou normaal op voorhand moeten verwijderd zijn van de disk.
+
+We voegen de nieuwe disk toe in de plaats van de andere en merken direct na 15 seconden dit op.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{../poc/hot-disktwee-prox.png}
+  \caption{hot disk swap in Proxmox VE}
+  \label{fig:hotdiskvervangen-swap}
+\end{figure}
+
+We zien dat dit duidelijk een andere disk is met nu een grote van 250 GB. Hiervoor was dat 500 GB.
