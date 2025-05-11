@@ -18,7 +18,7 @@ Deze kosten kunnen bij bedrijven zoals Excentis zo hoog oplopen dat de kosten ni
 Welke risico's zijn er verbonden aan het blijven werken met VMware ESXi/VMware vCenter?
 Zijn deze risico’s van een zodanige aard dat ze de dagelijkse werking van Excentis in de toekomst in gevaar zouden kunnen brengen?
 
-Direct Attached Storage en Serial Attached SCSI worden bij Excentis gebruikt in combinatie met VMware vCenter.
+Direct Attached Storage en Storage Area Network (SAN)worden bij Excentis gebruikt in combinatie met VMware vCenter.
 Deze moeten ook worden overgezet naar het nieuwe alternatieve systeem. Dit zal een belangrijk criterium en onderdeel van het onderzoek zijn.
 
 Vaak gaat het om bedrijven die virtualisatie hebben als een service, waarbij dit niet de allerbelangrijkste zorg is binnen het bedrijf.
@@ -36,35 +36,34 @@ Evaluatie van alternatieven voor VMware vCenter: Een onderzoek naar verschillend
 \newline De volgende deelvragen zullen beantwoord worden om de centrale onderzoeksvraag te beantwoorden:
 \begin{enumerate}
   \item Welke functionele en prestatieverschillen zijn er tussen open-source en closed-source managementplatformen, en welke voor- en nadelen hebben deze verschillen voor het bedrijf Excentis?
-  \item In welke mate integreren managementplatformen met tools zoals Nakivo, Ansible en Foreman, en hoe kunnen deze toegepast worden binnen Excentis?
   \item Hoe presteren managementplatformen op het gebied van High Availability(failover,\newline schaalbaarheid,backups,...)?
-  \item Hoe kan de bestaande ondersteuning van Direct Attached Storage en Serial Attached SCSI in VMWare vCenter worden overgezet naar een alternatief managementplatformen binnen de infrastructuur van Excentis?
+  \item Hoe kan de bestaande ondersteuning van Direct Attached Storage en Storage Area Network met SCSI in VMWare vCenter worden geintegreerd naar een alternatief managementplatformen binnen de infrastructuur van Excentis?
   \end{enumerate}
-  
+\newpage
 \section{\IfLanguageName{dutch}{Onderzoeksdoelstelling}{Research objective}}%
 \label{sec:onderzoeksdoelstelling}
 Dit onderzoek heeft als doel om een alternatief te vinden voor VMware vCenter binnen de infrastructuur van Excentis. Hierbij wordt er gekeken naar de verschillende managementplatformen die er op de markt zijn en hoe deze kunnen worden geïntegreerd binnen de infrastructuur van Excentis.
 Het resultaat zal verkregen worden aan de hand van een proof of concept. Hierin zullen de specifiek geselecteerde managementplatformen uitgerold worden en de volgende criteria en testen worden uitgevoerd:
 \begin{itemize}
   \item werking met de bestaande hardware van Excentis, vergeleken op prestatie en stabiliteit. (Hoe snel start een nieuwe virtuele machine op, wat zijn de minimum eisen voor de hardware, ...).
-  \item Testen en meten van de performance en stabiliteit van de bestaande Direct Attached Storage en Serial Attached SCSI-systemen die Excentis gebruikt aan de hand van testdata op de nieuwe managementplatformen.
-  \item De integratie van bepalende systemen binnen Excentis testen, zoals CI/CD-tools, op de nieuwe managementplatformen.
+  \item Testen en meten van de performance en stabiliteit van de bestaande Direct Attached en Storage Area Network SCSI-systemen die Excentis gebruikt aan de hand van testdata op de nieuwe managementplatformen.
   \item Prestatie en stabiliteit van de managementplatformen bij piekmomenten en failovers.
-  \end{itemize}
+\end{itemize}
 Een vergelijkende studie zal uitgevoerd worden tussen de verschillende managementplatformen en de resultaten zullen worden geanalyseerd. Hieruit zal een advies worden geformuleerd voor Excentis.
 Als conclusie wordt er dan één managementplatform aanbevolen.
+
 
 \section{\IfLanguageName{dutch}{Opzet van deze bachelorproef}{Structure of this bachelor thesis}}%
 \label{sec:opzet-bachelorproef}
 
-% Het is gebruikelijk aan het einde van de inleiding een overzicht te
+% Het is gebruikelijk aan het einde van de inleiding ejaen overzicht te
 % geven van de opbouw van de rest van de tekst. Deze sectie bevat al een aanzet
 % die je kan aanvullen/aanpassen in functie van je eigen tekst.
 
 De rest van deze bachelorproef is als volgt opgebouwd:
 
 In Hoofdstuk~\ref{ch:stand-van-zaken} wordt een overzicht gegeven van de stand van zaken binnen het onderzoeksdomein, op basis van een literatuurstudie.
-
+In Hoofdstuk~\ref{ch:poc} wordt de proof of concept gemaakt en besproken. Hierbij wordt het theoretisch onderzoek omgezet in een realistisch praktijkvoorbeeld.
 In Hoofdstuk~\ref{ch:methodologie} wordt de methodologie toegelicht en worden de gebruikte onderzoekstechnieken besproken om een antwoord te kunnen formuleren op de onderzoeksvragen.
 
 % TODO: Vul hier aan voor je eigen hoofstukken, één of twee zinnen per hoofdstuk

@@ -45,6 +45,12 @@ Aangezien de tijd en middelen beperkt zijn, is het belangrijk om hierop een goed
 \end{enumerate}
 Als deze criteria zijn voldaan voor een specifiek managementplatform, wordt deze geselecteerd voor te draaien in de proof of concept.
 
+Microsoft SCVMM(Microsoft Hyper-v) ~\autocite{Eaton2019} is deprecated en wordt op dit moment niet meer actief ondersteund door Microsoft.
+Proxmox VE~\autocite{Proxmox} is een open-source managementplatform dat geen betalende licentie heeft voor de software. Het biedt wel een betalende support aan voor commercieel gebruik. Dit platform kan draaien op de bestaande DELL-servers die tot de beschikking zijn in de proof of concept.
+OpenStack ~\autocite{openstack2024} is ook een open-source managementplatform dat geen betalende licentie heeft voor de software. Het biedt ook een betalende support aan voor commercieel gebruik bij verschillende toepassingen. Dit platform kan ook draaien op de bestaande DELL-servers die tot de beschikking zijn in de proof of concept.
+Xen Orchestra ~\autocite{el2021server} is ook een opensource virtual managementplatform dat geen betalende licentie heeft voor de software. Het biedt ook een betalende support aan voor commercieel gebruik bij verschillende toepassingen. Dit platform kan ook draaien op de bestaande DELL-servers die tot de beschikking zijn in de proof of concept.
+Xen Center~\autocite{xencenter2024}  is closed-source maar bied wel een gratis proefversie aan. Ze bieden ook een enterprise licentie aan voor commercieel gebruik. Dit platform kan ook draaien op de bestaande DELL-servers die tot de beschikking zijn in de proof of concept.
+
 \subsection{Geselecteerde managementplatformen (short list)} 
 \begin{table}[h!]
     \centering
@@ -60,19 +66,18 @@ Als deze criteria zijn voldaan voor een specifiek managementplatform, wordt deze
     \end{tabular}
     \caption{Vergelijking van virtualisatieplatforms}
 \end{table}
-
+\newpage
 \subsection{Opzetten testomgeving/proof of concept}
 De hardware en omgeving waarin alles wordt getest en opgebouwd, worden opgesteld in een testomgeving bij Excentis. Dit maakt het mogelijk om de managementplatformen te testen in een realistische omgeving, wat essentieel is om een objectief resultaat te bekomen.
-Deze omgeving zal bestaan uit 2 verouderde DELL servers die in de serverruimte van Excentis staan. Hierbij zal alles op kleine schaal kunnen worden uitgevoerd.
+Deze omgeving zal bestaan uit 2 tot 3 verouderde DELL servers die in de serverruimte van Excentis staan. Hierbij zal alles op kleine schaal kunnen worden uitgevoerd.
 Op deze servers worden de geselecteerde managementplatformen geïnstalleerd.
 Voor bepaalde situaties zal er een extra server gebruikt worden als er beperkingen zijn in bepaalde functionaliteiten van de managementplatformen. Dit kan bijvoorbeeld zijn dat er een minimum aantal nodes moet zijn om bepaalde functionaliteiten rond High Availability te kunnen testen.
 \subsection{Uitvoeren onderzoek op testomgeving}
 Voor de vergelijking van de managementplatformen worden de volgende acties uitgevoerd op de testomgeving van Excentis:
 \begin{itemize}
 \item werking met de bestaande infrastructuur van Excentis, vergeleken op prestatie en stabiliteit. (Hoe snel start een nieuwe virtuele machine op, wat zijn de minimum eisen voor de hardware, ...).
-\item Testen en meten van de performance en stabiliteit van de bestaande Direct Attached Storage en Serial Attached SCSI-systemen die Excentis gebruikt aan de hand van testdata op de nieuwe managementplatformen.
+\item Testen en meten van de performance en stabiliteit van de bestaande direct attached storage,distributed storage en storage area netwerk systemen die Excentis gebruikt aan de hand van testdata op de nieuwe managementplatformen.
 \item Individueele vergelijking van een distributed storage systeem in een virtual management cluster (1<nodes)
-\item De integratie van bepalende systemen binnen Excentis testen, zoals CI/CD-tools, op de nieuwe managementplatformen.
 \item Prestatie en stabiliteit van de managementplatformen bij piekmomenten en failovers.
 \item hot swapping van hard disks. Blijf alles correct werken? 
 \item Neemt de ene node de virtuele machines over van de andere node bij een failover?
