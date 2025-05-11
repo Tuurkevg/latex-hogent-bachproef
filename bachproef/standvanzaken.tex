@@ -9,7 +9,7 @@
 % Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
 VMware~\autocite{vmware} is een bedrijf dat zich specialiseert in virtualisatietechnologieën. De sterke prijsstijgingen van VMware zorgen ervoor dat veel bedrijven afhaken en op zoek gaan naar alternatieven~\autocite{Hale2024}. Er zijn verschillende alternatieve managementplatformen met bijhorende hypervisors.
 
-\subsection{Hypervisors}
+\section{Hypervisors}
 In het huidige systeem dat Excentis gebruikt, fungeert VMware ESXi~\autocite{vmware} als onderliggende hypervisor. Deze is closed source en werkt binnen het VMware systeem. Als alternatief voor VMware ESXI zijn er verschillende open-source hypervisors op de markt.
 Een voorbeeld hiervan is 'KVM' (Kernel-based Virtual Machine)\autocite{KVM}. KVM is open source en vrij te gebruiken voor iedereen\autocite{KVM}. Microsoft Hyper-V ~\autocite{Eaton2019} wordt ook genoemd als mogelijke vergelijking met VMware ESXI~\autocite{fayyad2013benchmarking}. In dit onderzoek wordt een vergelijking gemaakt tussen verschillende hypervisors die geselecteerd zijn.
 Verder in de virtualisatiewereld bestaat ook het Xen Project~\autocite{xenproject}. Dit is een open-source hypervisor die zich vooral richt op cloud computing en server virtualisatie ~\autocite{binu2011virtualization}.
@@ -17,7 +17,7 @@ XenServer~\autocite{xenserverwebsite} (nu Citrix Hypervisor) is ook een alternat
 XCP-ng~\autocite{el2021server} is een open-source hypervisor die is afgeleid van de Citrix Hypervisor(XenServer). Dit biedt een gratis alternatief voor bedrijven die op zoek zijn naar een hypervisor met enterprise-ondersteuning.
 Het ligt zeer dicht bij XenServer aangezien het een fork geweest is. Het wordt beheert door de linux foundation en bied op die manier een betrouwbare toekomst op verdere ontwikkeling en ondersteuning.
 
-\subsection{managementplatformen}
+\section{managementplatformen}
 Excentis gebruikt als managementplatform VMWare vCenter~\autocite{vmware}. Voor dit platform moet een alternatief worden gevonden.
 Proxmox VE~\autocite{Proxmox} is een open-source managementplatform dat werkt met KVM en enterprise-ondersteuning aanbiedt voor bedrijven. Uit onderzoek van \textcite{ally2018comparative} blijkt dat Proxmox, dat gebruik maakt van KVM, zeker niet onderdoet tegenover andere closed source systemen.
 OpenStack is een open-source cloud computing platform~\autocite{openstack2024}. Het dient geinstalleert te worden individueel van je hypervisor. Het ondersteunt verschillende hypervisors zoals KVM en Xen.
@@ -26,17 +26,17 @@ Microsoft System Center Virtual Machine Manager (SCVMM)~\autocite{microsoftvmm20
 Xen Center~\autocite{xencenter2024} biedt een managementplatform aan voor XenServer~\autocite{xenserverwebsite}. Deze is veranderd van naam 
 Xen Orchestra ~\autocite{el2021server} is een open-source managementplatform dat werkt via een web interface. De gebruiker moet geen applicatie meer op de pc installeren. Het kan zowel clusters beheren van XCP-ng of Citrix Hypervisor/XenServer.
 Het kan gratis gebruikt worden tot een bepaald niveau. Support is mogelijk met een contract.
-\subsection{Open source systemen}
+\section{Open source systemen}
 Er zijn vele soorten softwarepakketten op de markt die hypervisors en managementplatformen aanbieden. Bij het bekijken van de verschillende managementplatformen met hun bijbehorende hypervisors kunnen deze worden onderverdeeld in twee groepen: de closed-source en open-source hypervisors. Elke groep heeft zijn voor- en nadelen. Alles hangt steeds af van de noden en vereisten van het bedrijf of instelling.
 Proxmox VE is open source~\autocite{Proxmox}. Dit wil zeggen dat de systemen kosteloos gebruikt kunnen worden. Support bij problemen valt hierbij wel af. Er is wel een mogelijkheid om bij hen een enterprise support services subscription te nemen. Hierbij kan er alsnog beroep worden gedaan op support bij eventuele problemen.
 Open source software is een evidentie maar zorgt voor meer zelfstandig werk bij installatie en rust meer op de community achter de software.
 
-\subsection{closed source systemen}
+\section{closed source systemen}
 Andere alternatieven zijn closed-source. Hierbij gaat het onder andere om VMware ESXi/VMware vCenter~\autocite{vmware} en Microsoft Hyper-V~\autocite{Eaton2019}. Deze software systemen zijn niet gratis en vragen een licentie om te mogen gebruiken. Dit is een nadeel ten opzichte van open-source systemen.
 Bij bedrijven waar stabiliteit en betrouwbaarheid hoog in het vaandel staan, zoals in een wetenschappelijke omgeving met supercomputers die veel geld kosten als ze niet draaien, kan het een goede keuze zijn om te kiezen voor closed-source hypervisors~\autocite{voras2012early}. Dit wil niet zeggen dat andere systemen uitgesloten zijn.
 
 
-\subsection{Soorten storage systemen}
+\section{Soorten storage systemen}
 Wanneer het over opslag in de virtualisatiewereld gaat, betreft het ook 'Serial-Attached SCSI' (SAS) en 'Direct-Attached Storage' (DAS). Deze technologieën zorgen ervoor dat er een hoge beschikbaarheid is van de data en dat deze snel kan worden opgevraagd~\autocite{griswold2002storage}. Dit is een belangrijk aspect in de virtualisatiewereld en is belangrijk voor Excentis dat deze beide technologieën perfect werken en ondersteunt worden.
 SAS is een snelle, betrouwbare opslaginterface die servers en high-performance opslagapparaten verbindt~\autocite{aravindan2014performance}. Dit is een belangrijk om een consistente opslag te garanderen. DAS is een opslagarchitectuur waarbij opslag direct fysiek is verbonden aan een enkele server, zonder tussenkomst van een netwerk. Deze technologie is goedkoper en eenvoudiger, maar garandeert niet alle voordelen die SAS wel kan garanderen~\autocite{griswold2002storage}.
 DAS wordt vaak gebruikt in kleinere bedrijven waar de data niet zo belangrijk is en waar de data niet zo vaak wordt opgevraagd. SAS wordt vaak gebruikt in grotere bedrijven waar de data zeer belangrijk is en waar de data vaak wordt opgevraagd~\autocite{griswold2002storage}.
@@ -47,14 +47,14 @@ Dit is puur een manier om storage op te zetten.
 Je hebt hiernaast ook nog een protocol of manier nodig om te kunnen communiceren met de storage op die server.
 
 
-\subsection{High Availability-ondersteuning}
+\section{High Availability-ondersteuning}
 In het onderzoek van~\textcite{dudnik2017creating} wordt een grote vergelijking gemaakt tussen hypervisors en hun managementplatformen. Hierin wordt gefocust op bepaalde aspecten binnen de term High Availability, zoals redundantie, risicoanalyse en piekdrukte.
 Er zijn verschillende aspecten die moeten worden bekeken en waaraan voldaan moet worden om aan een goede High Availability te voldoen. Een failover-systeem dat het ene systeem het andere systeem over laat nemen bij een bepaalde fout, is een van die aspecten.
 Op netwerkniveau moet er ook nagedacht worden over zowel schaalbaarheid bij piekmomenten als bij problemen die zich voordoen in het netwerk. Migratie tussen verschillende fysieke servers moet ook mogelijk zijn om een goede High Availability te garanderen~\autocite{dudnik2017creating}.
 Workloadmanagers kunnen een goede oplossing zijn om overbelasting tegen te gaan op drukke piekmomenten. Back-ups van de data worden ook gezien als een belangrijk aspect voor High Availability.
 
 
-\subsection{samenvatting van alle managementplatformen en hun bijhorende hypervisors als long-list}
+\section{samenvatting van alle managementplatformen en hun bijhorende hypervisors als long-list}
     \begin{table}[h!]
         \centering
         \begin{tabular}{|l|l|l|l|l|}
@@ -70,7 +70,7 @@ Workloadmanagers kunnen een goede oplossing zijn om overbelasting tegen te gaan 
         \caption{Vergelijking van Virtualisatieplatforms}
         \end{table}
         
-\subsection{Prestatie verschillen tussen XenServer en Proxmox VE}
+\section{Prestatie verschillen tussen XenServer en Proxmox VE}
 In het onderzoek van \textcite{algarni2018performance} wordt een vergelijkende studie gemaakt tussen Xen en KVM. In ons onderzoek focussen wij ons vooral op het managementplatform.
 Aangezien een managementplatform ook een hypervisor nodig heeft kunnen wij hier spreken over het management platform die gekoppeld is in deze studie aan een hypervisor.
 Voor KVM spreken we over PROXMOX VE en voor Xen spreken we over XenServer. In deze studie wordt er een vergelijking gemaakt tussen de twee systemen en hun prestaties. De resultaten zijn als volgt:
@@ -82,7 +82,7 @@ Voor KVM spreken we over PROXMOX VE en voor Xen spreken we over XenServer. In de
 Over het volledige onderzoek van \textcite{algarni2018performance} heen krijg KVM (gekoppeld aan Proxmox VE voor ons onderzoek) de beste punten over het globael punt heen. Dit onderozek heeft plaats gevonden in 2018 waarbij de conclusies nog alst actueel kunnen beschouwd worden.
 Dit is een belangrijk onderzoek om conclusies uit te trekken eenmaal een proof of concept gemaakt is.
 
-\subsection{Storage ondersteuning voor hypervisors en managementplatformen}
+\section{Storage ondersteuning voor hypervisors en managementplatformen}
 
 Zoals eerder uitgelegd wordt er in dit onderzoek gekeken naar Serial-Attached SCSI (SAS) en Direct-Attached Storage (DAS). Deze technologieën zijn belangrijk voor de virtualisatiewereld en zijn ook belangrijk voor Excentis. Het is belangrijk dat deze technologieën goed werken met de hypervisors en managementplatformen die in dit onderzoek worden bekeken.
 Om in de proof of concept deze technologieën te kunnen gebruiken moet er gekken worden of elk managamentplatform deze technologieën ondersteunt.

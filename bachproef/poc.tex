@@ -2,15 +2,14 @@
 \chapter{\IfLanguageName{dutch}{Proof of concept}{Proof of concept}}%
 \label{ch:poc}
 
-\subsection{inleiding}
-
+\section{inleiding}%
 Aan de hand van de shortlist die opgemaakt is komt er voor elke geselecteerde managementplatform een proof of concept. Hierbij wordt er gekeken hoe de nodige functionaliteiten werken en toegepast kunnen worden in het systeem.
 Belangrijk om te weten is dat de proof of concept niet de volledige functionaliteit van het managementplatform zal testen. Het doel is om een goed beeld te krijgen van de mogelijkheden en hoe deze kunnen worden toegepast binnen de infrastructuur van Excentis. 
 We verdelen alle virtual managementplatformen in hun eigen subsecties. In deze subsecties worden dan de vooropgestelde testen op uitgevoerd.
-\subsection{Proxmox VE}
+\section{Proxmox VE}%
 
 Voor deze virtual managementplatform wordt er Proxmox VE 8.4 gebruikt. Dit is de laatste versie van Proxmox VE die op dit moment beschikbaar is.
-\subsubsection{cluster opstelling in Proxmox VE}
+\subsection{cluster opstelling in Proxmox VE}
 Voor proxmox VE is er gekozen om te werken met 3 fysieke node's. Zoals beschreven op de officiële documentatiepagina van Proxmox~\cite{proxmoxHA} ondersteunt het platform high availability clustering maar moeten er minimaal 3 nodes in de cluster draaien.
 Hierbij spreken we over minimaal 50\% van de nodes die moeten draaien om de cluster operationeel te houden. Dit is ook de reden waarom er voor 3 nodes is gekozen. Bij 2 nodes zou er bij een node failure geen quorum zijn en zou de cluster niet meer operationeel zijn.
 In de figuur hieronder wordt de opstelling getoont. Elke node heeft zijn unieke naam in de cluster, vaak is dat de hostname zelf.
@@ -20,7 +19,7 @@ In de figuur hieronder wordt de opstelling getoont. Elke node heeft zijn unieke 
   \caption{Clusteropstelling in Proxmox VE}
   \label{fig:cluster-proxmox}
 \end{figure}
-\subsubsection{Storage in Proxmox VE}
+\subsection{Storage in Proxmox VE}
 Proxmox VE ondersteunt verschillende soorten storage. In de proof of concept is er gekozen om te werken met een CEPH storage als distributed storage. Dit is een open-source software-defined storage oplossing die kan worden gebruikt in combinatie met Proxmox VE.
 Om deze te configureren moeten er minimaal 3 schijven/partities zijn. Voor deze POC is er besloten om op elke fysieke node een fysieke schijf toe te kennen aan de CEPH storage. Dit zijn 3 willekeurige harde schijven.
 Via de GUI kan je via elke node doorklikken naar CEPH hierin moet er dan de schijf worden aangeduid die je wilt gebruiken voor de CEPH storage. Dit kan ook via de command line.
@@ -99,7 +98,7 @@ Nu maken we een 2de virtuele machine aan met dezelfde configuratie als de eerste
   \label{fig:vm-lijst}
 \end{figure}
 
-\subsubsection{High Availability in Proxmox VE}
+\subsection{High Availability in Proxmox VE}
 
 Eenmaal de storage in orde is voor de virtuele machines kan er een HA configuratie worden aangemaakt. 
 Onder Datancenter HA kan je een group aanmaken. Hierin beschrijf je alle 3 de fysieke nodes die in de cluster zitten. Vervolgens geven we de groep een logische naam. In dit geval is het de naam ha-pool.
@@ -139,7 +138,7 @@ Aangezien beide virtuele machines dezelfde HA group hebben, krijgen ze ook dezel
 Merk op dat zowel de virtuele machine met een SAN als de virtuele machine met een distributed storage opnieuw worden opgestart op de node foissarak. Dit toont aan dat Proxmox VE goed werkt met beide storage systemen, zeker met failover situaties.
 
 
-\subsubsection{Virtuele machines migraties in Proxmox VE}
+\subsection{Virtuele machines migraties in Proxmox VE}
 In het het werkveld komt het geregeld voor dat een node een gepland onderhoud heeft. Dit kan zijn dat er een update moet worden uitgevoerd of dat er hardware moet worden vervangen.
 Bij deze is het gewenst om te weten of er een mogelijkheid is om de virtuele machines te migreren naar een andere node zonder dat er downtime/minimale downtime is.
 Via de GUI in Proxmox VE kan je heel eenvoudig een virtuele machine migreren via de migration optie rechts boven als er een virtuele machine geselecteerd is.
@@ -153,7 +152,7 @@ Tijdens het migreren van de virtuele machine blijft de console open staan van de
 Hieruit kan er bekeken worden dat de downtime bij migratie zo goed als minimaal is, wat ideaal is voor het offline brengen van een node voor bijvoorbeeld een gepland onderhoud.
 
 
-\subsubsection{Hot swapping fysieke disks in Proxmox VE}
+\subsection{Hot swapping fysieke disks in Proxmox VE}
 Proxmox VE bied ook hot swapping aan van de fysieke disks. 
 Voor deze test is er een fysieke disk voor node poc002 toegevoegd.
 \begin{figure}[H]
