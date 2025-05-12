@@ -47,7 +47,7 @@ Merk op dat de pool naam cepha is.
 Eenmaal aangemaakt kan er een virtuele machine worden aangemakt. Deze virtuele machine zal gedraaid worden met ubuntu 22.04.
 De meeste instellingen kunnen helemaal naar keuze worden ingesteld en is voor de rest buiten de scope van deze bachelorproef. De belangrijkste instellingen zijn die rond de storage.
 Tijdens het configureren van de virtuele machine kan je de schijf kiezen die je wilt gebruiken. Hierin kan je ook de pool selecteren die je hebt aangemaakt. Dit is de pool cepha.
-Merk verder op dat er al een optie is voor SAN isci met truenas. Deze optie mag tijdelijk genegeerd worden.
+Merk verder op dat er al een optie is voor SAN isci met truenas~\autocite{truenas} . Deze optie mag tijdelijk genegeerd worden.
 Als alles goed verloopt kan je op alle 3 de nodes naar keuze een virtuele machine aanmaken en krijgen zij allemaal dezelfde optie op als disk cepha te gebruiken.
 \begin{figure}[H]
   \centering
@@ -97,7 +97,7 @@ Nu maken we een 2de virtuele machine aan met dezelfde configuratie als de eerste
   \caption{Lijst van de 2 virtuele machines in Proxmox VE}
   \label{fig:vm-lijst}
 \end{figure}
-
+Aangezien een SAN princiepe via een vebrinding werkt op het netwerk is de storage de zwakste schakel in een high availability cluster
 \subsection{High Availability in Proxmox VE}
 
 Eenmaal de storage in orde is voor de virtuele machines kan er een HA configuratie worden aangemaakt. 
