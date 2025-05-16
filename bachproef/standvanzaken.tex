@@ -9,12 +9,12 @@
 % Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
 VMware ~\autocite{vmware} is een bedrijf dat zich specialiseert in virtualisatietechnologieën. De sterke prijsstijgingen van VMware zorgen ervoor dat veel bedrijven afhaken en op zoek gaan naar alternatieven ~\autocite{Hale2024}.
 Er zijn verschillende alternatieve managementplatformen met bijhorende hypervisors.
-In dit hoofdstuk worden de verschillende hypervisors bekeken \nameref{subsec:Hypervisors} ~\ref{subsec:Hypervisors} en de verschillende managementplatformen \nameref{subsec:managementplatformen}~\ref{subsec:managementplatformen} besproken die in dit onderzoek aan bod komen.
-Er wordt ook gekeken naar open-source \nameref{subsec:opensource}~\ref{subsec:opensource} en closed-source systemen \nameref{subsec:clousedsource} ~\ref{subsec:clousedsource} en de voor- en nadelen van deze systemen.
-Virtuele machines hebben ook  storage nodig. Er wordt gekeken naar de verschillende soorten storage systemen \nameref{subsec:storage}~\ref{subsec:storage} die er zijn en hoe deze worden geïntegreerd \nameref{subsec:storageondersteuning} ~\ref{subsec:storageondersteuning} in de verschillende hypervisors en managementplatformen.
-High Availability-ondersteuning \nameref{subsec:ha}~\ref{subsec:ha} wordt besproken en hoe deze wordt geïmplementeerd in de managementplatformen.
-Een samenvatting van de verschillende managementplatformen en hun bijhorende hypervisors wordt gegeven in een long-list \nameref{subsec:samenvatting} ~\ref{subsec:samenvatting}.
-Het direct vergelijken van bepaalde managementplatformen komt ook aan bod in dit hoofdstuk. 
+In dit hoofdstuk worden de verschillende hypervisors bekeken \nameref{subsec:Hypervisors} ~\ref{subsec:Hypervisors} en de verschillende managementplatformen \nameref{subsec:managementplatformen}~\ref{subsec:managementplatformen} besproken die in dit onderzoek aan bod komen. \\
+Er wordt ook gekeken naar open-source \nameref{subsec:opensource}~\ref{subsec:opensource} en closed-source systemen \nameref{subsec:clousedsource} ~\ref{subsec:clousedsource} en de voor- en nadelen van deze systemen. \\
+Virtuele machines hebben ook  storage nodig. Er wordt gekeken naar de verschillende soorten storage systemen \nameref{subsec:storage}~\ref{subsec:storage} die er zijn en hoe deze worden geïntegreerd \nameref{subsec:storageondersteuning} ~\ref{subsec:storageondersteuning} in de verschillende hypervisors en managementplatformen. \\
+High Availability-ondersteuning \nameref{subsec:ha}~\ref{subsec:ha} wordt besproken en hoe deze wordt geïmplementeerd in de managementplatformen. \\
+Een samenvatting van de verschillende managementplatformen en hun bijhorende hypervisors wordt gegeven in een long-list \nameref{subsec:samenvatting} ~\ref{subsec:samenvatting}. \\
+Het direct vergelijken van bepaalde managementplatformen komt ook aan bod in \nameref{subsec:performace}~\ref{subsec:performace}
 \subsection{Hypervisors}\label{subsec:Hypervisors}
 In het huidige systeem dat Excentis gebruikt, fungeert VMware ESXi ~\autocite{vmware} als onderliggende hypervisor. Deze is closed source en werkt binnen het VMware systeem. Als alternatief voor VMware ESXI zijn er verschillende hypervisors op de markt.
 
@@ -42,7 +42,7 @@ Excentis gebruikt als managementplatform VMWare vCenter~\autocite{vmware}. Voor 
 \begin{itemize}
     \item Proxmox VE~\autocite{Proxmox} is een open-source managementplatform dat werkt met KVM en enterprise-ondersteuning aanbiedt voor bedrijven. Uit onderzoek van \textcite{ally2018comparative} blijkt dat Proxmox, dat gebruik maakt van KVM, zeker niet onderdoet tegenover andere closed source systemen.
 
-    \item OpenStack is een open-source cloud computing platform ~\autocite{openstack2024}. Het dient geïnstalleerd te worden individueel van je hypervisor. Het ondersteunt verschillende hypervisors zoals KVM en Xen. Deze biedt niet alleen ondersteuning voor KVM maar ook voor Xen~\autocite{oleksiuk2023comparative}.
+    \item OpenStack is een open-source cloud computing platform ~\autocite{openstack2024}. Het dient geïnstalleerd te worden individueel van de hypervisor. Het ondersteunt verschillende hypervisors zoals KVM en Xen. Deze biedt niet alleen ondersteuning voor KVM maar ook voor Xen~\autocite{oleksiuk2023comparative}.
 
     \item Microsoft System Center Virtual Machine Manager (SCVMM) ~\autocite{microsoftvmm2025} is een product van Microsoft en biedt een managementplatform systeem aan voor Hyper-V. Dit product bestaat nog maar in beperkte vorm en is niet meer meegegroeid met de node van een gemiddeld bedrijf.
 
@@ -74,8 +74,15 @@ DAS wordt veel gebruikt in consumententoestellen zoals laptops en desktops. SAS 
 In dit onderzoek blijkt dat vrijwel alle managementplatformen ondersteuning bieden voor zowel DAS als SAS. Excentis wenst na te gaan hoe deze ondersteuning efficiënt kan worden gemigreerd naar een nieuw managementplatform.
 
 Storage Area Network (SAN) \textcite{ibm2025san} is een technologie die gebruikt wordt om storage te delen over het netwerk.
-Dit is puur een manier om storage op te zetten.
+Dit is puur een manier om storage op te zetten. \\
 Je hebt hiernaast ook nog een protocol of manier nodig om te kunnen communiceren met de storage op die server.
+Daar zijn er voornamelijk 2 toepassingen voor: iSCSI en FC (Fibre Channel).
+In het onderzoek van \textcite{stonefly2023fcvsiscsi} wordt er gesproken over iSCSI en FC met hun bijhorende voor en nadelen. Dit zijn twee veel gebruikte protocollen voor niet direct attach storage systemen.
+
+\begin{itemize}
+    \item iSCSI (Internet Small Computer System Interface) is een protocol dat SCSI-commando's over IP (layer 3) verzendt. Het maakt gebruik van TCP/IP om opslagapparaten te verbinden met servers en opslag via een netwerk. Dit maakt het mogelijk om opslagbronnen op afstand te delen en te beheren, wat de flexibiliteit en schaalbaarheid vergroot. Het is makelijk toe te passen met standaard netwerkapparatuur en is relatief goedkoop in vergelijking met andere opslagprotocollen. Het grootste nadeel is dat de latency hoger is dan bij FC, omdat het gebruik maakt van TCP/IP en dus afhankelijk is van de netwerkprestaties.
+    \item FC (Fibre Channel) is een hoogwaardig netwerkprotocol dat speciaal is ontworpen voor opslagnetwerken. Het nadeel met dit systeem is dat er speciale netwerk appartuur nodig is om dit protocol te kunnen gebruiken. Deze hardware is ook duur. Het grootste voordeel is wel dat er een veel lagere latency is dan bij iSCSI. 
+\end{itemize}
 
 
 \subsection{High Availability-ondersteuning}\label{subsec:ha}
@@ -102,11 +109,11 @@ In tabel~\ref{tab:longlist} wordt een overzicht gegeven van de verschillende hyp
         Xen Orchestra  & Open-source & XCP-ng,Citrix Hypervisor(xenserver)  & opvolger XEN project \\ \hline
         Xen Center  & Closed-source & Citrix Hypervisor(xenserver)   &  Betalende versie met enterprise support\\ 
         \end{tabular}
-        \caption{Vergelijking van Virtualisatieplatforms}
+        \caption{Vergelijking van Virtualisatieplatformen}
         \label{tab:longlist}        
         \end{table}
 \clearpage        
-\subsection{Prestatie verschillen tussen managementplatformen}
+\subsection{Prestatie verschillen tussen managementplatformen} \label{subsec:performace}
 In het onderzoek van \textcite{algarni2018performance} wordt een vergelijkende studie gemaakt tussen Xen en KVM. In ons onderzoek focussen wij ons vooral op het managementplatform.
 Aangezien een managementplatform ook een hypervisor nodig heeft kunnen wij hier spreken over het management platform die gekoppeld is in deze studie aan een hypervisor.
 Voor KVM wordt er gesproken over PROXMOX VE en voor Xen wordt er gesproken over XenServer. In deze studie wordt er een vergelijking gemaakt tussen de twee systemen en hun prestaties. De resultaten zijn als volgt:
@@ -134,30 +141,31 @@ Afbeelding ~\ref{fig:sas} toont een volledig beeld van SAS-systemen. Dit is een 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\textwidth]{../onderzoek/storagesas-das.jpg} 
-    \caption{volledig beeld die SAS weergeeft, afkomstig van \href{https://www.eetimes.com/serial-attached-scsi-storage-moves-ahead-in-network-server-designs/}{eetimes}.}
+    \caption{volledig beeld die SAS weergeeft, afkomstig van \textcite{eetimesSAS}}
     \label{fig:sas}
 \end{figure}
 
 \FloatBarrier
-Figuur ~\ref{fig:saspres} toont de kracht van SAS systemen. In het artikel van \textcite{loshin2022sas} wordt er uitgelegd dat SAS tot 2 keer zoveel meer data kan versturen en verwerken t.o.v. het bekende SATA systeem.
+Figuur~\ref{fig:saspres} toont de kracht van SAS systemen. In het artikel van \textcite{loshin2022sas} wordt er uitgelegd dat SAS tot 2 keer zoveel meer data kan versturen en verwerken t.o.v. het bekende SATA systeem.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.7\textwidth]{../onderzoek/sas_vs_sata-f.png} 
-    \caption{Afbeelding die SAS prestatie weergeeft, afkomstig van \href{https://www.techtarget.com/searchstorage/definition/serial-attached-SCSI}{TechTarget} over Serial Attached SCSI.}
+    \includegraphics[width=1.0\textwidth]{../onderzoek/sas_vs_sata-f.png} 
+    \caption{Afbeelding die SAS prestatie weergeeft, afkomstig van \textcite{loshinKranzSAS} over Serial Attached SCSI.}
     \label{fig:saspres}
 \end{figure}
 
 
 \FloatBarrier
 Verder wordt er ook nog Storage Area Network (SAN) gebruikt in combinatie met iSCSI voor grote storage-opslagsystemen. In het onderzoek van \textcite{park2024performance} wordt besproken hoe iSCSI een positieve invloed heeft op de prestatie van storagesystemen die gedeeld worden met verschillende toepassingen.
+Figuur ~\ref{fig:san} toont een afbeelding die SAN weergeeft.
 In het bedrijf Excentis is het daarom ook belangrijk dat de storage van het virtual managementplatform gedeeld kan worden met verschillende toepassingen. Bij het onderzoek van \textcite{park2024performance} wordt bevestigd dat dit een goede standaardmethode is voor storage over het netwerk.
 ISCI is hiermee ook een belangrijk punt om rekening mee te houden in de proof of concept. Het is belangrijk dat de iSCSI goed werkt met de hypervisors en managementplatformen die in dit onderzoek worden bekeken.
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.7\textwidth]{../onderzoek/nas-isci.png} 
-  \caption{Afbeelding die SAN simpel weergeeft, afkomstig van \href{https://www.kernsafe.com/images/VMware-iSCSI-iStorage-Server.png}{kernsafe}.}
+  \caption{Afbeelding die SAN simpel weergeeft, afkomstig van \textcite{kernsafeVMware}.}
   \label{fig:san}
 \end{figure}
 
@@ -165,24 +173,27 @@ ISCI is hiermee ook een belangrijk punt om rekening mee te houden in de proof of
 \FloatBarrier
 Bij DAS-systemen wordt, zoals eerder vermeld, de data rechtstreeks aan de hardware verbonden. Het onderzoek van \textcite{joshi2014empirical} richt zich specifiek tot schijfformaten op DAS-systemen.
 Dit gaat buiten de scope van dit onderzoek, maar toont zeer mooi aan dat KVM (voor ons Proxmox VE) zeer goede ondersteuning biedt en hierbij ook aantoont dat er zeer veel ondersteunende schijfformaten bestaan.
-Het is zeer moeilijk om correcte wetenschappelijke artikels te vinden over implementatie van DAS- en SAS-systemen op alle soorten managementplatformen. Er wordt vaak specifiek gericht op een gebruikt systeem die zich onder de categorie bevindt DAS of SAS. Het onderzoek van \textcite{joshi2014empirical} is daar een goed voorbeeld van.
-Met de referenties en kennis die hieruit zijn gekomen, weten we dat DAS en SAS globaal over alle managementplatformen ondersteund worden. De uitvoering en de praktische ervaring zal in de proof of concept worden bekeken. Daaruit moet uitkomen of de SAS- en DAS-integratie voldoende stabiliteit biedt.
+Het is zeer moeilijk om correcte wetenschappelijke artikels te vinden over de implementatie van DAS- en SAS-systemen op alle soorten managementplatformen.
+Er wordt vaak specifiek gericht op een gebruikt systeem die zich onder de categorie bevindt DAS of SAS. Het onderzoek van \textcite{joshi2014empirical} is daar een goed voorbeeld van.
+Met de referenties en kennis die hieruit zijn gekomen, weten we dat DAS en SAS globaal over alle managementplatformen ondersteund worden. De afbeelding ~\ref{fig:das} toon overzichtelijk DAS ten opzichte van NAS en SAN.
+De uitvoering en de praktische ervaring zal in de proof of concept worden bekeken. Daaruit moet uitkomen of de SAS- en DAS-integratie voldoende stabiliteit biedt.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\textwidth]{../onderzoek/DAS.jpg} 
-    \caption{Afbeelding die DAS simpel weergeeft, afkomstig van \href{https://networkwalks.com/storage-types-das-nas-san/I}{Networkwalks}.}
+    \caption{Afbeelding die DAS simpel weergeeft, afkomstig van \textcite{networkwalksStorage}}
     \label{fig:das}
 \end{figure}
 \FloatBarrier
-gedistribueerde opslag of distributed storage is nog een belangrijke optie die toepasselijk is voor een virtual managementplatform. Dit is een opslagmethode waarbij de data over verschillende servers (nodes) wordt verdeeld. Dit zorgt ervoor dat de data sneller kan worden opgevraagd en netwerk verkeer eficient benut wordt. ~\autocite{patil2010unified}.
-In het onderzoek zijn wij specifiek gefocust op toepassingen voor management platformen. VMware heeft izjn eigen private toepassing genaamd VSAN~\autocite{hogan2016essential}. Dit is een software-defined storage oplossing die speciaal is ontworpen voor VMware-omgevingen. Het biedt een effectieve opslagoplossing die eenvoudig kan worden geïntegreerd met VMware's virtualisatieplatforms.
-Hierbij moet er dus ook een alternatief ter beschikking zijn. Een daarvan die open source is, is Ceph~\autocite{weil2006ceph}. Dit is een open-source software-defined storage oplossing die kan worden gebruikt met verschillende managementplatformen zoals Proxmox VE ~\autocite{Proxmox}.
+Gedistribueerde opslag of distributed storage is nog een belangrijke optie die toepasselijk is voor een virtual managementplatform. Dit is een opslagmethode waarbij de data over verschillende servers (nodes) wordt verdeeld.
+Dit zorgt ervoor dat de data sneller kan worden opgevraagd en netwerk verkeer efficiënt benut wordt. ~\autocite{patil2010unified}.
+In het onderzoek zijn wij specifiek gefocust op toepassingen voor management platformen. VMware heeft zijn eigen private toepassing genaamd vSAN~\autocite{hogan2016essential}. Dit is een software-defined storage oplossing die speciaal is ontworpen voor VMware-omgevingen. Het biedt een effectieve opslagoplossing die eenvoudig kan worden geïntegreerd met VMware's virtualisatieplatformen.
+Hierbij moet er dus ook een alternatief ter beschikking zijn. Eén daarvan die open source is, is Ceph~\autocite{weil2006ceph}. Dit is een open-source software-defined storage oplossing die kan worden gebruikt met verschillende managementplatformen zoals Proxmox VE ~\autocite{Proxmox}.
 
-Hieronder is een theoretisch voorbeeld aangetoont. Ceph zelf en VSAN kan je vergelijken met dit theoretisch voorbeeld.
+Bij figuur \ref{fig:das} is een theoretisch voorbeeld aangetoond. Ceph zelf en vSAN kan vergeleken worden met dit theoretisch voorbeeld.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.9\textwidth]{../onderzoek/dssep.png} 
-  \caption{Afbeelding van distributed storage als toepassing., afkomstig van \href{https://medium.com/systemdesign-us-blog/how-does-storage-work-in-distributed-systems-fde890e88a7f}{Medium}.}
+  \caption{Afbeelding van distributed storage als toepassing., afkomstig van \textcite{pb2022storage}.}
   \label{fig:das}
 \end{figure}
