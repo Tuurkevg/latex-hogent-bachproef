@@ -10,15 +10,15 @@
 
 Door de aankondiging van VMware om de licentiekosten te verhogen~\autocite{device42_2024}, zijn er bedrijven die beginnen te denken aan een eventueel alternatief voor VMware ESXi/VMWare vCenter.
 Hierdoor wordt dit onderzoek gevoerd. Specifiek gaan we voor het bedrijf Excentis op zoek naar een alternatief voor VMware vCenter.
-Excentis is een middel groot bedrijf dat zich specialiseert in het testen van netwerken en het ontwikkelen van software voor de telecomindustrie \autocite{Excentis}.
+Excentis is een middelgroot bedrijf dat zich specialiseert in het testen van netwerken en het ontwikkelen van software voor de telecomindustrie \autocite{excentis2025}.
 Zij hebben enorm veel baat bij een stabiel en performant managementplatform voor virtualisatie. Een groot deel van hun omgeving draait op VMware vCenter.
 De prijzen voor deze software zijn zo hoog~\autocite{Hale2024} dat bedrijven zoeken naar alternatieven.
-Hoe groot zijn de kostenstijgingen en wat zijn de gevolgen voor bedrijven die gebruik maken van VMware ESXi/VMware vCenter?
+Hoe groot zijn de kostenstijgingen en wat zijn de gevolgen voor bedrijven die gebruikmaken van VMware ESXi/VMware vCenter?
 Deze kosten kunnen bij bedrijven zoals Excentis zo hoog oplopen dat de kosten niet meer in verhouding staan tot de voordelen.
 Welke risico's zijn er verbonden aan het blijven werken met VMware ESXi/VMware vCenter?
 Zijn deze risico’s van een zodanige aard dat ze de dagelijkse werking van Excentis in de toekomst in gevaar zouden kunnen brengen?
 
-Direct Attached Storage en Storage Area Network (SAN)worden bij Excentis gebruikt in combinatie met VMware vCenter.
+Direct Attached Storage en Storage Area Network (SAN) worden bij Excentis gebruikt in combinatie met VMware vCenter.
 Deze moeten ook worden overgezet naar het nieuwe alternatieve systeem. Dit zal een belangrijk criterium en onderdeel van het onderzoek zijn.
 
 Vaak gaat het om bedrijven die virtualisatie hebben als een service, waarbij dit niet de allerbelangrijkste zorg is binnen het bedrijf.
@@ -32,12 +32,14 @@ De volgende vragen moeten worden gesteld bij het zoeken naar alternatieven op de
 \section{\IfLanguageName{dutch}{Onderzoeksvraag}{Research question}}%
 \label{sec:onderzoeksvraag}
 
-Evaluatie van alternatieven voor VMware vCenter: Een onderzoek naar verschillende managementplatformen met ondersteuning voor Nakivo, Ansible, en Foreman binnen Excentis
-\newline De volgende deelvragen zullen beantwoord worden om de centrale onderzoeksvraag te beantwoorden:
+Welke opties zijn er voor Excentis om VMware vCenter te vervangen door een open-source of closed-source managementplatform? Hoe passen de huidige eisesn van het bedrijf binnen de alternatieven die er zijn?
+Via dit onderzoek moet Excentis een goed overzicht krijgen van de verschillende managementplatformen die er zijn en welke het beste aansluiten bij hun noden.
+
+De volgende deelvragen zullen beantwoord worden om de centrale onderzoeksvraag te beantwoorden:
 \begin{enumerate}
   \item Welke functionele en prestatieverschillen zijn er tussen open-source en closed-source managementplatformen, en welke voor- en nadelen hebben deze verschillen voor het bedrijf Excentis?
-  \item Hoe presteren managementplatformen op het gebied van High Availability(failover,\newline schaalbaarheid,backups,...)?
-  \item Hoe kan de bestaande ondersteuning van Direct Attached Storage en Storage Area Network met SCSI in VMWare vCenter worden geintegreerd naar een alternatief managementplatformen binnen de infrastructuur van Excentis?
+  \item Hoe presteren managementplatformen op het gebied van High Availability ( failover, \newline schaalbaarheid, backups,...)?
+  \item Hoe kan de bestaande ondersteuning van Direct Attached Storage en Storage Area Network met iSCSI in VMWare vCenter worden geïntegreerd naar een alternatief managementplatformen binnen de infrastructuur van Excentis?
   \end{enumerate}
 \newpage
 \section{\IfLanguageName{dutch}{Onderzoeksdoelstelling}{Research objective}}%
@@ -46,7 +48,7 @@ Dit onderzoek heeft als doel om een alternatief te vinden voor VMware vCenter bi
 Het resultaat zal verkregen worden aan de hand van een proof of concept. Hierin zullen de specifiek geselecteerde managementplatformen uitgerold worden en de volgende criteria en testen worden uitgevoerd:
 \begin{itemize}
   \item werking met de bestaande hardware van Excentis, vergeleken op prestatie en stabiliteit. (Hoe snel start een nieuwe virtuele machine op, wat zijn de minimum eisen voor de hardware, ...).
-  \item Testen en meten van de performance en stabiliteit van de bestaande Direct Attached en Storage Area Network SCSI-systemen die Excentis gebruikt aan de hand van testdata op de nieuwe managementplatformen.
+  \item Testen en meten van de performantie en stabiliteit van de bestaande Direct Attached en Storage Area Network iSCSI-systemen die Excentis gebruikt aan de hand van testdata op de nieuwe managementplatformen.
   \item Prestatie en stabiliteit van de managementplatformen bij piekmomenten en failovers.
 \end{itemize}
 Een vergelijkende studie zal uitgevoerd worden tussen de verschillende managementplatformen en de resultaten zullen worden geanalyseerd. Hieruit zal een advies worden geformuleerd voor Excentis.
@@ -62,10 +64,9 @@ Als conclusie wordt er dan één managementplatform aanbevolen.
 
 De rest van deze bachelorproef is als volgt opgebouwd:
 
-In Hoofdstuk~\ref{ch:stand-van-zaken} wordt een overzicht gegeven van de stand van zaken binnen het onderzoeksdomein, op basis van een literatuurstudie.
-In Hoofdstuk~\ref{ch:poc} wordt de proof of concept gemaakt en besproken. Hierbij wordt het theoretisch onderzoek omgezet in een realistisch praktijkvoorbeeld.
-In Hoofdstuk~\ref{ch:methodologie} wordt de methodologie toegelicht en worden de gebruikte onderzoekstechnieken besproken om een antwoord te kunnen formuleren op de onderzoeksvragen.
-
+In Hoofdstuk~\ref{ch:stand-van-zaken} wordt een overzicht gegeven van de stand van zaken binnen het onderzoeksdomein, op basis van een literatuurstudie. \\
+In Hoofdstuk~\ref{ch:methodologie} wordt de methodologie toegelicht en worden de gebruikte onderzoekstechnieken besproken om een antwoord te kunnen formuleren op de onderzoeksvragen. \\
+In Hoofdstuk~\ref{ch:poc} wordt de proof of concept gemaakt en besproken. Hierbij wordt het theoretisch onderzoek omgezet in een realistisch praktijkvoorbeeld. \\
 % TODO: Vul hier aan voor je eigen hoofstukken, één of twee zinnen per hoofdstuk
 
 In Hoofdstuk~\ref{ch:conclusie}, tenslotte, wordt de conclusie gegeven en een antwoord geformuleerd op de onderzoeksvragen. Daarbij wordt ook een aanzet gegeven voor toekomstig onderzoek binnen dit domein.
