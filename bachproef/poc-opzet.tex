@@ -100,7 +100,7 @@ Nu maken we een 2de virtuele machine aan met dezelfde configuratie als de eerste
 Aangezien een SAN princiepe via een vebrinding werkt op het netwerk is de storage de zwakste schakel in een high availability cluster. Deze verbinding kan verbroken worden door netwerk problemen. Hierna kan er data corruptie onstaan in het slechtste geval.
 
 \subsection{High Availability in Proxmox VE}
-
+\label{sec:ha-proxmox}
 Eenmaal de storage in orde is voor de virtuele machines kan er een HA configuratie worden aangemaakt. 
 Onder datacenter HA kan een groep worden aangemaakt. Hierin worden alle drie de fysieke nodes opgenomen die deel uitmaken van de cluster. Vervolgens wordt aan de groep een logische naam toegekend, in dit geval ha-pool zoals in figuur \ref{fig:ha-group}.
 \begin{figure}[H]
