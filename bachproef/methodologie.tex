@@ -43,13 +43,15 @@ Aangezien de tijd en middelen beperkt zijn, is het belangrijk om hierop een goed
 \item Het managementplatform moet verschillende nodes kunnen aansturen en beheren.
 \item Betalende managementplatformen die een licentie nodig hebben, bieden een gratis proefversie aan om deze studie te kunnen uitvoeren in de proof of concept-omgeving.
 \end{enumerate}
-Als deze criteria zijn voldaan voor een specifiek managementplatform, wordt deze geselecteerd voor te draaien in de proof of concept.
+Als aan deze criteria is voldaan voor een specifiek managementplatform, wordt dit geselecteerd om te worden ingezet in de proof of concept.
 
-Microsoft SCVMM(Microsoft Hyper-v) ~\autocite{Eaton2019} is deprecated en wordt op dit moment niet meer actief ondersteund door Microsoft.
-Proxmox VE~\autocite{Proxmox} is een open-source managementplatform dat geen betalende licentie heeft voor de software. Het biedt wel een betalende support aan voor commercieel gebruik. Dit platform kan draaien op de bestaande DELL-servers die tot de beschikking zijn in de proof of concept.
-OpenStack ~\autocite{openstack2024} is ook een open-source managementplatform dat geen betalende licentie heeft voor de software. Het biedt ook een betalende support aan voor commercieel gebruik bij verschillende toepassingen. Dit platform kan ook draaien op de bestaande DELL-servers die tot de beschikking zijn in de proof of concept.
-Xen Orchestra ~\autocite{el2021server} is ook een opensource virtual managementplatform dat geen betalende licentie heeft voor de software. Het biedt ook een betalende support aan voor commercieel gebruik bij verschillende toepassingen. Dit platform kan ook draaien op de bestaande DELL-servers die tot de beschikking zijn in de proof of concept.
-Xen Center~\autocite{xencenter2024}  is closed-source maar bied wel een gratis proefversie aan. Ze bieden ook een enterprise licentie aan voor commercieel gebruik. Dit platform kan ook draaien op de bestaande DELL-servers die tot de beschikking zijn in de proof of concept.
+\begin{itemize}
+    \item \textbf{Microsoft SCVMM (Microsoft Hyper-V)}~\autocite{Eaton2019} is verouderd (deprecated) en wordt momenteel niet meer actief ondersteund door Microsoft.
+    \item \textbf{Proxmox VE}~\autocite{Proxmox} is een open-source managementplatform dat geen betalende licentie vereist voor het gebruik van de software. Voor commercieel gebruik is er wel betaalde ondersteuning beschikbaar. Dit platform kan draaien op de bestaande DELL-servers die beschikbaar zijn voor de proof of concept.   
+    \item \textbf{OpenStack}~\autocite{openstack2024} is eveneens een open-source managementplatform zonder verplichte licentiekosten. Er is wel commerciële ondersteuning beschikbaar via diverse aanbieders. OpenStack is primair een cloud computing-platform en kan ook worden ingezet in hybride cloudomgevingen. Hierdoor is OpenStack minder geschikt als oplossing voor het probleem dat in dit onderzoek wordt onderzocht.
+    \item \textbf{Xen Orchestra}~\autocite{el2021server} is een open-source virtualisatiebeheerplatform zonder verplichte licentiekosten. Er is commerciële ondersteuning beschikbaar. Ook dit platform is compatibel met de DELL-servers in de proof of concept.
+    \item \textbf{XenCenter}~\autocite{xencenter2024} is closed-source, maar er is een gratis proefversie beschikbaar. Daarnaast wordt een enterprise-licentie aangeboden voor commercieel gebruik. Dit platform kan eveneens draaien op de beschikbare DELL-servers in de proof of concept.
+\end{itemize}
 
 \subsection{Geselecteerde managementplatformen (short list)} 
 \begin{table}[h!]
@@ -59,7 +61,6 @@ Xen Center~\autocite{xencenter2024}  is closed-source maar bied wel een gratis p
     \textbf{Platform} & \textbf{Type} & \textbf{Hypervisor} \\ \hline
     \hline
     Proxmox VE        & Open-source   & KVM,LXC             \\ \hline
-    OpenStack         & Open-source   & KVM, Xen            \\ \hline
     Xen Orchestra  & Open-source & XCP-ng,Citrix Hypervisor(XenServer) \\ \hline
     Xen Center  & Closed-source & Citrix Hypervisor(XenServer) \\ \hline
     \hline
