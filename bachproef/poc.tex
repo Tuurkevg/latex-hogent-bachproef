@@ -327,3 +327,80 @@ Hierna kan de disk worden toegevoegd aan Xen Orchestra als een storageoptie. In 
   \caption{Storagepad configuratievoorbeeld in Xen Orchestra}
   \label{fig:storage-path-orch}  
 \end{figure}
+\section{XenCenter}%
+XenCenter is het volgende virtual managementplatform die getest wordt. Deze applicatie zal samen gedraaid worden met Citrix Hypervisor (XenServer).
+3 fysieke nodes zullen elk de XenServer-installatie krijgen. XenCenter dient geïnstalleerd te worden op een Windows-machine als app.
+Zowel de hypervisor als XenServer draaien op de laatste beschikbare versie. XenServer heeft momenteel versie 8.4 en XenCenter heeft de versie 2025.2.0.
+Er wordt een pool aangemaakt waar de virtuele machines in zitten zoals in Figuur \ref{fig:opstel-xen}.
+In \nameref{sec:Clusteropstelling-Xen} wordt de opstelling in meer detail uitgelegd.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{../poc/opstel-xen.png}
+\caption{Basis opstelling voor XenCenter}
+\label{fig:opstel-xen}
+\end{figure}
+
+\subsection{Storage in XenCenter}%
+Er moet ook getest worden hoe virtual managementplatformen omgaan met gebruik van SAN iSCSI en distributed storage systemen.
+XenCenter biedt standaard een built-in systeem voor SAN storage te koppelen aan een cluster met iSCSI als protocol.
+Verder binnen de XenCenter-applicatie is er geen directe ondersteuning mogelijk voor distributed storage systemen zoals CEPH~\autocite{weil2006ceph} of XOSTOR bij Xen Orchestra.
+Er bestaan workarounds om systemen zoals CEPH te gebruiken, helaas zijn deze niet officieel ondersteund door XenCenter. Hierdoor kan er ook geen beroep worden gedaan op officiële support van het bedrijf bij problemen, wat wel een must is voor Excentis.
+Hierdoor is er geen mogelijkheid om distributed storage te gaan implementeren met XenCenter in deze proof of concept. DAS wordt door elke virtual managementplatform goed ondersteund en is een basis voor elk systeem.
+Het biedt alleen geen goede oplossing als we willen werken met een High Availability-principe.
+Het volgende wordt getest en bekeken:
+\begin{itemize}
+\item SAN iSCSI (met TrueNAS~\autocite{truenas})
+\end{itemize}
+In \nameref{sec:Storage-technisch-xen} wordt de opstelling van de storage en technische instellingen besproken in meer detail.
+Het is belangrijk dat er op een correcte goede manier storage kan worden toegevoegd. Hierbij biedt XenCenter een goede duidelijke manier aan om iSCSI-storage toe te voegen.
+De iSCSI-target wordt gehost op een TrueNAS~\autocite{truenas} server. Deze instellingen worden verder niet in detail besproken.
+Na het instellen van de TrueNAS via iSCSI wordt deze door XenCenter duidelijk weergegeven in het overzichtsmenu, zie Figuur \ref{fig:truenasinlijst-xen}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{../poc/truenasinlijst-xen.png}
+\caption{iSCSI SAN na configuratie van storage in XenCenter}
+\label{fig:truenasinlijst-xen}
+\end{figure}
+
+\subsection{High Availability in XenCenter}%
+De configuratie voor het opzetten van een High Availability-cluster wordt uitgelegd in \nameref{sec:HA-xen}.
+Nu de HA-configuratie aangemaakt is, willen we testen of de High Availability-integratie effectief werkt. Dit wordt gedaan door een fysieke node offline te brengen door een netwerkkabel uit de cluster te halen.
+Hierna wordt er gekeken hoelang het duurt voor XenCenter dit detecteert en wat het dan specifiek zal doen om het probleem op te lossen.
+
+Eenmaal de kabel uit de server is gehaald, duurt het ongeveer 1-2 minuten voor XenCenter dit detecteert. Dit is vergelijkbaar met de tijd die XenOrchestra met XCP-ng nodig heeft.
+Direct wanneer XenCenter de melding maakt dat er een node offline is waar een virtuele machine op draait, zoekt het naar een nieuwe node om de virtuele machine te kunnen opstarten.
+Figuur \ref{fig:failover-xen} toont dit duidelijk aan wat XenCenter dan probeert te doen. Het totale proces duurt maximaal 3 minuten voor de virtuele machine weer opgestart wordt op een andere beschikbare node.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{../poc/failover-xen.png}
+\caption{Failover XenCenter activiteiten}
+\label{fig:failover-xen}
+\end{figure}
+
+\subsection{Virtuele machines migraties in XenCenter}%
+Een migratie van een virtuele machine is belangrijk met het oog op dat wanneer er een onderhoud is, geen enkele virtuele machine een downtime heeft.
+Hierbij moet er worden nagegaan of XenCenter een implementatie biedt om virtuele machines te migreren zonder een echte downtime van die virtuele machine.
+Via XenCenter kan er eenvoudig via de ingebouwde GUI een migratie gestart worden door aan te geven wie de nieuwe target host is.
+Vervolgens begint XenCenter met het migratieproces waarbij de connectie van de virtuele machine maximaal 5 seconden wegvalt.
+Dit moment is wanneer het laatste stukje data van de oude node naar de nieuwe gaat en de virtuele machine even geen data kan ophalen of wegschrijven.
+De duurtijd is vergelijkbaar met de andere virtuele managementplatformen, waarbij het migratieproces voor de eenvoudige virtuele machine ongeveer 3 minuten duurde.
+Figuur \ref{fig:migrate-vm-xen} toont hoe de migratie gestart kan worden.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{../poc/migrate-vm-xen.png}
+\caption{Migratie starten van virtuele machine in XenCenter}
+\label{fig:migrate-vm-xen}
+\end{figure}
+
+\subsection{Hot swapping fysieke disks in XenCenter}%
+Als er een oude schijf vervangen moet worden of een nieuwe schijf moet worden toegevoegd, is het belangrijk dat deze op een eenvoudige manier te zien is in de GUI van de software.
+In dit geval biedt XenCenter geen directe manier om de schijven weer te geven in de applicatie. Er moet manueel ingelogd worden via de console of via SSH op de fysieke node waar de schijf vernieuwd is.
+Hierna moet de schijf geformatteerd worden en een EXT4-partitie krijgen via GPT om te kunnen worden uitgelezen in de GUI van XenCenter.
+Het kan gebeuren bij verouderde apparatuur dat een restart van het systeem noodzakelijk is voor XenCenter de wijzigingen ziet.
+Als alles correct verloopt, moet de storage zichtbaar zijn binnen XenCenter, zie Figuur \ref{fig:swap-storage-xen}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{../poc/swap-storage-xen.png}
+\caption{Nieuwe schijf als storage in XenCenter}
+\label{fig:swap-storage-xen}
+\end{figure}

@@ -93,7 +93,7 @@ De configuratie van iSCI op TrueNAS is buiten de scope van deze bachelorproef.
   \label{fig:iscsi-SAN}
 \end{figure}
 Nu zal er een extra  optie bijgekomen zijn in de GUI onder de tab storage bij datacenter, zie fiuur~\ref{fig:vm-lijst}  Hier in het voorbeeld wordt het al naam iSCI-TrueNAS gegeven.
-Er wordt nu een tweede virtuele machine aangemaakt met dezelfde configuratie als de eerste virtuele machine, maar met een andere schijf. Er wordt nu gekozen voor de isci-truenas disk.
+Er wordt nu een tweede virtuele machine aangemaakt met dezelfde configuratie als de eerste virtuele machine, maar met een andere schijf. Er wordt nu gekozen voor de iSCSI-TrueBAS disk.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.85\textwidth]{../poc/vm-lijst-prox.png}
@@ -199,4 +199,63 @@ Zie Figuur \ref{fig:ha-settings-orch.png} voor de volledige configuratie van de 
   \includegraphics[width=1.1\textwidth, trim=0cm 0cm 10cm 0cm, clip]{../poc/ha-settings-orch.png}
   \caption{High Availability pool in Xen Orchestra}
   \label{fig:ha-settings-orch.png}
+\end{figure}
+
+\section{XenCenter}%
+\subsection{Clusteropstelling in XenCenter}
+\label{sec:Clusteropstelling-Xen}
+Om de basisopstelling te verkrijgen zoals in Figuur \ref{fig:opstel-xen} moeten alle 3 de servers geïnstalleerd zijn met XenServer en bereikbaar zijn op het netwerk.
+Hierna wordt de XenCenter app geïnstalleerd op een Windows machine. Daar wordt vervolgens een nieuwe pool aangemaakt en de 3 IP-adressen van de machines ingegeven.
+XenCenter zal dan automatisch het proces beginnen om deze toe te voegen aan 1 grote cluster. Verder kan er ook worden opgemerkt dat een triallicentie automatisch geactiveerd wordt.
+Dit is normaal want XenCenter biedt geen gratis communityversie aan zoals bij Xen Orchestra. Er kan direct gebruik gemaakt worden van alle features zonder eerst een licentie te activeren.
+Tot nu toe is niet specifiek toegespitst op hoe een virtuele machine in detail wordt aangemaakt, aangezien dit eigenlijk niet de hoofdzaak van deze proof of concept is.
+Bij XenCenter wordt hier een uitzondering opgemaakt. De reden hiervoor is dat een basis-ISO waarmee een virtuele machine kan geboot worden niet via het virtual managementplatform kan gebeuren.
+Hiervoor moet er via de console/ssh ingelogd worden op 1 van de 3 nodes en bepaalde commando's worden uitgevoerd. De commando's hiervoor lijken op het eerste zicht aan de onnodig ingewikkelde kant. 
+Er wordt voor deze oplossing gebruikgemaakt van de uitleg die \textcite{rendek2018iso} geschreven heeft. Eenmaal uitgevoerd zou het resultaat zichtbaar moeten zijn zoals weergegeven in Figuur \ref{fig:iso-driv-xen}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{../poc/iso-driv-xen.png}
+  \caption{ISO drive aangemaakt via CLI in XenCenter}
+  \label{fig:iso-driv-xen}
+\end{figure}
+Nu is het mogelijk om de virtuele machine aan te maken zoals bij andere virtual managementplatformen.
+\subsection{Storage in XenCenter}%
+\label{sec:Storage-technisch-xen}
+Om SAN met iSCSI te kunnen opzetten, moet er eerst zekerheid zijn dat alle 3 de fysieke nodes in een pool zitten. Zoals in Figuur \ref{fig:opstel-xen} moeten de nodes onder de pool zitten die aangemaakt is met de correcte poolnaam.
+Eenmaal de pool gecontroleerd is, kan er naar de optie create storage gegaan worden. Deze optie biedt een zeer eenvoudige manier aan om de storage toe te voegen aan de cluster.
+Selecteer iSCSI onder Block based storage, zoals weergegeven in Figuur \ref{fig:iscsi-xen}.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{../poc/iscsi-xen.png}
+  \caption{selecteren van iSCSI als storage in XenServer}
+  \label{fig:iscsi-xen}
+\end{figure}
+Vervolgens wordt er een correcte naam gegeven aan de storage-pool. Na het invoeren van het adres waarop de iSCSI bereikbaar is, volgt een scan van de target. Als de iSCSI target correct is ingesteld moet de correcte target weergegeven worden zoals Figuur \ref{fig:cochir-nas-xen} weergeeft.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{../poc/cochir-nas-xen.png}
+  \caption{selecteren van iSCSI als storage in XenServer stap 2}
+  \label{fig:cochir-nas-xen}
+\end{figure}
+Nu heeft de pool een gedeelte iSCSI storage waar alle virtuele machines hun data in bewaard kan worden.
+Een virtuele machine kan nu aangemaakt worden met de iSCSI target als storage.
+\subsection{High Availability in XenCenter}%
+\label{sec:HA-xen}
+Deze configuratie is ook volledig mogelijk op een eenvoudige manier van de XenCenter software.
+De cluster-pool wordt geselecteerd en vervolgens kan een HA principe worden geconfigureerd, zie Figuur \ref{fig:ha-settiings1.png}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{../poc/ha-settiings1.png}
+  \caption{HA configuratie menu openen}
+  \label{fig:ha-settiings1.png}
+\end{figure}
+Er wordt bij de HA configuratie aangegeven wat de correcte storage-pool is waarmee XenCenter mag werken om HA te garanderen en te kunnen toepassen.
+Hierna wil XenCenter weten wanneer HA niet meer mogelijk is. Dit wil specifiek zeggen wanneer kan de server niet meer de taken van een HA-opzetting uitvoeren. 
+Dit wordt best op het maximale gehouden, zeker voor de testen die gedaan worden in deze proof of concept. Er zijn 3 fysieke servers aanwezig, hierdoor is voor nu de beste optie 3 maximale failures.
+Zie Figuur \ref{fig:haconf2-xen} met de correcte configuratie.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{../poc/haconf2-xen.png}
+  \caption{HA configuratie menu inhoudelijk weergegeven}
+  \label{fig:haconf2-xen}
 \end{figure}
