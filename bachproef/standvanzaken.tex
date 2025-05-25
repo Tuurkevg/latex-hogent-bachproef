@@ -9,12 +9,10 @@
 % Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
 VMware ~\autocite{vmware} is een bedrijf dat zich specialiseert in virtualisatietechnologieën. De sterke prijsstijgingen van VMware zorgen ervoor dat veel bedrijven afhaken en op zoek gaan naar alternatieven ~\autocite{Hale2024}.
 Er zijn verschillende alternatieve managementplatformen met bijhorende hypervisors.
-In dit hoofdstuk worden de verschillende hypervisors bekeken \nameref{subsec:Hypervisors} ~\ref{subsec:Hypervisors} en de verschillende managementplatformen \nameref{subsec:managementplatformen}~\ref{subsec:managementplatformen} besproken die in dit onderzoek aan bod komen. \\
-Er wordt ook gekeken naar open-source \nameref{subsec:opensource}~\ref{subsec:opensource} en closed-source systemen \nameref{subsec:clousedsource} ~\ref{subsec:clousedsource} en de voor- en nadelen van deze systemen. \\
-Virtuele machines hebben ook  storage nodig. Er wordt gekeken naar de verschillende soorten storage systemen \nameref{subsec:storage}~\ref{subsec:storage} die er zijn en hoe deze worden geïntegreerd \nameref{subsec:storageondersteuning} ~\ref{subsec:storageondersteuning} in de verschillende hypervisors en managementplatformen. \\
-High Availability-ondersteuning \nameref{subsec:ha}~\ref{subsec:ha} wordt besproken en hoe deze wordt geïmplementeerd in de managementplatformen. \\
-Een samenvatting van de verschillende managementplatformen en hun bijhorende hypervisors wordt gegeven in een long-list \nameref{subsec:samenvatting} ~\ref{subsec:samenvatting}. \\
-Het direct vergelijken van bepaalde managementplatformen komt ook aan bod in \nameref{subsec:performace}~\ref{subsec:performace}
+In dit hoofdstuk wordt een overzicht gegeven van relevant onderzoek rond hypervisors en managementplatformen.
+Eerst komen de verschillende hypervisors en managementplatformen aan bod, gevolgd door een bespreking van geschikte open-source en closed-source systemen en hun voor- en nadelen.
+Vervolgens wordt ingegaan op de verschillende opslagoplossingen en de manier waarop deze in de hypervisors en managementplatformen geïntegreerd worden.
+Daarna wordt de ondersteuning voor high availability behandeld, en tot slot wordt een samenvatting en vergelijking van de managementplatformen met bijbehorende hypervisors gepresenteerd, inclusief een analyse van hun prestaties.
 \subsection{Hypervisors}\label{subsec:Hypervisors}
 In het huidige systeem dat Excentis gebruikt, fungeert VMware ESXi ~\autocite{vmware} als onderliggende hypervisor. Deze is closed source en werkt binnen het VMware systeem. Als alternatief voor VMware ESXI zijn er verschillende hypervisors op de markt.
 
@@ -81,7 +79,7 @@ In het onderzoek van \textcite{stonefly2023fcvsiscsi} wordt er gesproken over iS
 
 \begin{itemize}
     \item iSCSI (Internet Small Computer System Interface) is een protocol dat SCSI-commando's over IP (layer 3) verzendt. Het maakt gebruik van TCP/IP om opslagapparaten te verbinden met servers en opslag via een netwerk. Dit maakt het mogelijk om opslagbronnen op afstand te delen en te beheren, wat de flexibiliteit en schaalbaarheid vergroot. Het is makelijk toe te passen met standaard netwerkapparatuur en is relatief goedkoop in vergelijking met andere opslagprotocollen. Het grootste nadeel is dat de latency hoger is dan bij FC, omdat het gebruik maakt van TCP/IP en dus afhankelijk is van de netwerkprestaties.
-    \item FC (Fibre Channel) is een hoogwaardig netwerkprotocol dat speciaal is ontworpen voor opslagnetwerken. Het nadeel met dit systeem is dat er speciale netwerk appartuur nodig is om dit protocol te kunnen gebruiken. Deze hardware is ook duur. Het grootste voordeel is wel dat er een veel lagere latency is dan bij iSCSI. 
+    \item FC (Fibre Channel) is een hoogwaardig netwerkprotocol dat speciaal is ontworpen voor opslagnetwerken. Het nadeel met dit systeem is dat er speciale netwerk apparatuur nodig is om dit protocol te kunnen gebruiken. Deze hardware is ook duur. Het grootste voordeel is wel dat er een veel lagere latency is dan bij iSCSI. 
 \end{itemize}
 
 
@@ -98,9 +96,9 @@ In tabel~\ref{tab:longlist} wordt een overzicht gegeven van de verschillende hyp
     \begin{table}[h!]
         \centering
         \small
-        \begin{tabular}{|p{2cm}|p{2cm}|p{3cm}|p{7cm}|p{7cm}|}
+        \begin{tabular}{|p{2cm}|p{2cm}|p{3cm}|p{7cm}|p{7cm}|}         
         \hline
-        \textbf{Platform}      & \textbf{Type}      & \textbf{Hypervisor} & \textbf{Description} \\ \hline
+        \textbf{Platform}      & \textbf{Type}      & \textbf{Hypervisor} & \textbf{Description} \\ \hline      
         VMware vCenter         & Closed-source      & VMware ESXi         & Enterprise management platform voor VMware-gebaseerde virtualisatie. \\ \hline
         Microsoft SCVMM        & Closed-source      & Microsoft Hyper-V   & Beheert Hyper-V-omgevingen en biedt integratie met andere Microsoft-producten. \\ \hline
         Proxmox VE             & Open-source        & KVM                 & Geavanceerd open-source managementplatform voor KVM, met enterprise-ondersteuning. \\ \hline
@@ -108,6 +106,7 @@ In tabel~\ref{tab:longlist} wordt een overzicht gegeven van de verschillende hyp
         Xen Project            & Open-source        & Xen                 & Managementplatform dat Open-source is. \\ \hline
         Xen Orchestra  & Open-source & XCP-ng,Citrix Hypervisor(xenserver)  & opvolger XEN project \\ \hline
         Xen Center  & Closed-source & Citrix Hypervisor(xenserver)   &  Betalende versie met enterprise support\\ 
+       \bottomrule        
         \end{tabular}
         \caption{Vergelijking van Virtualisatieplatformen}
         \label{tab:longlist}        
@@ -181,7 +180,7 @@ De uitvoering en de praktische ervaring zal in de proof of concept worden bekeke
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\textwidth]{../onderzoek/DAS.jpg} 
-    \caption{Afbeelding die DAS simpel weergeeft, afkomstig van \textcite{networkwalksStorage}}
+    \caption{Afbeelding die DAS simpel weergeeft, afkomstig van \textcite{tekmart2020nasvsdas}}
     \label{fig:das}
 \end{figure}
 \FloatBarrier
@@ -197,3 +196,7 @@ Bij figuur \ref{fig:das} is een theoretisch voorbeeld aangetoond. Ceph zelf en v
   \caption{Afbeelding van distributed storage als toepassing., afkomstig van \textcite{pb2022storage}.}
   \label{fig:das}
 \end{figure}
+
+Xen Orchestra heeft ook zijn eigen distributed storage-oplossing genaamd XOSTOR~\autocite{xostor-docs}. Dit is een software-defined storage-oplossing die speciaal is ontworpen voor XCP-ng en Xen Orchestra. Het biedt een opslagoplossing als virtuele SAN die eenvoudig kan worden geïntegreerd met XCP-ng en Xen Orchestra.
+Het is zeer vergelijkbaar met CEPH~\autocite{weil2006ceph}, dat ook werkt met schijven die in de cluster zitten. Beide zorgen ervoor dat de fysieke disks op alle nodes onderling voor elkaar beschikbaar zijn. Er wordt ook aan replica’s gedaan waarbij er een RAID-achtige manier wordt toegepast.
+Als er een schijf verloren gaat, zal een andere het overnemen. De enige voorwaarde is bij XOSTOR en CEPH dat er minimaal 3 schijven beschikbaar zijn.

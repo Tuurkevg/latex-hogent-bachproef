@@ -2,7 +2,6 @@
 \chapter{\IfLanguageName{dutch}{Proof of concept}{Proof of concept}}%
 \label{ch:poc}
 
-\section{inleiding}%
 Aan de hand van de shortlist die opgemaakt is komt er voor elke geselecteerde managementplatform een proof of concept. Hierbij wordt er gekeken hoe de nodige functionaliteiten werken en toegepast kunnen worden in het systeem.
 Belangrijk om te weten is dat de proof of concept niet de volledige functionaliteit van het managementplatform zal testen. Het doel is om een goed beeld te krijgen van de mogelijkheden en hoe deze kunnen worden toegepast binnen de infrastructuur van Excentis. 
 We verdelen alle managementplatformen in hun eigen subsecties. In deze subsecties worden dan de vooropgestelde testen op uitgevoerd.
@@ -25,7 +24,7 @@ Hierna worden ze toegevoegd aan een HA-groep. Dit is een groep van virtuele mach
 
 Om HA te testen in combinatie met beide storage systemen zal er een netwerk probleem worden gesimuleerd.
 Alle virtuele machines draaien nu op node 001
-Op de fysieke node poc001 zal de internet kabel worden uitgetrokken. Hierna kijken we hoelang het duurt vooraleer de virtuele machines opnieuw worden opgestart op een andere node, alsookop welke node specifiek. \\
+Op de fysieke node poc001 zal de internet kabel worden uitgetrokken. Hierna wordt er gekeken hoelang het duurt vooraleer de virtuele machines opnieuw moet worden opgestart op een andere node, alsookop welke node specifiek. \\
 
 Figuur \ref{fig:failover-vm} kan er duidelijk gezien worden dat de virtuele machines volledig van cold mode moeten opstarten. Dit is een andere situatie dan wanneer er een migratie gedaan wordt.
 Dan wordt live de virtuele machine van de ene node naar de andere gemigreerd zonder echte downtime.
@@ -46,7 +45,7 @@ Merk op dat zowel de virtuele machine met een SAN als de virtuele machine met ee
 \subsection{Virtuele machines migraties in Proxmox VE}
 In het het werkveld komt het geregeld voor dat een node een gepland onderhoud heeft. Dit kan zijn dat er een update moet worden uitgevoerd of dat er hardware moet worden vervangen.
 Bij deze is het gewenst om te weten of er een mogelijkheid is om de virtuele machines te migreren naar een andere node zonder dat er downtime/minimale downtime is.
-Via de GUI in Proxmox VE kan een virtuele machine eenvoudig worden gemigreerd via de optie Migration rechtsboven, zodra een virtuele machine is geselecteerd, zie figuur \ref{fig:migratie-vm}.
+Via de GUI in Proxmox VE kan een virtuele machine eenvoudig worden gemigreerd via de optie Migration rechtsboven, zodra een virtuele machine is geselecteerd, zie Figuur \ref{fig:migratie-vm}.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.85\textwidth]{../poc/vm-migratie-prox.png}
@@ -58,31 +57,35 @@ Hieruit kan er bekeken worden dat de downtime bij migratie zo goed als minimaal 
 
 \subsection{Hot swapping fysieke disks in Proxmox VE}
 Proxmox VE biedt ook hot swapping aan van de fysieke disks. 
-Voor deze test is er een fysieke disk voor node poc002 toegevoegd, zie figuur \ref{fig:hotdisk-swap}.
+Voor deze test is er een fysieke disk voor node poc002 toegevoegd, zie Figuur \ref{fig:hotdisk-swap}.
 \begin{figure}[H]
   \centering
-  \includegraphics[width=1.2\textwidth]{../poc/hot-disk-prox.png}
-  \caption{hot disk swap in Proxmox VE}
+  \hspace*{-1cm} % schuift de hele afbeelding 1cm naar links
+  \includegraphics[width=1.1\textwidth, trim=0cm 0cm 15cm 0cm, clip]{../poc/hot-disk-prox.png}
+  \caption{Hot disk swap in Proxmox VE met huidige disk}
   \label{fig:hotdisk-swap}
 \end{figure}
+
 Deze noemt sdb. Eenmaal dat deze disk is toegevoegd zou de disk moeten kunnen verwijderd worden en vervangen worden door een andere zonder dat de node poc002 offline moet worden gehaald.
 Dit wordt live getest tijden het draaien. Op deze disk draait momenteel niks. Dit is belangrijk aangezien we het vervangen van een disk simuleren. De data zou normaal op voorhand moeten verwijderd zijn van de disk.
 
-We voegen de nieuwe disk toe in de plaats van de andere en merken direct na 15 seconden dit op, zie figuur \ref{fig:hotdiskvervangen-swap}.
+We voegen de nieuwe disk toe in de plaats van de andere en merken direct na 15 seconden dit op, zie Figuur \ref{fig:hotdiskvervangen-swap}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=1.2\textwidth]{../poc/hot-disktwee-prox.png}
-  \caption{hot disk swap in Proxmox VE}
+  \hspace*{-1cm}
+  \includegraphics[width=1.1\textwidth, trim=0cm 0cm 10cm 0cm, clip]{../poc/hot-disktwee-prox.png}
+  \caption{Hot disk swap in Proxmox VE met nieuwe disk}
   \label{fig:hotdiskvervangen-swap}
 \end{figure}
 
-We zien bij figuur` \ref{fig:hotdiskvervangen-swap} dit duidelijk een andere disk is met nu een grote van 250 GB. Hiervoor was dat 500 GB.
+
+We zien bij Figuur \ref{fig:hotdiskvervangen-swap} dit duidelijk een andere disk is met nu een grote van 250 GB. Hiervoor was dat 500 GB.
 % Voor deze virtual managementplatform wordt er Proxmox VE 8.4 gebruikt. Dit is de laatste versie van Proxmox VE die op dit moment beschikbaar is.
 % \subsection{cluster opstelling in Proxmox VE}
 % Voor proxmox VE is er gekozen om te werken met 3 fysieke node's. Zoals beschreven op de officiële documentatiepagina van Proxmox ondersteunt het platform high availability clustering maar moeten er minimaal 3 nodes in de cluster draaien ~\autocite{proxmoxHA}.
 % Hierbij spreken we over minimaal 50\% van de nodes die moeten draaien om de cluster operationeel te houden. Dit is ook de reden waarom er voor 3 nodes is gekozen.
-% Bij 2 nodes zou er bij een node failure geen quorum zijn en zou de cluster niet meer operationeel zijn. Dit wil zeggen dat er geen 50\% meerderheid is van de cluster die online is. Enkel bij 3 nodes kan er 1 node uitvallen en alsnog meer dan 50 procent online hebben. In zo een gavel spreken we van een quorum.
-% In de figuur \ref{fig:cluster-proxmox} wordt de opstelling getoond. Elke node heeft zijn unieke naam in de cluster, vaak is dat de hostname zelf.
+% Bij 2 nodes zou er bij een node failure geen quorum zijn en zou de cluster niet meer operationeel zijn. Dit wil zeggen dat er geen 50\% meerderheid is van de cluster die online is. Enkel bij 3 nodes kan er 1 node uitvallen en alsnog meer dan 50 procent online hebben. In zo een geval spreken we van een quorum.
+% In de Figuur \ref{fig:cluster-proxmox} wordt de opstelling getoond. Elke node heeft zijn unieke naam in de cluster, vaak is dat de hostname zelf.
 % \begin{figure}[H]
 %   \centering
 %   \includegraphics[width=0.85\textwidth]{../poc/cluster-info-prox.png}
@@ -93,7 +96,7 @@ We zien bij figuur` \ref{fig:hotdiskvervangen-swap} dit duidelijk een andere dis
 % Proxmox VE ondersteunt verschillende soorten storage. In de proof of concept is er gekozen om te werken met een CEPH storage als distributed storage. Dit is een open-source software-defined storage oplossing die kan worden gebruikt in combinatie met Proxmox VE.
 % Om deze te configureren moeten er minimaal 3 schijven/partities zijn. Voor deze POC is er besloten om op elke fysieke node een fysieke schijf toe te kennen aan de CEPH storage. Dit zijn 3 willekeurige harde schijven.
 % Via de GUI kan vanaf elke node worden doorgeklikt naar Ceph. Daar moet worden aangeduid welke schijf gebruikt zal worden voor de Ceph-storage. Dit kan ook via de command line.
-% Nadat de schijven op elke node zijn toegevoegd, kan via het OSD-menu in de Proxmox-GUI een overzicht worden bekeken, zoals te zien is in figuur \ref{fig:osd-ceph-proxmox}.
+% Nadat de schijven op elke node zijn toegevoegd, kan via het OSD-menu in de Proxmox-GUI een overzicht worden bekeken, zoals te zien is in Figuur \ref{fig:osd-ceph-proxmox}.
 % \begin{figure}[H]
 %   \centering
 %   \includegraphics[width=1.2\textwidth]{../poc/ceph-osd-prox.png}
@@ -138,7 +141,7 @@ We zien bij figuur` \ref{fig:hotdiskvervangen-swap} dit duidelijk een andere dis
 
 % Hierna kan er een HA test uitgevoerd worden. Dit wordt later besproken.
 % Tijdens het werken met Proxmox VE valt er op dat Proxmox VE automatisch een direct attach storage mount aanmaakt voor te gebruiken. Deze wordt gekoppeld als een directory met als naam local.
-% Dit toont aan dat Proxmox VE standaard een integratie biedt met DAS. In deze situatie draait het direct op de schijf waar de Proxmox VE zelf op draait zoals te zien is in de figuur \ref{fig:das-prox}.
+% Dit toont aan dat Proxmox VE standaard een integratie biedt met DAS. In deze situatie draait het direct op de schijf waar de Proxmox VE zelf op draait zoals te zien is in de Figuur \ref{fig:das-prox}.
 % \begin{figure}[H]
 %   \centering
 %   \includegraphics[width=1.1\textwidth]{../poc/das-proxmox.png}
@@ -149,7 +152,7 @@ We zien bij figuur` \ref{fig:hotdiskvervangen-swap} dit duidelijk een andere dis
 
 % Nu we weten dat CEPH goed werkt moet er gekeken worden naar de SAN configuratie met ISCSI.
 % Er is een bestaande TrueNAS ~\autocite{truenas} server die al draait in de omgeving. Hierop draait een block storage waar iSCI is geconfigureerd.
-% Onder de tab storage bij Datacenter kan er zeer eenvoudig een iSCSI target worden aangemaakt bij Add, zie figuur \ref{fig:iscsi-SAN}.
+% Onder de tab storage bij Datacenter kan er zeer eenvoudig een iSCSI target worden aangemaakt bij Add, zie Figuur \ref{fig:iscsi-SAN}.
 % Via de opties in het menu moet er een correct ID als naam worden gegeven en via portal het correct IP adres van de TrueNAS service.
 % Omdat er gewerkt wordt met een SAN principe staat het default bij de optie node in de configuratie op all nodes. Dit is ook de bedoeling aangezien we met een HA cluster werken.
 % De configuratie van iSCI op TrueNAS is buiten de scope van deze bachelorproef.
@@ -172,7 +175,7 @@ We zien bij figuur` \ref{fig:hotdiskvervangen-swap} dit duidelijk een andere dis
 % \subsection{High Availability in Proxmox VE}
 
 % Eenmaal de storage in orde is voor de virtuele machines kan er een HA configuratie worden aangemaakt. 
-% Onder datacenter HA kan een groep worden aangemaakt. Hierin worden alle drie de fysieke nodes opgenomen die deel uitmaken van de cluster. Vervolgens wordt aan de groep een logische naam toegekend, in dit geval ha-pool zoals in figuur \ref{fig:ha-group}.
+% Onder datacenter HA kan een groep worden aangemaakt. Hierin worden alle drie de fysieke nodes opgenomen die deel uitmaken van de cluster. Vervolgens wordt aan de groep een logische naam toegekend, in dit geval ha-pool zoals in Figuur \ref{fig:ha-group}.
 % \begin{figure}[H]
 %   \centering
 %   \includegraphics[width=0.85\textwidth]{../poc/ha-group.png}
@@ -213,7 +216,7 @@ We zien bij figuur` \ref{fig:hotdiskvervangen-swap} dit duidelijk een andere dis
 % \subsection{Virtuele machines migraties in Proxmox VE}
 % In het het werkveld komt het geregeld voor dat een node een gepland onderhoud heeft. Dit kan zijn dat er een update moet worden uitgevoerd of dat er hardware moet worden vervangen.
 % Bij deze is het gewenst om te weten of er een mogelijkheid is om de virtuele machines te migreren naar een andere node zonder dat er downtime/minimale downtime is.
-% Via de GUI in Proxmox VE kan een virtuele machine eenvoudig worden gemigreerd via de optie Migration rechtsboven, zodra een virtuele machine is geselecteerd, zie figuur \ref{fig:migratie-vm}.
+% Via de GUI in Proxmox VE kan een virtuele machine eenvoudig worden gemigreerd via de optie Migration rechtsboven, zodra een virtuele machine is geselecteerd, zie Figuur \ref{fig:migratie-vm}.
 % \begin{figure}[H]
 %   \centering
 %   \includegraphics[width=0.85\textwidth]{../poc/vm-migratie-prox.png}
@@ -226,7 +229,7 @@ We zien bij figuur` \ref{fig:hotdiskvervangen-swap} dit duidelijk een andere dis
 
 % \subsection{Hot swapping fysieke disks in Proxmox VE}
 % Proxmox VE biedt ook hot swapping aan van de fysieke disks. 
-% Voor deze test is er een fysieke disk voor node poc002 toegevoegd, zie figuur \ref{fig:hotdisk-swap}.
+% Voor deze test is er een fysieke disk voor node poc002 toegevoegd, zie Figuur \ref{fig:hotdisk-swap}.
 % \begin{figure}[H]
 %   \centering
 %   \includegraphics[width=1.2\textwidth]{../poc/hot-disk-prox.png}
@@ -236,7 +239,7 @@ We zien bij figuur` \ref{fig:hotdiskvervangen-swap} dit duidelijk een andere dis
 % Deze noemt sdb. Eenmaal dat deze disk is toegevoegd zou de disk moeten kunnen verwijderd worden en vervangen worden door een andere zonder dat de node poc002 offline moet worden gehaald.
 % Dit wordt live getest tijden het draaien. Op deze disk draait momenteel niks. Dit is belangrijk aangezien we het vervangen van een disk simuleren. De data zou normaal op voorhand moeten verwijderd zijn van de disk.
 
-% We voegen de nieuwe disk toe in de plaats van de andere en merken direct na 15 seconden dit op, zie figuur \ref{fig:hotdiskvervangen-swap}.
+% We voegen de nieuwe disk toe in de plaats van de andere en merken direct na 15 seconden dit op, zie Figuur \ref{fig:hotdiskvervangen-swap}.
 % \begin{figure}[H]
 %   \centering
 %   \includegraphics[width=1.2\textwidth]{../poc/hot-disktwee-prox.png}
@@ -244,4 +247,76 @@ We zien bij figuur` \ref{fig:hotdiskvervangen-swap} dit duidelijk een andere dis
 %   \label{fig:hotdiskvervangen-swap}
 % \end{figure}
 
-% We zien bij figuur` \ref{fig:hotdiskvervangen-swap} dit duidelijk een andere disk is met nu een grote van 250 GB. Hiervoor was dat 500 GB.
+% We zien bij Figuur \ref{fig:hotdiskvervangen-swap} dit duidelijk een andere disk is met nu een grote van 250 GB. Hiervoor was dat 500 GB.
+
+
+\section{Xen Orchestra}%
+Deze software wordt gedraaid in combinatie met de hypervisor XCP-ng versie 8.3. Dit is de laatste versie van XCP-ng die op dit moment beschikbaar is en als stabiel kan worden beschouwd.
+Xen Orchestra zal draaien in een virtuele machine op een van de fysieke nodes van de cluster. Xen Orchestra zelf draait op versie 5.106.
+
+\subsection{Storage in Xen Orchestra}%
+Zoals eerder vermeld moeten er 2 soorten storage systemen worden getest. Deze moeten het mogelijk maken om virtuele machines te kunnen draaien in een High Availability methode.
+Xen Orchestra biedt zowel een SAN integratie als ook een distribuated storage integratie aan.
+De volgende 2 storage systemen worden specifiek getest.
+
+\begin{itemize}
+    \item XOSTOR storage~\autocite{vates_xostor}, is een implementatie van een distributed storage systeem dat volledig draait over de cluster heen als virtuele SAN (VSAN).
+    \item SAN iSCSI (met TrueNAS ~\autocite{truenas})
+\end{itemize}
+In sectie \nameref{sec:sec:storage_orch} wordt er dieper ingegaan op de configuratie van de storage in Xen Orchestra.
+XOSTOR wordt toegepast op alle 3 de fysieke nodes. Elk hebben hun eigen schijf die gebruikt wordt door XOSTOR. Deze schijven nemen elkaars taken over bij een failover of het maken van redunante data.
+iSCI bij Xen Orchestra biedt op een makelijke manier de mogelijkheid om een SAN te configureren.
+Elke storage optie krijgt een virtiuele machine toegwezen om de storage te testen en te bekijken of deze correct werkt.
+Uiteindelijk worden beide virtuele machines probleemloos aangemaakt met hun eigen storage toepassing. Zie \ref{fig:virtuelemachines-orch} voor meer details.
+
+\subsection{High Availability in Xen Orchestra}%
+Momenteel zijn er 2 virtuele machines aangemaakt in Xen Orchestra. Deze zijn respectievelijk verbonden met de XOSTOR en de iSCSI storage.
+Nu is er nog geen sprake van een High Availability princiepe. Hiervoor moet de cluster extra configuratie krijgen. om bij een eventueele node failure de virtuele machines opnieuw te kunnen opstarten op een andere node.
+Zie \nameref{sec:ha-orch} voor de specifieke configuratie van de HA in Xen Orchestra.
+
+Om een realistische test te doen waarbij het HA princiepe kan worden gestest zal er een node failure worden gesimuleerd.
+Dit wordt gedaan door een netwerk kabel fysiek uit te trekken uit de node waar beide virtuele machines op draaien.
+Het duurt tot maxiaal 70 seconden vooraleer Xen Orchestra ingrijpt en ziet dat er een node offline is. Hierna start Xen Orchestra onmiddelijk met het starten van de virtuele machines op een andere node die healthy is en voldoende resources over heeft.
+Figuur \ref{fig:failure-orch} toont duidelijk dat Xen Orchestra de virtuele machines opnieuw opstart op een andere node. Dit is een cold start aangezien de virtuele machines volledig opnieuw moeten worden opgestart.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1.1\textwidth, trim=0cm 0cm 5cm 0cm, clip]{../poc/failure-orch.png}
+  \caption{failover node virtuale machines herstellen in HA in Xen Orchestra}
+  \label{fig:failure-orch}    
+\end{figure}
+Tijdens de overgang valt de verbinding met de virtuele machine volledig weg. Dit is te wijten aan het feit dat de virtuele machines volledig opnieuw moeten worden opgestart zoals eerder vermeld.
+
+\subsection{Virtuele machines migraties in Xen Orchestra}%
+Nu HA getest is met failover situaties moet er ook geweten zijn hoe HA kan worden toegepast bij een gepland onderhoud. Dit wil zeggen dat we 0 down time willen hebben maar ter zelfde tiijd wel kunnen werken aan een node.
+In deze proof of concept gaan we dit specifieken testen door de 2 virtuele machines te laten draaien op een node die we bewust offline willen halen.
+Hierna migreren we beide virtuele machines naar een andere willekeurige node. Tijdens de migratie willen kijken we of de virtuele machine afwijkend gedrag heeft tijdens het migreren. 
+Beide virtuele machines draaien nog steeds op node poc002. Er wordt ter zelfde tijd een migratie commando uitgevoerd.
+We geven de informatie in die Xen orchestra nodig heeft om de migratie te kunnen uitvoeren. Hierbij geven we dezelfde storage optie mee dat de virtuele machine nu heeft. Enkel de target host veranderd. (Zie Figuur \ref{fig:migratie-vm-orch}).
+\begin{figure}[H]
+  \centering
+  \hspace*{-1cm}  
+  \includegraphics[width=0.9\textwidth]{../poc/migratie-vm-orch.png}
+  \caption{migratie virtuele machine in Xen Orchestra}
+  \label{fig:migratie-vm-orch}
+\end{figure}
+In Figuur \ref{fig:migratie-proces-orch} is te zien dat de migratie wordt uitgevoerd. De virtuele machine blijft volledig bereikbaar tijdens de migratie. Er wordt enkel een kleine hapering van 5 seconden opgemerkt bij de SAN storage met iSCI.
+In Figuur \ref{fig:migratie-proces-orch} is ook te zien dat XOSTOR storage veel sneller migreert dan SAN met iSCSI. Wellicht is dit te wijten aan het feit dat het netwerk de bottleneck is bij iSCSI.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1.1\textwidth]{../poc/migratie-proces-orch.png}
+  \caption{migratie proces in Xen Orchestra}
+  \label{fig:migratie-proces-orch}  
+\end{figure}
+
+\subsection{Hot swapping fysieke disks in Xen Orchestra}%
+Bij dit gedeelte van de proof of concept is het belangrijk dat een kappote schijf kan worden vervangen zonder dat de node offline moet worden gehaald.
+In dit geval gaan we vanuit dat alle data al van de disk gehaald is en klaar is voor vervaning.
+We nemen de disk uit de fysieke node en vervangen deze met een andere en kijken of we we de disk kunnen terug vinden in Xen Orchestra.
+Aangezien Xen Orchestra zelf geen disk management heeft moeten we met SSH connecteren op de specifieke node waar de disk is vervangen. Daar kunnen we de reguliere manier gebruiken om een disk te mounten en te partitioneren.
+Hierna kan de disk worden toegevoegd aan Xen Orchestra als een storage optie. In de GUI moet dan het correcte pad worden toegevoegd (Zie Figuur~\ref{fig:storage-path-orch} ). Merk op dat dit een extra stap is dat moet gebeuren.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{../poc/storage-path-orch.png}
+  \caption{Storage pad configuratie voorbeeld in Xen Orchestra}
+  \label{fig:storage-path-orch}  
+\end{figure}

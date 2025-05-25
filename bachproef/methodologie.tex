@@ -49,7 +49,7 @@ Als aan deze criteria is voldaan voor een specifiek managementplatform, wordt di
     \item \textbf{Microsoft SCVMM (Microsoft Hyper-V)}~\autocite{Eaton2019} is verouderd (deprecated) en wordt momenteel niet meer actief ondersteund door Microsoft.
     \item \textbf{Proxmox VE}~\autocite{Proxmox} is een open-source managementplatform dat geen betalende licentie vereist voor het gebruik van de software. Voor commercieel gebruik is er wel betaalde ondersteuning beschikbaar. Dit platform kan draaien op de bestaande DELL-servers die beschikbaar zijn voor de proof of concept.   
     \item \textbf{OpenStack}~\autocite{openstack2024} is eveneens een open-source managementplatform zonder verplichte licentiekosten. Er is wel commerciële ondersteuning beschikbaar via diverse aanbieders. OpenStack is primair een cloud computing-platform en kan ook worden ingezet in hybride cloudomgevingen. Hierdoor is OpenStack minder geschikt als oplossing voor het probleem dat in dit onderzoek wordt onderzocht.
-    \item \textbf{Xen Orchestra}~\autocite{el2021server} is een open-source virtualisatiebeheerplatform zonder verplichte licentiekosten. Er is commerciële ondersteuning beschikbaar. Ook dit platform is compatibel met de DELL-servers in de proof of concept.
+    \item \textbf{Xen Orchestra}~\autocite{el2021server} is een open-source virtualisatiebeheerplatform zonder verplichte licentiekosten. Er is commerciële ondersteuning beschikbaar. Ook dit platform is compatibel met de DELL-servers in de proof of concept. Aangezien Citrix Hypervisor vooral werkt met XenCenter, is het waardevoller om XCP-ng te gebruiken als hypervisor in combinatie met Xen Orchestra. 
     \item \textbf{XenCenter}~\autocite{xencenter2024} is closed-source, maar er is een gratis proefversie beschikbaar. Daarnaast wordt een enterprise-licentie aangeboden voor commercieel gebruik. Dit platform kan eveneens draaien op de beschikbare DELL-servers in de proof of concept.
 \end{itemize}
 
@@ -59,11 +59,9 @@ Als aan deze criteria is voldaan voor een specifiek managementplatform, wordt di
     \begin{tabular}{|l|l|l|l|}
     \hline
     \textbf{Platform} & \textbf{Type} & \textbf{Hypervisor} \\ \hline
-    \hline
     Proxmox VE        & Open-source   & KVM,LXC             \\ \hline
     Xen Orchestra  & Open-source & XCP-ng,Citrix Hypervisor(XenServer) \\ \hline
     Xen Center  & Closed-source & Citrix Hypervisor(XenServer) \\ \hline
-    \hline
     \end{tabular}
     \caption{Vergelijking van virtualisatieplatforms}
 \end{table}
