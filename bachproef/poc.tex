@@ -13,12 +13,12 @@ Voor deze virtual managementplatform wordt er Proxmox VE 8.4 gebruikt. Dit is de
     \item CEPH storage
     \item SAN iSCSI (met TrueNAS ~\autocite{truenas})
 \end{itemize}
-In sectie \autoref{sec:storage_proxmox} wordt er dieper ingegaan op de configuratie van de storage in Proxmox VE.
+In sectie \nameref{sec:storage_proxmox} wordt er dieper ingegaan op de configuratie van de storage in Proxmox VE.
 CEPH wordt toegepast op alle 3 de fysieke nodes. Elk hebben hun eigen schijf die gebruikt wordt door CEPH. Deze schijven nemen elkaars taken over bij een failover of het maken van redunante data.
 iSCI bij Proxmox VE biedt op een makelijke manier de mogelijkheid om een SAN te configureren. 
-Beiden werden probleemloos geconfigureerd en getest bij een virtuele machine. Zie \ref{sec:storage_proxmox} voor meer details.
+Beiden werden probleemloos geconfigureerd en getest bij een virtuele machine. Zie \nameref{sec:storage_proxmox} voor meer details.
 \subsection{High Availability in Proxmox VE}
-In \autoref{sec:ha-proxmox} wordt de configuratie voor HA in detail uitgelgd.
+In \nameref{sec:ha-proxmox} wordt de configuratie voor HA in detail uitgelgd.
 De test zellf wordt uitgevoerd bij 2 virtuele machines die elk gekoppeld zijn aan hun eigen storage systeem (iscsi of CEPH).
 Hierna worden ze toegevoegd aan een HA-groep. Dit is een groep van virtuele machines die samen prioriteit hebben in de cluster.
 
@@ -37,7 +37,7 @@ Het systeem in Proxmox VE is nu zo ingesteld dat bij een echte failover de schad
 \end{figure}
 
 Van zodra de connectie van poc001 verboken is met de nadere nodes duurt het ongeveer 30-60 seconden vooraleer de virtuele machines opnieuw worden opgestart op een andere node. Dit is ook de tijd die nodig is om de heartbeat van de cluster te verliezen.
-Hierbij kunenn we vanuit gaan dat de default healthy check van de cluster en zijn nodes ook rond deze tijdsduur ligt. Beide virtuele machines worden opnieuw opgestart op de node foissarak en poc002. \\
+Hierbij kan ervan uitgegaan worden dat de standaard healthy check van de cluster en zijn nodes ook rond deze tijdsduur ligt. Beide virtuele machines worden opnieuw opgestart op de node foissarak en poc002. \\
 Aangezien beide virtuele machines dezelfde HA group hebben, krijgen ze ook dezelfde prioriteit.
 
 Merk op dat zowel de virtuele machine met een SAN als de virtuele machine met een distributed storage opnieuw worden opgestart op de node foissarak. Dit toont aan dat Proxmox VE goed werkt met beide storage systemen, zeker met failover situaties.
@@ -67,7 +67,7 @@ Voor deze test is er een fysieke disk voor node poc002 toegevoegd, zie Figuur \r
 \end{figure}
 
 Deze noemt sdb. Eenmaal dat deze disk is toegevoegd zou de disk moeten kunnen verwijderd worden en vervangen worden door een andere zonder dat de node poc002 offline moet worden gehaald.
-Dit wordt live getest tijden het draaien. Op deze disk draait momenteel niks. Dit is belangrijk aangezien we het vervangen van een disk simuleren. De data zou normaal op voorhand moeten verwijderd zijn van de disk.
+Dit wordt live getest tijden het draaien. Op deze disk draait momenteel niks. Hierbij wordt ervan uitgegaan dat het vervangen van een disk wordt gesimuleerd.. De data zou normaal op voorhand moeten verwijderd zijn van de disk.
 
 We voegen de nieuwe disk toe in de plaats van de andere en merken direct na 15 seconden dit op, zie Figuur \ref{fig:hotdiskvervangen-swap}
 \begin{figure}[H]
@@ -251,72 +251,79 @@ We zien bij Figuur \ref{fig:hotdiskvervangen-swap} dit duidelijk een andere disk
 
 
 \section{Xen Orchestra}%
-Deze software wordt gedraaid in combinatie met de hypervisor XCP-ng versie 8.3. Dit is de laatste versie van XCP-ng die op dit moment beschikbaar is en als stabiel kan worden beschouwd.
-Xen Orchestra zal draaien in een virtuele machine op een van de fysieke nodes van de cluster. Xen Orchestra zelf draait op versie 5.106.
+Deze software wordt gedraaid in combinatie met de hypervisor XCP-ng versie 8.3. Dit is de laatste versie van XCP-ng die op dit moment beschikbaar is en als stabiel kan worden beschouwd.  
+Xen Orchestra zal draaien in een virtuele machine op een van de fysieke nodes van de cluster. Xen Orchestra zelf draait op versie 5.106.  
+De keuze is gemaakt om de enterprise trial-licentie te activeren, aangezien deze meer features ter beschikking heeft dan de communityversie. Meer specifiek biedt de enterpriseversie ook een ingebouwde ondersteuning voor een distributed storage-systeem, XOSTOR.
 
 \subsection{Storage in Xen Orchestra}%
-Zoals eerder vermeld moeten er 2 soorten storage systemen worden getest. Deze moeten het mogelijk maken om virtuele machines te kunnen draaien in een High Availability methode.
-Xen Orchestra biedt zowel een SAN integratie als ook een distribuated storage integratie aan.
-De volgende 2 storage systemen worden specifiek getest.
+Zoals eerder vermeld moeten er twee soorten storagesystemen worden getest. Deze moeten het mogelijk maken om virtuele machines te kunnen draaien in een High Availability-methode.  
+Xen Orchestra biedt zowel SAN-integratie als ook een distributed storage-integratie aan.  
+De volgende twee storagesystemen worden specifiek getest.
 
 \begin{itemize}
-    \item XOSTOR storage~\autocite{vates_xostor}, is een implementatie van een distributed storage systeem dat volledig draait over de cluster heen als virtuele SAN (VSAN).
-    \item SAN iSCSI (met TrueNAS ~\autocite{truenas})
+    \item XOSTOR storage~\autocite{vates_xostor}, is een implementatie van een distributed storage-systeem dat volledig draait over de cluster heen als virtuele SAN (VSAN).
+    \item SAN iSCSI (met TrueNAS~\autocite{truenas})
 \end{itemize}
-In sectie \nameref{sec:sec:storage_orch} wordt er dieper ingegaan op de configuratie van de storage in Xen Orchestra.
-XOSTOR wordt toegepast op alle 3 de fysieke nodes. Elk hebben hun eigen schijf die gebruikt wordt door XOSTOR. Deze schijven nemen elkaars taken over bij een failover of het maken van redunante data.
-iSCI bij Xen Orchestra biedt op een makelijke manier de mogelijkheid om een SAN te configureren.
-Elke storage optie krijgt een virtiuele machine toegwezen om de storage te testen en te bekijken of deze correct werkt.
-Uiteindelijk worden beide virtuele machines probleemloos aangemaakt met hun eigen storage toepassing. Zie \ref{fig:virtuelemachines-orch} voor meer details.
+In sectie \nameref{sec:storage_orch} wordt er dieper ingegaan op de configuratie van de storage in Xen Orchestra.  
+XOSTOR wordt toegepast op alle drie de fysieke nodes. Elk heeft zijn eigen schijf die gebruikt wordt door XOSTOR. Deze schijven nemen elkaars taken over bij een failover of het maken van redundante data.  
+iSCSI bij Xen Orchestra biedt op een makkelijke manier de mogelijkheid om een SAN te configureren.  
+Elke storageoptie krijgt een virtuele machine toegewezen om de storage te testen en te bekijken of deze correct werkt.  
+Uiteindelijk worden beide virtuele machines probleemloos aangemaakt met hun eigen storagetoepassing. Zie \ref{fig:virtuelemachines-orch} voor meer details.
 
 \subsection{High Availability in Xen Orchestra}%
-Momenteel zijn er 2 virtuele machines aangemaakt in Xen Orchestra. Deze zijn respectievelijk verbonden met de XOSTOR en de iSCSI storage.
-Nu is er nog geen sprake van een High Availability princiepe. Hiervoor moet de cluster extra configuratie krijgen. om bij een eventueele node failure de virtuele machines opnieuw te kunnen opstarten op een andere node.
+Momenteel zijn er twee virtuele machines aangemaakt in Xen Orchestra. Deze zijn respectievelijk verbonden met de XOSTOR- en de iSCSI-storage.  
+Nu is er nog geen sprake van een High Availability-principe. Hiervoor moet de cluster extra configuratie krijgen om bij een eventuele node failure de virtuele machines opnieuw te kunnen opstarten op een andere node.  
 Zie \nameref{sec:ha-orch} voor de specifieke configuratie van de HA in Xen Orchestra.
 
-Om een realistische test te doen waarbij het HA princiepe kan worden gestest zal er een node failure worden gesimuleerd.
-Dit wordt gedaan door een netwerk kabel fysiek uit te trekken uit de node waar beide virtuele machines op draaien.
-Het duurt tot maxiaal 70 seconden vooraleer Xen Orchestra ingrijpt en ziet dat er een node offline is. Hierna start Xen Orchestra onmiddelijk met het starten van de virtuele machines op een andere node die healthy is en voldoende resources over heeft.
+Om een realistische test te doen waarbij het HA-principe kan worden getest, zal er een node failure worden gesimuleerd.  
+Dit wordt gedaan door een netwerkkabel fysiek uit te trekken uit de node waar beide virtuele machines op draaien.  
+Het duurt tot maximaal 70 seconden vooraleer Xen Orchestra ingrijpt en ziet dat er een node offline is. Hierna start Xen Orchestra onmiddellijk met het starten van de virtuele machines op een andere node die healthy is en voldoende resources over heeft.  
 Figuur \ref{fig:failure-orch} toont duidelijk dat Xen Orchestra de virtuele machines opnieuw opstart op een andere node. Dit is een cold start aangezien de virtuele machines volledig opnieuw moeten worden opgestart.
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=1.1\textwidth, trim=0cm 0cm 5cm 0cm, clip]{../poc/failure-orch.png}
-  \caption{failover node virtuale machines herstellen in HA in Xen Orchestra}
+  \caption{Failover: node, virtuele machines herstellen in HA in Xen Orchestra}
   \label{fig:failure-orch}    
 \end{figure}
-Tijdens de overgang valt de verbinding met de virtuele machine volledig weg. Dit is te wijten aan het feit dat de virtuele machines volledig opnieuw moeten worden opgestart zoals eerder vermeld.
+Tijdens de overgang valt de verbinding met de virtuele machine volledig weg. Dit is te wijten aan het feit dat de virtuele machines volledig opnieuw moeten worden opgestart, zoals eerder vermeld.
 
 \subsection{Virtuele machines migraties in Xen Orchestra}%
-Nu HA getest is met failover situaties moet er ook geweten zijn hoe HA kan worden toegepast bij een gepland onderhoud. Dit wil zeggen dat we 0 down time willen hebben maar ter zelfde tiijd wel kunnen werken aan een node.
-In deze proof of concept gaan we dit specifieken testen door de 2 virtuele machines te laten draaien op een node die we bewust offline willen halen.
-Hierna migreren we beide virtuele machines naar een andere willekeurige node. Tijdens de migratie willen kijken we of de virtuele machine afwijkend gedrag heeft tijdens het migreren. 
-Beide virtuele machines draaien nog steeds op node poc002. Er wordt ter zelfde tijd een migratie commando uitgevoerd.
-We geven de informatie in die Xen orchestra nodig heeft om de migratie te kunnen uitvoeren. Hierbij geven we dezelfde storage optie mee dat de virtuele machine nu heeft. Enkel de target host veranderd. (Zie Figuur \ref{fig:migratie-vm-orch}).
+Nu HA getest is met failover-situaties, moet ook geweten worden hoe HA kan worden toegepast bij een gepland onderhoud. Dit wil zeggen dat er 0 downtime gewenst is, maar dat er tegelijkertijd wel aan een node gewerkt kan worden.
+In deze proof of concept wordt dit specifiek getest door de twee virtuele machines te laten draaien op een node die bewust offline wordt gehaald.
+Hierna worden beide virtuele machines naar een andere willekeurige node gemigreerd. Tijdens de migratie wordt gekeken of de virtuele machine afwijkend gedrag vertoont tijdens het migreren.
+Beide virtuele machines draaien nog steeds op node poc002. Tegelijkertijd wordt een migratiecommando uitgevoerd.
+De informatie die Xen Orchestra nodig heeft om de migratie uit te kunnen voeren, wordt ingegeven. Hierbij wordt dezelfde storageoptie meegegeven die de virtuele machine nu heeft. Enkel de target host verandert. (Zie Figuur \ref{fig:migratie-vm-orch}).
+
 \begin{figure}[H]
   \centering
   \hspace*{-1cm}  
   \includegraphics[width=0.9\textwidth]{../poc/migratie-vm-orch.png}
-  \caption{migratie virtuele machine in Xen Orchestra}
+  \caption{Migratie virtuele machine in Xen Orchestra}
   \label{fig:migratie-vm-orch}
 \end{figure}
-In Figuur \ref{fig:migratie-proces-orch} is te zien dat de migratie wordt uitgevoerd. De virtuele machine blijft volledig bereikbaar tijdens de migratie. Er wordt enkel een kleine hapering van 5 seconden opgemerkt bij de SAN storage met iSCI.
-In Figuur \ref{fig:migratie-proces-orch} is ook te zien dat XOSTOR storage veel sneller migreert dan SAN met iSCSI. Wellicht is dit te wijten aan het feit dat het netwerk de bottleneck is bij iSCSI.
+
+In Figuur \ref{fig:migratie-proces-orch} is te zien dat de migratie wordt uitgevoerd. De virtuele machine blijft volledig bereikbaar tijdens de migratie. Er wordt enkel een kleine hapering van 5 seconden opgemerkt bij de SAN-storage met iSCSI.  
+In Figuur \ref{fig:migratie-proces-orch} is ook te zien dat XOSTOR-storage veel sneller migreert dan SAN met iSCSI. Wellicht is dit te wijten aan het feit dat het netwerk de bottleneck is bij iSCSI.
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=1.1\textwidth]{../poc/migratie-proces-orch.png}
-  \caption{migratie proces in Xen Orchestra}
+  \caption{Migratieproces in Xen Orchestra}
   \label{fig:migratie-proces-orch}  
 \end{figure}
 
+
 \subsection{Hot swapping fysieke disks in Xen Orchestra}%
-Bij dit gedeelte van de proof of concept is het belangrijk dat een kappote schijf kan worden vervangen zonder dat de node offline moet worden gehaald.
-In dit geval gaan we vanuit dat alle data al van de disk gehaald is en klaar is voor vervaning.
-We nemen de disk uit de fysieke node en vervangen deze met een andere en kijken of we we de disk kunnen terug vinden in Xen Orchestra.
-Aangezien Xen Orchestra zelf geen disk management heeft moeten we met SSH connecteren op de specifieke node waar de disk is vervangen. Daar kunnen we de reguliere manier gebruiken om een disk te mounten en te partitioneren.
-Hierna kan de disk worden toegevoegd aan Xen Orchestra als een storage optie. In de GUI moet dan het correcte pad worden toegevoegd (Zie Figuur~\ref{fig:storage-path-orch} ). Merk op dat dit een extra stap is dat moet gebeuren.
+Bij dit gedeelte van de proof of concept is het belangrijk dat een kapotte schijf vervangen kan worden zonder dat de node offline gehaald hoeft te worden.
+In dit geval wordt ervan uitgegaan dat alle data al van de disk gehaald is en klaar is voor vervanging.
+De disk wordt uit de fysieke node gehaald en vervangen door een andere, waarna gekeken wordt of de disk teruggevonden kan worden in Xen Orchestra.
+Aangezien Xen Orchestra zelf geen diskmanagement heeft, moet met SSH worden verbonden op de specifieke node waar de disk is vervangen. Daar kan op de reguliere manier een disk worden gemount en gepartitioneerd.
+Hierna kan de disk worden toegevoegd aan Xen Orchestra als een storageoptie. In de GUI moet dan het correcte pad worden toegevoegd (Zie Figuur~\ref{fig:storage-path-orch}). Er wordt opgemerkt dat dit een extra stap is die moet gebeuren.
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{../poc/storage-path-orch.png}
-  \caption{Storage pad configuratie voorbeeld in Xen Orchestra}
+  \caption{Storagepad configuratievoorbeeld in Xen Orchestra}
   \label{fig:storage-path-orch}  
 \end{figure}
