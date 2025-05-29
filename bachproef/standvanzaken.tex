@@ -58,18 +58,18 @@ Excentis gebruikt als managementplatform VMWare vCenter~\autocite{vmware}. Voor 
 \subsection{Open source systemen}\label{subsec:opensource}
 Er zijn vele soorten softwarepakketten op de markt die hypervisors en managementplatformen aanbieden. Bij het bekijken van de verschillende managementplatformen met hun bijbehorende hypervisors kunnen deze worden onderverdeeld in twee groepen: de closed-source en open-source hypervisors. Elke groep heeft zijn voor- en nadelen. Alles hangt steeds af van de noden en vereisten van het bedrijf of instelling.
 Proxmox VE is open source~\autocite{Proxmox}. Dit wil zeggen dat de systemen kosteloos gebruikt kunnen worden. Support bij problemen valt hierbij wel af. Er is wel een mogelijkheid om bij hen een enterprise support services subscription te nemen. Hierbij kan er alsnog beroep worden gedaan op support bij eventuele problemen.
-Open source software is een evidentie maar zorgt voor meer zelfstandig werk bij installatie en rust meer op de community achter de software.
+Open source software is een evidentie maar zorgt vaak voor meer zelfstandig werk bij installatie en rust meer op de community achter de software.
 
 \subsection{Closed source systemen}\label{subsec:clousedsource}
-Andere alternatieven zijn closed-source. Hierbij gaat het onder andere om VMware ESXi/VMware vCenter~\autocite{vmware} en Microsoft Hyper-V~\autocite{Eaton2019}. Deze software systemen zijn niet gratis en vragen een licentie om te mogen gebruiken. Dit is een nadeel ten opzichte van open-source systemen.
-Bij bedrijven waar stabiliteit en betrouwbaarheid hoog in het vaandel staan, zoals in een wetenschappelijke omgeving met supercomputers die veel geld kosten als ze niet draaien, kan het een goede keuze zijn om te kiezen voor closed-source hypervisors~\autocite{voras2012early}. Dit wil niet zeggen dat andere systemen uitgesloten zijn.
-
+Andere alternatieven zijn closed-source. Hierbij gaat het onder andere om VMware ESXi/VMware vCenter~\autocite{vmware} en Microsoft Hyper-V~\autocite{Eaton2019}. Deze softwaresystemen zijn niet gratis en vereisen een licentie om te mogen gebruiken. Dit is een nadeel ten opzichte van open-source systemen.
+Bij bedrijven waar stabiliteit en betrouwbaarheid hoog in het vaandel staan, zoals in wetenschappelijke omgevingen met supercomputers die veel geld kosten als ze niet draaien, kan het een goede keuze zijn om te kiezen voor closed-source hypervisors~\autocite{voras2012early}. Dit betekent echter niet dat andere systemen uitgesloten zijn.
 
 \subsection{Soorten storage systemen}\label{subsec:storage}
-Wanneer het over opslag in de virtualisatiewereld gaat, betreft het ook 'Serial-Attached SCSI' (SAS) en 'Direct-Attached Storage' (DAS). Deze technologieën zorgen ervoor dat er een hoge beschikbaarheid is van de data en dat deze snel kan worden opgevraagd~\autocite{griswold2002storage}. Dit is een belangrijk aspect in de virtualisatiewereld en het is belangrijk voor Excentis dat deze beide technologieën perfect werken en ondersteund worden.
-SAS is een snelle, betrouwbare opslaginterface die servers en high-performance opslagapparaten verbindt~\autocite{aravindan2014performance}. Dit is belangrijk om een consistente opslag te garanderen. DAS is een opslagarchitectuur waarbij opslag direct fysiek is verbonden aan een enkele server, zonder tussenkomst van een netwerk. Deze technologie is goedkoper en eenvoudiger, maar garandeert niet alle voordelen die SAS wel kan bieden~\autocite{griswold2002storage}.
-DAS wordt veel gebruikt in consumententoestellen zoals laptops en desktops. SAS daarentegen wordt hoofdzakelijk toegepast in serversystemen waar data essentieel is en een hoge betrouwbaarheid en performantie vereist is~\autocite{griswold2002storage}.
-In dit onderzoek blijkt dat vrijwel alle managementplatformen ondersteuning bieden voor zowel DAS als SAS. Excentis wenst na te gaan hoe deze ondersteuning efficiënt kan worden gemigreerd naar een nieuw managementplatform.
+Wanneer het over opslag in de virtualisatiewereld gaat, betreft het ook 'Serial-Attached SCSI' (SAS) en 'Direct-Attached Storage' (DAS). Deze technologieën zorgen ervoor dat er een hoge beschikbaarheid is van de data en dat deze snel kan worden opgevraagd~\autocite{griswold2002storage}. Dit is een belangrijk aspect in de virtualisatiewereld, en het is essentieel voor Excentis dat beide technologieën perfect functioneren en goed ondersteund worden.
+SAS is een snelle, betrouwbare opslaginterface die servers en high-performance opslagapparaten verbindt~\autocite{aravindan2014performance}. Dit is van groot belang om consistente opslag te garanderen.
+DAS is een opslagarchitectuur waarbij opslag direct fysiek is verbonden aan één enkele server, zonder tussenkomst van een netwerk. Deze technologie is goedkoper en eenvoudiger, maar biedt niet alle voordelen die SAS wel kan bieden~\autocite{griswold2002storage}.
+DAS wordt veel gebruikt in consumententoestellen zoals laptops en desktops, terwijl SAS hoofdzakelijk wordt toegepast in serversystemen, waar data essentieel is en een hoge betrouwbaarheid en performantie vereist worden~\autocite{griswold2002storage}.
+In dit onderzoek blijkt dat vrijwel alle managementplatformen ondersteuning bieden voor zowel DAS als SAS. Excentis wil onderzoeken hoe deze ondersteuning efficiënt kan worden gemigreerd naar een nieuw managementplatform.
 
 Storage Area Network (SAN) \textcite{ibm2025san} is een technologie die gebruikt wordt om storage te delen over het netwerk.
 Dit is puur een manier om storage op te zetten. \\
@@ -118,9 +118,9 @@ Aangezien een managementplatform ook een hypervisor nodig heeft kunnen wij hier 
 Voor KVM wordt er gesproken over PROXMOX VE en voor Xen wordt er gesproken over XenServer. In deze studie wordt er een vergelijking gemaakt tussen de twee systemen en hun prestaties. De resultaten zijn als volgt:
 Over het volledige onderzoek van \textcite{algarni2018performance} heen krijgt KVM (gekoppeld aan Proxmox VE voor ons onderzoek) de beste punten over het globale punt heen. Dit onderzoek heeft plaats gevonden in 2018 waarbij de conclusies nog als actueel kunnen beschouwd worden.
 Dit is een belangrijk onderzoek om conclusies uit te trekken eenmaal een proof of concept gemaakt is. \\
-OpenStack is een buitenbeentje in deze longlist. OpenStack is specifiek bedoeld voor te werken als cloud oplossing. In het onderzoek van \textcite{callegati2014performance} wordt er duidelijk getoont dat het gemaakt is voor cloudoplossingen. Eventueel met een hybride could oplossing. \\
+OpenStack is een buitenbeentje in deze longlist. OpenStack is specifiek bedoeld voor te werken als cloud oplossing. In het onderzoek van \textcite{callegati2014performance} wordt er duidelijk getoond dat het gemaakt is voor cloudoplossingen. Eventueel met een hybride could oplossing. \\
 Microsoft SCVMM ~\autocite{microsoftvmm2025}  is een product van Microsoft en biedt een managementplatform systeem aan voor Hyper-V. Uit het onderzoek van \textcite{fayyad2013benchmarking} blijkt dat Hyper-V over het geheel genomen gemiddeld presteert. \\
-Xen Orchestra is een recenter product die werkt met de nieuwe XCP-ng hypervisor. Dit is een fork van XenServer. In het onderzoek van \textcite{el2021server} wordt Xen Orchestra die gebruik maakt van Citrix XenServer als beste uit het onderzoek gehaald waarbij het globaal gezien beter presteert dan KVM die gebruikt wordt door Proxmox VE \\
+Xen Orchestra is een recenter product die werkt met de nieuwe XCP-ng hypervisor. Dit is een fork van XenServer. In het onderzoek van \textcite{el2021server} wordt Xen Orchestra die gebruik maakt van Citrix XenServer als beste uit het onderzoek gehaald waarbij het globaal gezien beter presteert dan KVM die gebruikt wordt door Proxmox VE. \\
 
 \begin{itemize}
     \item \textbf{Proxmox VE (KVM)} heeft een betere prestatie in termen van CPU‑gebruik en geheugengebruik dan XenServer.
@@ -156,7 +156,7 @@ Figuur~\ref{fig:saspres} toont de kracht van SAS systemen. In het artikel van \t
 
 
 \FloatBarrier
-Verder wordt er ook nog Storage Area Network (SAN) gebruikt in combinatie met iSCSI voor grote storage-opslagsystemen. In het onderzoek van \textcite{park2024performance} wordt besproken hoe iSCSI een positieve invloed heeft op de prestatie van storagesystemen die gedeeld worden met verschillende toepassingen.
+Verder wordt er ook nog Storage Area Network (SAN) gebruikt in combinatie met \newline iSCSI voor grote storage-opslagsystemen. In het onderzoek van \textcite{park2024performance} wordt besproken hoe iSCSI een positieve invloed heeft op de prestatie van storagesystemen die gedeeld worden met verschillende toepassingen.
 Figuur ~\ref{fig:san} toont een afbeelding die SAN weergeeft.
 In het bedrijf Excentis is het daarom ook belangrijk dat de storage van het virtual managementplatform gedeeld kan worden met verschillende toepassingen. Bij het onderzoek van \textcite{park2024performance} wordt bevestigd dat dit een goede standaardmethode is voor storage over het netwerk.
 ISCI is hiermee ook een belangrijk punt om rekening mee te houden in de proof of concept. Het is belangrijk dat de iSCSI goed werkt met de hypervisors en managementplatformen die in dit onderzoek worden bekeken.

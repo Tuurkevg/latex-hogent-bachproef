@@ -22,7 +22,7 @@ De Windows-hypervisor Hyper-V biedt echter alleen ondersteuning op Windows, wat 
 Als dit onderzoek een objectief en goed resultaat oplevert, heeft Excentis een geschikte opvolging voor VMware, waarbij de kosten en nadelen in operationele werking zo minimaal mogelijk worden gehouden.
 Hierbij wordt ook rekening gehouden met de tijd die het bedrijf kan besparen door een goede overgang naar een nieuwe managementplatformen.
 
-Uit de proof of concept kan het volgende worden geconcludeerd.
+Aan de hand van de proof of concept en het globale onderzoek kan de volgende onderzoeksvraag, met zijn deelvragen, beantwoord worden:
 \section{Storage integratie}
 \begin{itemize}
 \item Proxmox VE biedt ondersteuning voor zowel distributed storage met CEPH als SAN met iSCSI. Beide systemen zijn eenvoudig configureerbaar en dienen zo goed als niet buiten de webintegratie te gaan.
@@ -45,8 +45,18 @@ Het kan soms nodig zijn om fysieke schijven op de node te vervangen waar er bijv
 Hierbij is het belangrijk dat de gebruiker zo eenvoudig mogelijk dit kan doen, waarbij liefst niet uit de GUI/applicatie moet worden gegaan.
 Proxmox VE biedt hiervoor de beste oplossing, waarbij de lijst van schijven te allen tijde direct wordt geüpdatet bij het verwisselen van de schijf en de mogelijkheid biedt om direct de schijf in te stellen met bijvoorbeeld CEPH voor distributed storage zonder een restart of uitschakelen van een virtuele machine of server.
 \newpage
+\section{Open source vs closed source}
+Als er gefocust wordt op open- of closed-source systemen, valt het vooral op dat open-source systemen, zoals in dit specifieke geval Proxmox VE, beter scoren op het gebied van documentatie. Het verschil in enterprise support tussen closed- en open-source systemen is echter niet direct zichtbaar bij de eerste indruk.
+De focus op de vraag of een systeem open- of closed-source is, mag niet de hoofdreden zijn voor de keuze. Enterprise support, waarbij specialisten ondersteuning kunnen bieden bij problemen, is in de meeste gevallen belangrijker voor bedrijven.
+Het is wel te zeggen dat systemen die open-source zijn, meer werken vanuit de drijfveer van de community en minder vanuit een model dat enkel gericht is op klanten.
 \section{Eindconclusie}
-Als eindconclusie van heel dit onderzoek kan Proxmox VE als beste uit de bus worden gehaald. Proxmox heeft bij de specifieke systemen die getest zijn geen gebreken getoond. Het biedt alles dat Excentis specifiek nodig heeft.
+Als eindconclusie van dit gehele onderzoek kan Proxmox VE als beste uit de bus worden gehaald op basis van de onderzoeksvraag en de bijbehorende deelvragen. Proxmox heeft bij de specifieke systemen die getest zijn geen gebreken getoond. Het biedt alles dat Excentis specifiek nodig heeft.
 Verder heeft Proxmox VE ook enterprise-oplossingen waar nieuwere en verbeterde technologieën inzitten en een 24/7 support inbegrepen is mocht dat nodig zijn. Met al deze factoren in overweging te nemen kan deze conclusie duidelijk worden gemaakt.
 Xen Orchestra biedt ook zo goed als alles aan dat nodig is voor Excentis. Het grootste verschil is wel dat Proxmox VE al onze geteste systemen aanbiedt in de gratis communityversie en Xen Orchestra biedt bijvoorbeeld alleen distributed storage aan bij de enterprise-versie.
 XenCenter geeft meer de blik dat het verouderd is en vaak het gevoel heeft om de GUI-applicatie te verlaten en toch in de CLI fysiek op de server te gaan om wijzigingen door te voeren. Het biedt ook geen gratis versie aan waardoor het verplicht is om direct een enterprise-licentie te nemen als er gekozen wordt om met dit systeem te werken.
+
+\section{Future work}
+Deze bachelorproef heeft gebruik gemaakt van een selectieve lijst om onderzoek te doen. Dit betekent dat er zeker andere opties mogelijk zijn. Een zeer veelbelovende optie die verder onderzocht kan worden, is KubeVirt~\autocite{kubevirt}.
+Deze optie biedt een volledige integratie in Kubernetes met dezelfde voordelen, met als enig verschil dat een container wordt gebruikt als virtualisatiesysteem. Er komt een extra softwarelaag tussen Kubernetes en het besturingssysteem te zitten.
+Dit onderzoek vormt een startpunt voor Excentis om eventueel af te stappen van VMware. Na dit onderzoek kan er nu gekeken worden naar hoe de integratie naar Proxmox VE kan plaatsvinden. Welke data kan er gerecupereerd worden? Zijn er bestaande opties die virtuele schijven converteren naar de Proxmox VE-standaard?
+Het is de bedoeling om Excentis een volwaardige overstap te bieden, zodat dit als vervolg op deze bachelorproef verder onderzocht kan worden.

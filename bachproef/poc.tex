@@ -24,9 +24,9 @@ Hierna worden ze toegevoegd aan een HA-groep. Dit is een groep van virtuele mach
 
 Om HA te testen in combinatie met beide storage systemen zal er een netwerk probleem worden gesimuleerd.
 Alle virtuele machines draaien nu op node 001
-Op de fysieke node poc001 zal de internet kabel worden uitgetrokken. Hierna wordt er gekeken hoelang het duurt vooraleer de virtuele machines opnieuw moet worden opgestart op een andere node, alsookop welke node specifiek. \\
 
-Figuur \ref{fig:failover-vm} kan er duidelijk gezien worden dat de virtuele machines volledig van cold mode moeten opstarten. Dit is een andere situatie dan wanneer er een migratie gedaan wordt.
+Op de fysieke node poc001 zal de internet kabel worden uitgetrokken. Hierna wordt er gekeken hoelang het duurt vooraleer de virtuele machines opnieuw moet worden opgestart op een andere node, als ook op welke node specifiek. \\
+Figuur \ref{fig:failover-vm} toont duidelijk aan dat de virtuele machines volledig in cold mode moeten opstarten. Dit is een andere situatie dan wanneer er een migratie gedaan wordt.
 Dan wordt live de virtuele machine van de ene node naar de andere gemigreerd zonder echte downtime.
 Het systeem in Proxmox VE is nu zo ingesteld dat bij een echte failover de schade van downtime relatief beperkt blijft. Dit staat uiteraard los van data verlies die kan optreden bij een failover.
 \begin{figure}[H]
@@ -37,10 +37,10 @@ Het systeem in Proxmox VE is nu zo ingesteld dat bij een echte failover de schad
 \end{figure}
 
 Van zodra de connectie van poc001 verboken is met de nadere nodes duurt het ongeveer 30-60 seconden vooraleer de virtuele machines opnieuw worden opgestart op een andere node. Dit is ook de tijd die nodig is om de heartbeat van de cluster te verliezen.
-Hierbij kan ervan uitgegaan worden dat de standaard healthy check van de cluster en zijn nodes ook rond deze tijdsduur ligt. Beide virtuele machines worden opnieuw opgestart op de node foissarak en poc002. \\
+Hierbij kan ervan uitgegaan worden dat de standaard healthy check van de cluster en zijn nodes ook rond deze tijdsduur ligt. Beide virtuele machines worden opnieuw opgestart op de node fossoirak en poc002. \\
 Aangezien beide virtuele machines dezelfde HA group hebben, krijgen ze ook dezelfde prioriteit.
 
-Merk op dat zowel de virtuele machine met een SAN als de virtuele machine met een distributed storage opnieuw worden opgestart op de node foissarak. Dit toont aan dat Proxmox VE goed werkt met beide storage systemen, zeker met failover situaties.
+Merk op dat zowel de virtuele machine met een SAN als de virtuele machine met een distributed storage opnieuw worden opgestart op de node fossoirak. Dit toont aan dat Proxmox VE goed werkt met beide storage systemen, zeker met failover situaties.
 
 \subsection{Virtuele machines migraties in Proxmox VE}
 In het het werkveld komt het geregeld voor dat een node een gepland onderhoud heeft. Dit kan zijn dat er een update moet worden uitgevoerd of dat er hardware moet worden vervangen.
@@ -52,7 +52,7 @@ Via de GUI in Proxmox VE kan een virtuele machine eenvoudig worden gemigreerd vi
   \caption{migratie virtuele machine in Proxmox VE}
   \label{fig:migratie-vm}
 \end{figure}
-Tijdens het migreren van de virtuele machine blijft de console open staan van de virtuele machine. Hierbij is er een zeer korte freeze in het beeld waarna de activiteiten in de vm weer verder werken. Het totale proces voor beide virtuele machines individueel was ongeveer 30 seconden.
+Tijdens het migreren van de virtuele machine blijft de console open staan van de virtuele machine. Hierbij is er een zeer korte freeze in het beeld waarna de activiteiten in de virtuele machine weer verder werken. Het totale proces voor beide virtuele machines individueel was ongeveer 30 seconden.
 Hieruit kan er bekeken worden dat de downtime bij migratie zo goed als minimaal is, wat ideaal is voor het offline brengen van een node voor bijvoorbeeld een gepland onderhoud.
 
 \subsection{Hot swapping fysieke disks in Proxmox VE}
@@ -207,10 +207,10 @@ We zien bij Figuur \ref{fig:hotdiskvervangen-swap} dit duidelijk een andere disk
 % \end{figure}
 
 % Van zodra de connectie van poc001 verboken is met de nadere nodes duurt het ongeveer 30-60 seconden vooraleer de virtuele machines opnieuw worden opgestart op een andere node. Dit is ook de tijd die nodig is om de heartbeat van de cluster te verliezen.
-% Hierbij kunenn we vanuit gaan dat de default healthy check van de cluster en zijn nodes ook rond deze tijdsduur ligt. Beide virtuele machines worden opnieuw opgestart op de node foissarak en poc002. 
+% Hierbij kunenn we vanuit gaan dat de default healthy check van de cluster en zijn nodes ook rond deze tijdsduur ligt. Beide virtuele machines worden opnieuw opgestart op de node fossoirak en poc002. 
 % Aangezien beide virtuele machines dezelfde HA group hebben, krijgen ze ook dezelfde prioriteit.
 
-% Merk op dat zowel de virtuele machine met een SAN als de virtuele machine met een distributed storage opnieuw worden opgestart op de node foissarak. Dit toont aan dat Proxmox VE goed werkt met beide storage systemen, zeker met failover situaties.
+% Merk op dat zowel de virtuele machine met een SAN als de virtuele machine met een distributed storage opnieuw worden opgestart op de node fossoirak. Dit toont aan dat Proxmox VE goed werkt met beide storage systemen, zeker met failover situaties.
 
 
 % \subsection{Virtuele machines migraties in Proxmox VE}
@@ -332,7 +332,7 @@ XenCenter is het volgende virtual managementplatform die getest wordt. Deze appl
 3 fysieke nodes zullen elk de XenServer-installatie krijgen. XenCenter dient geïnstalleerd te worden op een Windows-machine als app.
 Zowel de hypervisor als XenServer draaien op de laatste beschikbare versie. XenServer heeft momenteel versie 8.4 en XenCenter heeft de versie 2025.2.0.
 Er wordt een pool aangemaakt waar de virtuele machines in zitten zoals in Figuur \ref{fig:opstel-xen}.
-In \nameref{sec:Clusteropstelling-Xen} wordt de opstelling in meer detail uitgelegd.
+In \nameref{sec:Clusteropstelling-Xen} wordt de opstelling in meer detail uitgegeld.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{../poc/opstel-xen.png}
@@ -404,3 +404,16 @@ Als alles correct verloopt, moet de storage zichtbaar zijn binnen XenCenter, zie
 \caption{Nieuwe schijf als storage in XenCenter}
 \label{fig:swap-storage-xen}
 \end{figure}
+
+
+
+
+\section{Conlusie proof of concept opzet}
+Tijdens het opzetten van de proof of concept en het uitvoeren van het concept zijn de volgende zaken opgevallen:
+\begin{itemize}
+\item Proxmox VE biedt een eenvoudige, duidelijke manier voor het installeren en opzetten van een cluster. De documentatie is duidelijk en biedt een goed overzicht en een punt om naar te verwijzen bij problemen of bij het tekortkomen van bepaalde specifieke informatie. Het bood eenvoudig alle features aan die nodig waren in de proof of concept. Zo goed als alle stappen die moesten worden uitgevoerd, konden binnen de virtual management interface van Proxmox VE blijven, wat gebruiksvriendelijk overkomt.
+\item Xen Orchestra biedt hetzelfde aantal features aan als Proxmox VE, met het enige verschil dat er voor bepaalde zaken in de CLI moet worden gedoken van het operating system zelf. Dit was het geval wanneer er een nieuwe schijf werd toegevoegd aan de servers als direct attached storage. Hiervoor biedt Xen Orchestra zelf geen directe oplossing om te formatteren of te partitioneren via hun interface. De community is enorm groot en komt aardig dicht in de buurt van die van Proxmox VE.
+\item XenCenter komt over als een verouderd systeem dat niet meer meekan met de hedendaagse noden van de IT-wereld. Distributed storage is geen standaard aangeboden optie binnen XenCenter. Hiervoor moet er onder de motorkap van de server worden gedoken, rechtstreeks op het operating system. Hierdoor is er dus geen ondersteuning voor systemen zoals CEPH rechtstreeks in XenCenter. Dit maakt dat het eerder als omslachtig overkomt en aanvoelt als een tekortkoming als dit niet beheerd kan worden vanuit de GUI.
+\end{itemize}
+Voor het maken van de proof of concept is Proxmox als de meest eenvoudige oplossing uit de bus gekomen. De doorslaggevende factor voor dit resultaat is met name de goede documentatie en de actieve community. Ook de community-versie van Proxmox VE voelt aan als een volwaardige optie die vrijwel alle benodigde functionaliteiten aanbiedt. Veel zaken kunnen tot in detail beheerd worden via de webinterface, wat het werken aangenamer en vertrouwder maakt.
+De keuze om enkel deze drie softwareopties te onderzoeken, ligt voornamelijk in het feit dat de focus vooral ligt op populaire, goed ondersteunde systemen. Hierbij staan community-ondersteuning en documentatie/enterprise-support centraal. Er bestaan zeker interessante alternatieven die deze eigenschappen niet bezitten, maar vanwege de beperkte POC-omgeving met beperkte middelen en tijd is het belangrijk om zo efficiënt en correct mogelijk een gedegen onderzoek te kunnen uitvoeren.
